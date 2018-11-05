@@ -1,0 +1,4 @@
+ AuthName "Mathieu Report Server"
+                    AuthType Basic
+                    AuthUserFile D:\Document\Dropbox\elmer\.htpasswd
+                    require valid-user
