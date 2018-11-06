@@ -2,8 +2,8 @@
 class QuickProxyConfig
 {
 	protected $isWebAuth = true;
-	protected $webAuthUserName = "3cps";
-	protected $webAuthPassword = "eideeP3e";
+	protected $webAuthUserName = "";
+	protected $webAuthPassword = "";
 	protected $seed = "QuickProxySeed";
 	protected $tokenExpried = true;
 	protected $tokenExpriedTime = 60;
