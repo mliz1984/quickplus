@@ -1,4 +1,6 @@
-<?php 
+<?php
+namespace  Lib\DataMsg;
+
  class BaseVo
  {
       

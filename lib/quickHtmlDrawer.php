@@ -1,7 +1,7 @@
 <?php
- require_once(dirname(__FILE__)."/quickFormDrawer.php");
- require_once(dirname(__FILE__)."/quickFormConfig.php");
- require_once(dirname(__FILE__)."/htmlelement.php");
+ require_once(dirname(__FILE__) . "/quickFormDrawer.php");
+ require_once(dirname(__FILE__) . "/quickFormConfig.php");
+ require_once(dirname(__FILE__) . "/htmlelement.php");
  	class quickHtmlDrawer extends quickFormDrawer 
  	{
  		protected $withTitle = true;

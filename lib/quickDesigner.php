@@ -1,7 +1,7 @@
 <?php 
     require_once(dirname(__FILE__)."/quickForm.php"); 
-    require_once(dirname(__FILE__)."/commonTools.php"); 
-    require_once(dirname(__FILE__)."/htmlelement.php"); 
+    require_once(dirname(__FILE__) . "/UrlTools.php");
+    require_once(dirname(__FILE__) . "/htmlelement.php");
     require_once(dirname(__FILE__)."/quickExcelReader.php"); 
     require_once(dirname(__FILE__)."/quickHtmlDesignerExtend.php"); 
     require_once(dirname(__FILE__)."/mpdf/mpdf.php"); 

@@ -1,5 +1,5 @@
 <?php
- require_once(dirname(__FILE__)."/quickFormDrawer.php");
+ require_once(dirname(__FILE__) . "/quickFormDrawer.php");
 class quickBuilder extends quickFormDrawer 
 {
 

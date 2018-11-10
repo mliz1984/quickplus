@@ -1,6 +1,6 @@
 <?php
-  require_once(dirname(__FILE__)."/commonTools.php");
-  require_once(dirname(__FILE__)."/quickFormConfig.php");
+use Lib\Tools;
+use Lib\Quickplus\Quickform\QuickFromConfig as QuickFormConfig;
 class pdoConn
 {
     public function getTablePrefix()

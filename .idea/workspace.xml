@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7bdd4e07-257e-4296-9e1b-44416b8c864d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/Tools/DbTools.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/composer.lock" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/class/rightManager.php" afterPath="$PROJECT_DIR$/class/rightManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/loginManager.php" afterPath="$PROJECT_DIR$/include/loginManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/dbmodule.php" afterPath="$PROJECT_DIR$/lib/dbmodule.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/excelArray.php" afterPath="$PROJECT_DIR$/lib/excelArray.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/parameters.php" afterPath="$PROJECT_DIR$/lib/parameters.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickBatchFileProcesser.php" afterPath="$PROJECT_DIR$/lib/quickBatchFileProcesser.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickBuilder.php" afterPath="$PROJECT_DIR$/lib/quickBuilder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickChart.php" afterPath="$PROJECT_DIR$/lib/quickChart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickClassLoader.php" afterPath="$PROJECT_DIR$/lib/quickClassLoader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickDashBoard.php" afterPath="$PROJECT_DIR$/lib/quickDashBoard.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickData.php" afterPath="$PROJECT_DIR$/lib/quickData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickDesigner.php" afterPath="$PROJECT_DIR$/lib/quickDesigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickExcel.php" afterPath="$PROJECT_DIR$/lib/quickExcel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickExcelReader.php" afterPath="$PROJECT_DIR$/lib/quickExcelReader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickForm.php" afterPath="$PROJECT_DIR$/lib/quickForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickHtmlDesignerExtend.php" afterPath="$PROJECT_DIR$/lib/quickHtmlDesignerExtend.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickHtmlDrawer.php" afterPath="$PROJECT_DIR$/lib/quickHtmlDrawer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickHtmlWriter.php" afterPath="$PROJECT_DIR$/lib/quickHtmlWriter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickIni.php" afterPath="$PROJECT_DIR$/lib/quickIni.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickLanguage.php" afterPath="$PROJECT_DIR$/lib/quickLanguage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickMenu.php" afterPath="$PROJECT_DIR$/lib/quickMenu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickPdf.php" afterPath="$PROJECT_DIR$/lib/quickPdf.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickProxy.php" afterPath="$PROJECT_DIR$/lib/quickProxy.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickTemplateExec.php" afterPath="$PROJECT_DIR$/lib/quickTemplateExec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickUploader.php" afterPath="$PROJECT_DIR$/lib/quickUploader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickWord.php" afterPath="$PROJECT_DIR$/lib/quickWord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickform/include.php" afterPath="$PROJECT_DIR$/lib/quickform/include.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quickform/quickDesignerAjaxValue.php" afterPath="$PROJECT_DIR$/lib/quickform/quickDesignerAjaxValue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/report.php" afterPath="$PROJECT_DIR$/lib/report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/reportDesignerBase.php" afterPath="$PROJECT_DIR$/lib/reportDesignerBase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/admin.php" afterPath="$PROJECT_DIR$/pages/admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/menuManager.php" afterPath="$PROJECT_DIR$/pages/menuManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/pageManager.php" afterPath="$PROJECT_DIR$/pages/pageManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/rightManager.php" afterPath="$PROJECT_DIR$/pages/rightManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/subpages/header.php" afterPath="$PROJECT_DIR$/pages/subpages/header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/subpages/logout.php" afterPath="$PROJECT_DIR$/pages/subpages/logout.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/subpages/menu.php" afterPath="$PROJECT_DIR$/pages/subpages/menu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/standardView.php" afterPath="$PROJECT_DIR$/view/standardView.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/baseVo.php" afterPath="$PROJECT_DIR$/lib/DataMsg/BaseVo.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commonTools.php" afterPath="$PROJECT_DIR$/lib/Tools/UrlTools.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/datamsg.php" afterPath="$PROJECT_DIR$/lib/DataMsg/DataMsg.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/htmlelement.php" afterPath="$PROJECT_DIR$/lib/Tools/htmlelement.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/quickCrypt.php" afterPath="$PROJECT_DIR$/lib/Quickplus/quickCrypt.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/quickFormConfig.php" afterPath="$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormConfig.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/quickFormDrawer.php" afterPath="$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormDrawer.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/quickLayout.php" afterPath="$PROJECT_DIR$/lib/Quickplus/Quickform/quickLayout.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/quickLoginManager.php" afterPath="$PROJECT_DIR$/lib/Quickplus/quickLoginManager.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FileTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/FileTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImgProcesser.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/ImgProcesser.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jqueryTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/jqueryTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/RestTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/StringTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="9" column="64" lean-forward="false" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Data.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/DataMsg/Data.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="1405" column="0" lean-forward="false" selection-start-line="1405" selection-start-column="0" selection-end-line="1405" selection-end-column="0" />
+              <folding>
+                <element signature="e#113#177#0#PHP" expanded="true" />
+                <marker date="1541814029713" expanded="true" signature="41249:41263" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+                <marker date="1541814029713" expanded="true" signature="44062:44139" ph="DELETE FROM " />
+                <marker date="1541814029713" expanded="true" signature="44528:44608" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+                <marker date="1541814029713" expanded="true" signature="44808:44888" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+                <marker date="1541814029713" expanded="true" signature="45482:45559" ph="DELETE FROM " />
+                <marker date="1541814029713" expanded="true" signature="48518:48530" ph="INSERT INTO ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}... " />
+                <marker date="1541814029713" expanded="true" signature="53202:53214" ph="INSERT INTO ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}... " />
+                <marker date="1541814029713" expanded="true" signature="61901:61915" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/DbModule/Database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+              <folding>
+                <element signature="e#113#155#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UrlTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/UrlTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding>
+                <element signature="e#27#90#0#PHP" expanded="true" />
+                <element signature="e#132#1907#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XmlTools.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/Tools/XmlTools.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>quickcr</find>
+      <find>quickform</find>
+      <find>quickformconfig</find>
+      <find>quicklogin</find>
+      <find>drawer</find>
+      <find>$prefixMethod =</find>
+      <find>ca</find>
+      <find>claass</find>
+      <find>claas</find>
+      <find>claa</find>
+      <find>cla</find>
+      <find>class</find>
+      <find>class dat</find>
+      <find>class databas</find>
+      <find>class</find>
+      <find>class P</find>
+      <find>class Pd</find>
+      <find>Quickform</find>
+      <find>Database</find>
+      <find>class Pdo</find>
+      <find>c</find>
+      <find>cl</find>
+      <find>clas</find>
+      <find>class d</find>
+      <find>class da</find>
+      <find>class data</find>
+      <find>class databa</find>
+      <find>class database</find>
+      <find>QuickFormDrawer</find>
+      <find>$groupid</find>
+    </findStrings>
+    <dirStrings>
+      <dir>E:\Gitcodes\QuickPlus</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/phpinfo.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/pages/menuManager.php" />
+        <option value="$PROJECT_DIR$/lib/quickForm.php" />
+        <option value="$PROJECT_DIR$/lib/Quickplus/Quickform/quickLayout.php" />
+        <option value="$PROJECT_DIR$/lib/parameters.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/commonTools.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/datamsg.php" />
+        <option value="$PROJECT_DIR$/lib/baseVo.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/baseVo.php" />
+        <option value="$PROJECT_DIR$/lib/quickCrypt.php" />
+        <option value="$PROJECT_DIR$/lib/Quickplus/quickCrypt.php" />
+        <option value="$PROJECT_DIR$/lib/dbmodule.php" />
+        <option value="$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormDrawer.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
+        <option value="$PROJECT_DIR$/composer.lock.backup" />
+        <option value="$PROJECT_DIR$/lib/DbModule/pdoConn.php" />
+        <option value="$PROJECT_DIR$/lib/DbModule/SqlLite.php" />
+        <option value="$PROJECT_DIR$/lib/DbModule/dbmodule.php" />
+        <option value="$PROJECT_DIR$/lib/DbModule/Mssql.php" />
+        <option value="$PROJECT_DIR$/lib/DbModule/SqlServer.php" />
+        <option value="$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormConfig.php" />
+        <option value="$PROJECT_DIR$/lib/Quickplus/quickLoginManager.php" />
+        <option value="$PROJECT_DIR$/lib/htmlelement.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/htmlelement.php" />
+        <option value="$PROJECT_DIR$/lib/quickMenu.php" />
+        <option value="$PROJECT_DIR$/pages/admin.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/include/loginManager.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/BaseVo.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/DataMsg.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/TranDataMsg.php" />
+        <option value="$PROJECT_DIR$/lib/DataMsg/Data.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/ArrayTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/CommonTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/DbTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/FileTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/ImgProcesser.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/jqueryTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/RestTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/UrlTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/XmlTools.php" />
+        <option value="$PROJECT_DIR$/lib/Tools/StringTools.php" />
+        <option value="$PROJECT_DIR$/lib/DbModule/Database.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="composer" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tools" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tcpdf" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quickplus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quickplus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quickform" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DbModule" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataMsg" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="include" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QuickPlus" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="class" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="datamsg&#9;null&#9;null&#10;quickform\reg.php&#9;FILE&#9;file://E:/Gitcodes/QuickPlus/lib/quickform/reg.php&#10;right&#9;null&#9;null&#10;pages\menuManager.php&#9;FILE&#9;file://E:/Gitcodes/QuickPlus/pages/menuManager.php" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Gitcodes\QuickPlus\lib\DbModule" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Gitcodes\QuickPlus\lib\Tools" />
+      <recent name="E:\Gitcodes\QuickPlus\lib\Quickplus" />
+      <recent name="E:\Gitcodes\QuickPlus\lib\Quickplus\Quickform" />
+      <recent name="E:\Gitcodes\QuickPlus\lib\DataMsg" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7bdd4e07-257e-4296-9e1b-44416b8c864d" name="Default" comment="" />
+      <created>1541461144172</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541461144172</updated>
+      <workItem from="1541461145476" duration="11503000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="11503000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="13" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/quickform/quickAjaxColMapping.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickform/include.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickExcelReader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="42" lean-forward="false" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+          <folding>
+            <marker date="1541813357972" expanded="true" signature="133908:134901" ph="..." />
+            <marker date="1541813357972" expanded="true" signature="133983:134653" ph="..." />
+            <marker date="1541813357972" expanded="true" signature="134031:134626" ph="..." />
+            <marker date="1541813357972" expanded="true" signature="134537:134598" ph="..." />
+            <marker date="1541813357972" expanded="true" signature="134769:134876" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Quickplus/Quickform/quickLayout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="9" />
+          <folding>
+            <marker date="1541808191194" expanded="true" signature="2856:3121" ph="{&quot;submitButton&quot;: 'EXTERNAL_FRAGMENT'...}" />
+            <marker date="1541808191194" expanded="true" signature="7522:7536" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/reportDesignerBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1541813357930" expanded="true" signature="107764:107937" ph="..." />
+            <marker date="1541813357930" expanded="true" signature="107812:107913" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="162828:163343" ph="..." />
+            <marker date="1541813357930" expanded="true" signature="162880:163313" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="163147:163255" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="219658:221662" ph="..." />
+            <marker date="1541813357930" expanded="true" signature="219719:219903" ph="{&quot;EXTERNAL_FRAGMENT&quot;: locale...}" />
+            <marker date="1541813357930" expanded="true" signature="219905:220065" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="220114:221169" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="221290:221452" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="221546:221624" ph="{...}" />
+            <marker date="1541813357930" expanded="true" signature="223378:223589" ph="..." />
+            <marker date="1541813357930" expanded="true" signature="223440:223579" ph="{&quot;dateFormat&quot;: \&quot;yy-mm-dd\&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/parameters.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickHtmlWriter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1541810099968" expanded="true" signature="13658:13682" ph="..." />
+            <marker date="1541810099968" expanded="true" signature="17806:17825" ph="..." />
+            <marker date="1541810099968" expanded="true" signature="19422:19441" ph="..." />
+            <marker date="1541810099968" expanded="true" signature="32618:32642" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Quickplus/quickCrypt.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickIni.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock.backup">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_classmap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_files.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_namespaces.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_static.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/installed.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2176">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_real.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_psr4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="68" lean-forward="true" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/SqlLite.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2277">
+          <caret line="104" column="1" lean-forward="false" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/dbmodule.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/Mssql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/pdoConn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/SqlServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/ClassLoader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="39" column="23" lean-forward="false" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quickMenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="42" lean-forward="false" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+          <folding>
+            <marker date="1541813429108" expanded="true" signature="8015:8035" ph="..." />
+            <marker date="1541813429108" expanded="true" signature="9015:9035" ph="..." />
+            <marker date="1541813429108" expanded="true" signature="9179:9199" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dbmodule.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2691">
+          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Quickplus/Quickform/quickFormDrawer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="49" lean-forward="true" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="49" />
+          <folding>
+            <element signature="e#58#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Quickplus/quickLoginManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/loginManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <folding>
+            <element signature="e#6#45#0#PHP" expanded="true" />
+            <marker date="1541813874843" expanded="true" signature="6710:6917" ph="SELECT a.id,... qp_menu_manage" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DataMsg/BaseVo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="23" lean-forward="false" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DataMsg/DataMsg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#29#43#0#PHP" expanded="true" />
+            <marker date="1541813953821" expanded="true" signature="10289:10322" ph="SELECT * FRO... ${$sql}" />
+            <marker date="1541813953821" expanded="true" signature="21300:21314" ph="SELECT * FRO... ${$data-&gt;getTableName()}" />
+            <marker date="1541813953821" expanded="true" signature="26096:26134" ph="CREATE TABLE... IF" />
+            <marker date="1541813953821" expanded="true" signature="26238:26269" ph="INSERT INTO ${$dst}... " />
+            <marker date="1541813953821" expanded="true" signature="26255:26269" ph="SELECT * FRO... ${$src}" />
+            <marker date="1541813953821" expanded="true" signature="26591:26638" ph="INSERT INTO ${$dst}... " />
+            <marker date="1541813953821" expanded="true" signature="26618:26638" ph="SELECT ${$fi... ${$src}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DataMsg/TranDataMsg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/ArrayTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/CommonTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/DbTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <marker date="1541814096348" expanded="true" signature="283:327" ph="SELECT * FRO... ${$sql}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/htmlelement.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <marker date="1541813383544" expanded="true" signature="31018:34098" ph="..." />
+            <marker date="1541813383544" expanded="true" signature="31138:34057" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="31579:31964" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="31740:31857" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="32096:32208" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="32475:32614" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="32722:32862" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="32952:33249" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="33062:33209" ph="{...}" />
+            <marker date="1541813383544" expanded="true" signature="33902:34018" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/ImgProcesser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/jqueryTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/RestTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/UrlTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#27#90#0#PHP" expanded="true" />
+            <element signature="e#132#1907#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/XmlTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/StringTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="9" column="64" lean-forward="false" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DataMsg/Data.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="1405" column="0" lean-forward="false" selection-start-line="1405" selection-start-column="0" selection-end-line="1405" selection-end-column="0" />
+          <folding>
+            <element signature="e#113#177#0#PHP" expanded="true" />
+            <marker date="1541814029713" expanded="true" signature="41249:41263" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+            <marker date="1541814029713" expanded="true" signature="44062:44139" ph="DELETE FROM " />
+            <marker date="1541814029713" expanded="true" signature="44528:44608" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+            <marker date="1541814029713" expanded="true" signature="44808:44888" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+            <marker date="1541814029713" expanded="true" signature="45482:45559" ph="DELETE FROM " />
+            <marker date="1541814029713" expanded="true" signature="48518:48530" ph="INSERT INTO ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}... " />
+            <marker date="1541814029713" expanded="true" signature="53202:53214" ph="INSERT INTO ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}... " />
+            <marker date="1541814029713" expanded="true" signature="61901:61915" ph="SELECT * FRO... ${$this-&gt;getDb()-&gt;processTableObj($this-&gt;getTableName())}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/DbModule/Database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding>
+            <element signature="e#113#155#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Tools/FileTools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

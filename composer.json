@@ -1,5 +1,12 @@
 {
     "require": {
         "phpmyadmin/sql-parser": "^4.2"
+    },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Lib\\" : "lib/"
+        }
     }
 }

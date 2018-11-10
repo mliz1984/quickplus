@@ -1,7 +1,8 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/datamsg.php");
+use \Lib\DbModule\Database as Database;
+use \Lib\DataMsg\Data as Data;
     require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickMenu.php");
-     require_once($_SERVER['DOCUMENT_ROOT']."/lib/commonTools.php");
+use \Lib\Tools;
     if(!isset($_SESSION)){	
 		session_start();
 	}

@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);
-     require_once(dirname(__FILE__)."/datamsg.php");
+     require_once(dirname(__FILE__) . "/DataMsg.php");
      require_once(dirname(__FILE__)."/quickChart.php");
      require_once(dirname(__FILE__)."/quickExcel.php");
 

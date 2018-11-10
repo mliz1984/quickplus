@@ -1,8 +1,8 @@
 <?php 
       require_once(dirname(__FILE__)."/report.php");
-      require_once(dirname(__FILE__)."/commonTools.php");
-      require_once(dirname(__FILE__)."/htmlelement.php");
-      require_once(dirname(__FILE__)."/quickFormConfig.php");
+      require_once(dirname(__FILE__) . "/UrlTools.php");
+      require_once(dirname(__FILE__) . "/htmlelement.php");
+      require_once(dirname(__FILE__) . "/quickFormConfig.php");
       require_once(dirname(__FILE__)."/quickExtendTable.php");
       require_once(dirname(__FILE__)."/treeobject.php"); 
       require_once(dirname(__FILE__)."/dateUtil.php");         

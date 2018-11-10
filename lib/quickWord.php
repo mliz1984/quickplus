@@ -1,6 +1,6 @@
 <?php
-    require_once(dirname(__FILE__)."/quickFormConfig.php");
-    require_once(dirname(__FILE__)."/commonTools.php");
+    require_once(dirname(__FILE__) . "/quickFormConfig.php");
+    require_once(dirname(__FILE__) . "/commonTools.php");
 	class QuickWord 
 	{
 		protected $file = null;

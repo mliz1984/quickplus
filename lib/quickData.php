@@ -1,5 +1,5 @@
 <?php 
-     require_once($_SERVER['DOCUMENT_ROOT']."/include/datamsg.php");
+     require_once($_SERVER['DOCUMENT_ROOT']."/include/DataMsg.php");
 	class QuickData extends Data{
 		protected $linkMap = Array();
 		protected $relationMap = Array();

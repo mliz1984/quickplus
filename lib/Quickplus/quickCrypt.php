@@ -1,4 +1,5 @@
 <?php
+namespace Lib\Quickplus\QuickCrypt;
   
 class QuickCrypt
 {

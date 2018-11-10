@@ -1,6 +1,7 @@
-<?php 
-   require_once(dirname(__FILE__)."/reportDesignerBase.php");
-   require_once(dirname(__FILE__)."/htmlelement.php");
+<?php
+namespace Lib\Quickplus\Quickform\Quicklayout;
+   require_once(dirname(__FILE__) . "/reportDesignerBase.php");
+   require_once(dirname(__FILE__) . "/htmlelement.php");
 
     
 	class quickLayout  extends reportDesignerBase{

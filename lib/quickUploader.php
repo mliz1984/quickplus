@@ -3,9 +3,9 @@
 	require_once(dirname(__FILE__)."/dbmodule.php");
 	require_once(dirname(__FILE__)."/quickWord.php");
 	require_once(dirname(__FILE__)."/PHPExcel.php");
-    require_once(dirname(__FILE__)."/datamsg.php");
-    require_once(dirname(__FILE__)."/commonTools.php");
-    require_once(dirname(__FILE__)."/quickFormConfig.php");
+    require_once(dirname(__FILE__) . "/DataMsg.php");
+    require_once(dirname(__FILE__) . "/commonTools.php");
+    require_once(dirname(__FILE__) . "/quickFormConfig.php");
     require_once(dirname(__FILE__)."/PHPExcel.php");
 	class quickUploader
 	{

@@ -1,4 +1,6 @@
 <?php
+namespace Lib\Quickplus\Quickform\Parameters;
+
 define('INCLUDE_PATH',str_replace('\\','/',realpath(dirname(__FILE__).'/'))."/");
 define('BASE_PATH',str_replace('\\','/',realpath(dirname(dirname(__FILE__)).'/'))."/");
 

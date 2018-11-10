@@ -1,10 +1,10 @@
 <?php
 set_time_limit(0);
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormConfig.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormConfig.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/datamsg.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormDrawer.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/DataMsg.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormDrawer.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickForm.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/dateUtil.php");
 class RightManager extends QuickForm

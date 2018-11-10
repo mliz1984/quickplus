@@ -1,9 +1,9 @@
 <?php 
-  require_once(dirname(__FILE__)."/quickLayout.php");
-  require_once(dirname(__FILE__)."/commonTools.php");
-  require_once(dirname(__FILE__)."/datamsg.php");
-  require_once(dirname(__FILE__)."/htmlelement.php");
-  require_once(dirname(__FILE__)."/quickFormConfig.php");
+  require_once(dirname(__FILE__) . "/quickLayout.php");
+  require_once(dirname(__FILE__) . "/UrlTools.php");
+  require_once(dirname(__FILE__) . "/DataMsg.php");
+  require_once(dirname(__FILE__) . "/htmlelement.php");
+  require_once(dirname(__FILE__) . "/quickFormConfig.php");
   require_once(dirname(__FILE__)."/quickUploader.php");
   require_once(dirname(__FILE__)."/quickUrl.php");
   require_once(dirname(__FILE__)."/dateUtil.php");

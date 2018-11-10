@@ -1,8 +1,8 @@
 <?php 
 	set_time_limit(0);
     require_once(dirname(__FILE__)."/PHPExcel.php");
-	require_once(dirname(__FILE__)."/quickFormConfig.php");
-	require_once(dirname(__FILE__)."/commonTools.php");
+	require_once(dirname(__FILE__) . "/quickFormConfig.php");
+	require_once(dirname(__FILE__) . "/UrlTools.php");
 	class excelArray
 	{
 		protected $keyColMapping = Array();

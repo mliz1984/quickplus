@@ -1,5 +1,5 @@
 <?php 
-	 require_once(dirname(__FILE__)."/commonTools.php");
+	 require_once(dirname(__FILE__) . "/commonTools.php");
 	 require_once(dirname(__FILE__)."/quickIni.php");
 	class QuickLanguage
 	{

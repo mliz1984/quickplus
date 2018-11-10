@@ -1,6 +1,6 @@
 <?php 
 	require_once(dirname(__FILE__)."/quickForm.php");
-  require_once(dirname(__FILE__)."/quickFormDrawer.php");
+  require_once(dirname(__FILE__) . "/quickFormDrawer.php");
   class QuickDashBoardBase extends quickForm
   {
       protected $commonSettingPrefix ="csp_";

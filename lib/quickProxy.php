@@ -1,7 +1,7 @@
 <?php
 
     require_once(dirname(__FILE__)."/quickProxyConfig.php");
-    require_once(dirname(__FILE__)."/commonTools.php");
+    require_once(dirname(__FILE__) . "/commonTools.php");
     class QuickProxy extends QuickProxyConfig
     {
     	protected $options = Array(

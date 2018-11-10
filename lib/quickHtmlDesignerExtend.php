@@ -1,5 +1,5 @@
 <?php
-   require_once(dirname(__FILE__)."/htmlelement.php");
+   require_once(dirname(__FILE__) . "/htmlelement.php");
    class QuickHtmlDesignerExtend
    {
          protected $designMode = true;

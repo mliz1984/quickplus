@@ -2,8 +2,8 @@
 
     require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/commonTools.php");  
-	  require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormDrawer.php"); 
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/commonTools.php");
+	  require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormDrawer.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickPage.php");   
 require_once($_SERVER['DOCUMENT_ROOT']."/class/rightManager.php");
     $db = new QuickFormConfig::$SqlType();

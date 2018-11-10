@@ -1,8 +1,10 @@
 <?php
-     require_once(dirname(__FILE__)."/datamsg.php");
-     require_once(dirname(__FILE__)."/commonTools.php");
-     require_once(dirname(__FILE__)."/quickFormConfig.php");
-     require_once(dirname(__FILE__)."/quickLoginManager.php");
+namespace Lib\Quickplus\Quickform\QuickFormDrawer;
+
+use Lib\DataMsg;
+use Lib\Tools;
+use Lib\Quickplus\Quickform\QuickFromConfig as QuickFormConfig;
+     require_once(dirname(__FILE__) . "/quickLoginManager.php");
 class quickFormDrawer 
 {
         protected $quickForm;

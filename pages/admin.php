@@ -1,12 +1,12 @@
 <?php
-
+require("../vendor/autoload.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormDrawer.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormConfig.php");
+use \Lib\DataMsg;
+use \Lib\Quickplus\Quickform as Quickform;
 require_once($_SERVER['DOCUMENT_ROOT']."/class/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickLoginManager.php");         
-$db = new  QuickFormConfig::$SqlType();
+use Lib\Quickplus\QuickLoginManager as QuickLoginManager;
+
+$db = new  Quickform\QuickFormConfig::$SqlType();
 $loginmanager = QuickLoginManager::getQuickLoginManager();
 $result = $loginmanager->checkLogin();
 $adminid = $loginmanager->getAccountID();

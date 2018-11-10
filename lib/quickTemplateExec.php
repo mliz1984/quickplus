@@ -1,8 +1,8 @@
 <?php
 	require_once(dirname(__FILE__)."/parameters.php");
     require_once(dirname(__FILE__)."/dbmodule.php");
-    require_once(dirname(__FILE__)."/quickFormConfig.php");
-	require_once(dirname(__FILE__)."/datamsg.php");
+    require_once(dirname(__FILE__) . "/quickFormConfig.php");
+	require_once(dirname(__FILE__) . "/DataMsg.php");
 	require_once(dirname(__FILE__)."/quickTemplateImpl.php");
     $db = new QuickFormConfig::$SqlType();
 	$id = $_REQUEST["id"];

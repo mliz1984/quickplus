@@ -1,5 +1,5 @@
 <?php 
-    require_once(dirname(__FILE__)."/htmlelement.php");
+use \Lib\Tools\HtmlElement as HtmlElement;
 	class QuickMenu
 	{
 		protected $data = Array();

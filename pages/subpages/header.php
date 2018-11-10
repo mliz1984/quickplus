@@ -2,10 +2,10 @@
 
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormDrawer.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormConfig.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormDrawer.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormConfig.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/class/session.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickLoginManager.php");        
+require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickLoginManager.php");        
 $db = new  QuickFormConfig::$SqlType();
 $session = new Session();
 $loginmanager = QuickLoginManager::getQuickLoginManager();

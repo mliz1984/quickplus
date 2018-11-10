@@ -1,11 +1,10 @@
 <?php
+require("/vendor/autoload.php");
 // Start the session
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormDrawer.php"); 
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickFormConfig.php");
+use \Lib\Quickplus\Quickform\QuickFormConfig as QuickFormConfig;
 require_once($_SERVER['DOCUMENT_ROOT']."/class/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickLoginManager.php");      
+use \Lib\Quickplus\QuickLoginManager as QuickLoginManager;
 $db = new  QuickFormConfig::$SqlType();
 if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
 {
