@@ -1,5 +1,5 @@
 <?php
-namespace Lib\Quickplus\Quickform\Quicklayout;
+namespace Quickplus\Lib\Quicklayout;
    require_once(dirname(__FILE__) . "/reportDesignerBase.php");
    require_once(dirname(__FILE__) . "/htmlelement.php");
 

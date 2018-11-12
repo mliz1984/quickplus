@@ -1,6 +1,6 @@
 <?php
-namespace  Lib\Tools;
-use \Lib\Quickplus\Quickform\QuickFormConfig as QuickFormConfig;
+namespace  Quickplus\Lib\Tools;
+use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 
     Class HtmlElement{
         protected $id;

@@ -6,7 +6,7 @@
  * Time: 7:37 PM
  */
 
-namespace Lib\Tools;
+namespace Quickplus\Lib\Tools;
 
 
 class jqueryTools{

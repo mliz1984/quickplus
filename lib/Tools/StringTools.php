@@ -6,8 +6,8 @@
  * Time: 7:36 PM
  */
 
-namespace Lib\Tools;
-use \Lib\Quickplus\Quickform\QuickFormConfig as QuickFormConfig;
+namespace Quickplus\Lib\Tools;
+use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 
 class StringTools
 {

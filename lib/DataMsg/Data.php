@@ -6,10 +6,10 @@
  * Time: 7:12 PM
  */
 
-namespace Lib\DataMsg;
+namespace Quickplus\Lib\DataMsg;
+use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+use \Quickplus\Lib\Tools\StringTools as StringTools;
 
-use \Lib\Quickplus\Quickform\QuickFormConfig as QuickFormConfig;
-use \Lib\Tools\StringTools as StringTools;
 class Data extends BaseVo
 {
     protected $tableSign = null;
@@ -764,7 +764,6 @@ class Data extends BaseVo
 
     function __construct($db,$tableName="",$primaryKey=null,$src=null,$prefix=null,$blank=true)
     {
-
         $this->db = $db;
         $this->tableSign = "main";
         $this->tableName = $tableName;

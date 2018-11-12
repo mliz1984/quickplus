@@ -1,4 +1,5 @@
 <?php
+namespace Quickplus\Lib;
 class QuickProxyConfig
 {
 	protected $isWebAuth = true;

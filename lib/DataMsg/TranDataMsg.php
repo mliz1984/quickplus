@@ -6,8 +6,8 @@
  * Time: 7:28 PM
  */
 
-namespace Lib\DataMsg;
-use Lib\DataMsg\DataMsg as DataMsg;
+namespace Quickplus\Lib\DataMsg;
+use Quickplus\Lib\DataMsg\DataMsg as DataMsg;
 
 class TranDataMsg extends DataMsg{
     protected $tranList =Array();

@@ -1,10 +1,10 @@
 <?php
-namespace Lib\DataMsg;
-use Lib\Tools;
-use Lib\DataMsg\BaseVo as BaseVo;
-use Lib\DataMsg\Data as Data;
-use Lib\Quickplus\QuickCrypt as QuickCrypt;
-use Lib\Quickplus\Quickform\QuickFromConfig;
+namespace Quickplus\Lib\DataMsg;
+use Quickplus\Lib\Tools;
+use Quickplus\Lib\DataMsg\BaseVo as BaseVo;
+use Quickplus\Lib\DataMsg\Data as Data;
+use Quickplus\Lib\QuickCrypt as QuickCrypt;
+use Quickplus\Lib\QuickFromConfig;
 
 class DataMsg 
 {

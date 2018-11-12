@@ -1,5 +1,5 @@
 <?php 
-use \Lib\Tools\HtmlElement as HtmlElement;
+use \Quickplus\Lib\Tools\HtmlElement as HtmlElement;
 	class QuickMenu
 	{
 		protected $data = Array();

@@ -6,7 +6,7 @@
  * Time: 8:18 PM
  */
 
-namespace Lib\DbModule;
+namespace Quickplus\Lib\DbModule;
 
 class pdoConn
 {

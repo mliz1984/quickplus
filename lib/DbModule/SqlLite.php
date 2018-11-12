@@ -6,7 +6,7 @@
  * Time: 8:19 PM
  */
 
-namespace Lib\DbModule;
+namespace Quickplus\Lib\DbModule;
 
 
 class SqlLite extends SQLite3

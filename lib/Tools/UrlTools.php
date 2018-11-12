@@ -1,7 +1,7 @@
 <?php
-namespace Lib\Tools;
-use Lib\Quickplus\Quickform\QuickFromConfig as QuickFormConfig;
-use Lib\Quickplus\Quickform\Parameters;
+namespace Quickplus\Lib\Tools;
+use Quickplus\Lib\QuickFromConfig as QuickFormConfig;
+use Quickplus\Lib\Parameters;
 
 class UrlTools
   {

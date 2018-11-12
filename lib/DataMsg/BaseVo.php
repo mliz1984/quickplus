@@ -1,5 +1,5 @@
 <?php
-namespace  Lib\DataMsg;
+namespace  Quickplus\Lib\DataMsg;
 
  class BaseVo
  {

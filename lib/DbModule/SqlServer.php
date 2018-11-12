@@ -6,7 +6,7 @@
  * Time: 8:20 PM
  */
 
-namespace Lib\DbModule;
+namespace Quickplus\Lib\DbModule;
 
 class SqlServer extends Mssql
 {

@@ -1,8 +1,8 @@
 <?php
-use \Lib\DbModule\Database as Database;
-use \Lib\DataMsg\Data as Data;
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickMenu.php");
-use \Lib\Tools;
+use \Quickplus\Lib\DbModule\Database as Database;
+use \Quickplus\Lib\DataMsg\Data as Data;
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickMenu.php");
+use \Quickplus\Lib\Tools;
     if(!isset($_SESSION)){	
 		session_start();
 	}
@@ -26,7 +26,7 @@ use \Lib\Tools;
         public function login($db,$username,$password)
 		{
 			
-			
+
 			$result = false;
 			$db = new DataBase();
 			$data = new Data($db,"qp_rightcontrol","login");
@@ -34,6 +34,7 @@ use \Lib\Tools;
 			$data->set("password","password('".$password."')");
 			$data->setKeepOri("password",true);
 			$datamsg = $data->find();
+
 			if($datamsg->getSize()>0)
 			{
 				     $udata = $datamsg->getData(0);

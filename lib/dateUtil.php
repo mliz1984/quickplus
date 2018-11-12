@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
    class DateUtil{
         public function getDayDiff($dataStr1,$dataStr2) 
         {

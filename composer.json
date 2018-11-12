@@ -6,7 +6,7 @@
     {
         "psr-4":
         {
-            "Lib\\" : "lib/"
+            "Quickplus\\Lib\\" : "lib/"
         }
     }
 }

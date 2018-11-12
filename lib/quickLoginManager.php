@@ -1,6 +1,6 @@
-<?php 
-namespace Lib\Quickplus;
-use \Lib\Quickplus\Quickform as Quickform;
+<?php
+namespace Quickplus\Lib;
+use \Quickplus\Lib as Quickform;
  class QuickLoginManager
   {
   	  public static function getQuickLoginManager($src=null,$classname=null)

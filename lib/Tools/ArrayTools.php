@@ -6,7 +6,7 @@
  * Time: 7:39 PM
  */
 
-namespace Lib\Tools;
+namespace Quickplus\Lib\Tools;
 
 
 class ArrayTools{

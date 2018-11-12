@@ -1,5 +1,5 @@
 <?php
-namespace Lib\Quickplus\Quickform;
+namespace Quickplus\Lib;
 
     const defaultTableWidth = "1500px";
     const defatltFullScreenMode = false;
@@ -24,7 +24,7 @@ namespace Lib\Quickplus\Quickform;
 	 	public  static $quickFormMethodPath = "/lib/quickform/";
 	 	public  static $encode = "utf-8";
 	 	public  static $dbEncode = null;
-	 	public  static $SqlType = "\Lib\DbModule\Database";
+	 	public  static $SqlType = "\Quickplus\Lib\DbModule\Database";
 	 	public  static $tmpPath = "/tmp";
 	 	public  static $quickWordFilePath = "/public/QuickWordFiles/";
 	 	public  static $dirSep = "\\";

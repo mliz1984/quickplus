@@ -1,10 +1,10 @@
 <?php
 require("../vendor/autoload.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-use \Lib\DataMsg;
-use \Lib\Quickplus\Quickform as Quickform;
+use \Quickplus\Lib\DataMsg;
+use \Quickplus\Lib as Quickform;
 require_once($_SERVER['DOCUMENT_ROOT']."/class/session.php");
-use Lib\Quickplus\QuickLoginManager as QuickLoginManager;
+use Quickplus\Lib\QuickLoginManager as QuickLoginManager;
 
 $db = new  Quickform\QuickFormConfig::$SqlType();
 $loginmanager = QuickLoginManager::getQuickLoginManager();

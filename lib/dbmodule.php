@@ -1,6 +1,7 @@
 <?php
-use Lib\Tools;
-use Lib\Quickplus\Quickform\QuickFromConfig as QuickFormConfig;
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools;
+use Quickplus\Lib\QuickFromConfig as QuickFormConfig;
 class pdoConn
 {
     public function getTablePrefix()

@@ -6,9 +6,9 @@
  * Time: 8:19 PM
  */
 
-namespace Lib\DbModule;
-use \Lib\Tools\StringTools as StringTools;
-use \Lib\Quickplus\Quickform\QuickFormConfig as QuickFormConfig;
+namespace Quickplus\Lib\DbModule;
+use \Quickplus\Lib\Tools\StringTools as StringTools;
+use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 class Database
 {
 

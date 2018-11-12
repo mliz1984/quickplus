@@ -1,8 +1,13 @@
 <?php
-     require_once(dirname(__FILE__)."/parameters.php");
-    require_once(dirname(__FILE__)."/quickProxy.php");
-    require_once(dirname(__FILE__)."/dbmodule.php");
-  
+namespace Quickplus\Lib;
+use Quickplus\Lib\pdoConn as pdoConn;
+use Quickplus\Lib\SqlLite as SqlLite;
+use Quickplus\Lib\Database as Database;
+use Quickplus\Lib\SqlServer as SqlServer;
+use Quickplus\Lib\Mssql as Mssql;
+use Quickplus\Lib\Parameters;
+require_once(dirname(__FILE__)."/quickProxy.php");
+
   class DbProxy extends QuickProxy
   {
   	function __construct()

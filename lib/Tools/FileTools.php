@@ -6,7 +6,7 @@
  * Time: 7:35 PM
  */
 
-namespace Lib\Tools;
+namespace Quickplus\Lib\Tools;
 
 
 class FileTools
