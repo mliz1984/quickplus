@@ -62,7 +62,7 @@
 		public function reloadUserRight($db)
 		{
 			$result = false;
-			$userinfo = $_SESSION[$this->sessionArea];
+			$userinfo = ArrayTools::getValueFromArray($_SESSION,$this->sessionArea);
 			$id = $userinfo["accountid"];
 			if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
 			{
@@ -81,15 +81,16 @@
 		{
 			
 			$result = false;
-			$userinfo = $_SESSION[$this->sessionArea];
-			if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
-			{
-				$result = true;
-				if($getUserInfo)
+			$userinfo = ArrayTools::getValueFromArray($_SESSION,$this->sessionArea);
+				if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
 				{
-					$result =  $userinfo;
+					$result = true;
+					if($getUserInfo)
+					{
+						$result =  $userinfo;
+					}
 				}
-			}
+				
 			return $result;
 		}
 

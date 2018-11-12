@@ -1133,6 +1133,16 @@
 
         }
 
+        public static function getValueFromArray($array,$key,$defaultValue=null)
+        { 
+           $ret = $defaultValue;
+           if(is_array($array)&&isset($array[$key]))
+           {
+              $ret = $array[$key];
+           }
+           return $ret;
+        }
+
           public static function arrayRecursive($array, $function, $apply_to_keys_also = false,$jsonPre=false)
           {
               $result = array();

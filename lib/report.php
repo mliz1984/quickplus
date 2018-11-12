@@ -1016,14 +1016,14 @@ class report extends QuickChart{
           $this->getData($db,$sql,$pagerows,$curpage,$sqlBuilder);
      }
      
-     public function getData($db,$sql,$pagerows=0,$curpage=1,$sqlBuilder=null)
+    public function getData($db,$sql,$orderBy,$pagerows=0,$curpage=1,$sqlBuilder=null)
      {
 
            $this->setDb($db);
            $this->setExecSql($sql);
            $this->getSqlBuilder($sqlBuilder);
            $dataMsg = new DataMsg($db);
-           $dataMsg->findByPageSql($db,$sql,$pagerows,$curpage,$this->getCountCol(),"",$sqlBuilder);
+           $dataMsg->findByPageSql($db,$sql,$pagerows,$curpage,$this->getCountCol(),"",$sqlBuilder,false,$orderBy);
            $this->totalcount = $dataMsg->getTotalCount();
 
            $this->pagerows = $dataMsg->getPageRows();

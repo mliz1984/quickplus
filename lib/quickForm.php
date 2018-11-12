@@ -151,7 +151,7 @@
         public function getColVisable($dbname)
         {
             $result =true;
-            if(is_bool($this->colVisable[$dbname])&&!$this->colVisable[$dbname])
+            if(isset($this->colVisable[$dbname])&&is_bool($this->colVisable[$dbname])&&!$this->colVisable[$dbname])
             {
                 $result = false;
             }
@@ -344,10 +344,10 @@
         {
             $this->autoRefreshTimeText = $autoRefreshTimeText;
         }
-        public function getAutoRefreshTimeText()
+        public function getAutoRefreshTimeText($src)
         {
             $result = "Auto Refresh Time";
-            $mark = $src[$this->getSearchPrefix().$this->autoRefreshMark];
+            $mark = ArrayTools::getValueFromArray($src,$this->getSearchPrefix().$this->autoRefreshMark);
             if($this->autoRefreshTimeText!=null&&trim($this->autoRefreshTimeText)!="")
             {
                 $result = $this->autoRefreshTimeText;
@@ -364,12 +364,12 @@
             if($this->autoRefresh)
             {      
                 $defaultValue = 0;
-                $mark = $src[$this->getSearchPrefix().$this->autoRefreshMark];
+                $mark = ArrayTools::getValueFromArray($src,$this->getSearchPrefix().$this->autoRefreshMark);
                 if(isset($src[$mark])&&floatval($src[$mark])>0)
                 {
                     $defaultValue = floatval($src[$mark]);
                 }
-                $this->addField($this->autoRefreshMark,$this->getAutoRefreshTimeText());
+                $this->addField($this->autoRefreshMark,$this->getAutoRefreshTimeText($src));
                 $this->setSearchFieldType($this->autoRefreshMark,"defaultSearchShowMode",$defaultValue);
             }
         }
@@ -437,7 +437,11 @@
         }
         public function initCustomCol($src)
         {
-            $colSetting = $src[$this->getSearchPrefix().$this->customColMark];
+            $colSetting = null;
+            if(isset($src[$this->getSearchPrefix().$this->customColMark]))
+            {
+                $colSetting = $src[$this->getSearchPrefix().$this->customColMark];
+            }
             $fields = $this->getReportField(true);
             $defaultValue = "";
             if(is_array($colSetting))
@@ -1227,7 +1231,11 @@
                 $oriDbName = $info["oridbname"];
                 $tablekey = DbTools::getTableKeyFormCol($oriDbName);
                 $colname = strtolower(DbTools::getColNameFormCol($oriDbName));
-                $this->colDetail[$dbname] = $detailInfo[$tablekey][$colname];
+                 $this->colDetail[$dbname] = null;
+                 if(isset($detailInfo[$tablekey][$colname]))
+                {
+                    $this->colDetail[$dbname] = $detailInfo[$tablekey][$colname];
+                }
             }
         }
 
@@ -1728,7 +1736,7 @@
         public function deleteFormDataByMainId($db,$src=null)
         { 
           
-            $temp = $this->modifyDataBeforeDelete($db,$src,$editPrefix);
+            $temp = $this->modifyDataBeforeDelete($db,$src,$this->editPrefix);
             if(is_array($temp))
             {
                $src = $temp;
@@ -1736,7 +1744,7 @@
             $mainIds = null;
             if($src!=null&&is_array($src))
             {
-                 $mainIds =   $src['deleteid'];
+                 $mainIds =   ArrayTools::getValueFromArray($src,'deleteid');
             }
             
             $beforeResult = $this->beforeDelete($db,$mainIds,$src);
@@ -2514,7 +2522,7 @@
            public function getFormDefaultValue($dbname)
           {
               $field = $this->getFieldByName($dbname);
-              $defaultValue = $field["defaultsearch"];
+              $defaultValue = ArrayTools::getValueFromArray($field,"defaultsearch");
               return $defaultValue;
           }
         protected  function getFieldArray($array)
@@ -2587,7 +2595,7 @@
 
   		public function getJsOrderType($dbname)
   		{
-  			$type = $this->jsOrderType[$dbname];
+  			$type = ArrayTools::getValueFromArray($this->jsOrderType,$dbname);
   			if($type==null||trim($type)=="")
   			{
   				$type = "CaseInsensitiveString";
@@ -3206,7 +3214,7 @@
                 }
              }
              
-            $searchSign = intval($src["searchSign"]);   
+            $searchSign = intval(ArrayTools::getValueFromArray($src,"searchSign"));   
             $searchMapping = $this->getSearchMapping($dbname);                    
             if(($defaultsearch==null||trim($defaultsearch)=="")&&$searchMapping!=null&&trim($searchMapping)!=""&&trim($src[$searchMapping])!=null&&trim($src[$searchMapping])!="")
             {
@@ -3285,14 +3293,18 @@
                        $tmphaving = "";
                         foreach($groupinfo as $dbname => $dbsetting)
                         {
-                            $oridbname = $fields[$dbname]["oridbname"];
-                            if(($oridbname!=null&&trim($oridbname)!="")||($colInfo[$dbname]!=null&&trim($colInfo[$dbname])!=""))
+                            $oridbname = null;
+                            if(isset($fields[$dbname]["oridbname"]))
                             {
-                                $relation = $dbsetting["relation"];
-                                $value = $fields[$dbname];
-                                $isSql = $value["issql"];
-                                $isHaving = $value["having"];
-                                $isJoin = $value["join"];
+                                $oridbname = $fields[$dbname]["oridbname"];
+                            }
+                            if(($oridbname!=null&&trim($oridbname)!="")||(isset($colInfo[$dbname])&&$colInfo[$dbname]!=null&&trim($colInfo[$dbname])!=""))
+                            {
+                                $relation = ArrayTools::getValueFromArray($dbsetting,"relation");
+                                $value = ArrayTools::getValueFromArray($fields,$dbname);
+                                $isSql = ArrayTools::getValueFromArray($value,"issql");
+                                $isHaving = ArrayTools::getValueFromArray($value,"having"); 
+                                $isJoin = ArrayTools::getValueFromArray($value,"join");  
                                 if($isSql)
                                 {
 
@@ -3313,7 +3325,7 @@
                                         $defaultValue = $src[$searchMapping];
                                         $src[$sign] = $src[$searchMapping];
                                      }   
-                                    if(($src[$sign]!=null&&(is_array($src[$sign])||trim($src[$sign])!=""))||($src[$end]!=null&&trim($src[$end])!="")||$this->getSearchMode($dbname,$src,false,null,null,false,$searchPrefix)==null)
+                                    if((isset($src[$sign])&&$src[$sign]!=null&&(is_array($src[$sign])||trim($src[$sign])!=""))||(isset($src[$end])&&$src[$end]!=null&&trim($src[$end])!="")||$this->getSearchMode($dbname,$src,false,null,null,false,$searchPrefix)==null)
                                     {
                                          $dstdbname = $this->getSearchFieldMapping($dbname);
                                          if($dstdbname == null || trim($dstdbname) == "")
@@ -3450,11 +3462,11 @@
                 $this->modifySqlForLinkData($linkDataSign);
             }
             $mainIdOriDbName  =$this->getMainIdOriDbName();
-            if($src["qp_keeprowsids"]!=null&&trim($src["qp_keeprowsids"])!="")
+            if(isset($src["qp_keeprowsids"])&&$src["qp_keeprowsids"]!=null&&trim($src["qp_keeprowsids"])!="")
             {
                 $fullWhere = $fullWhere." AND ".$mainIdOriDbName . " IN (".trim($src["qp_keeprowsids"]).") ";
             }
-            if($src["qp_excluderowsids"]!=null&&trim($src["qp_excluderowsids"])!="")
+            if(isset($src["qp_excluderowsids"])&&$src["qp_excluderowsids"]!=null&&trim($src["qp_excluderowsids"])!="")
             {
                 $fullWhere =  $fullWhere." AND ".$mainIdOriDbName . " NOT IN (".trim($src["qp_excluderowsids"]).") ";
             }

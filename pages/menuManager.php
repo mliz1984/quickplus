@@ -16,17 +16,16 @@
 <?php
    
     $url = UrlTools::getFullUrl();
-    $blank = $_REQUEST['blank'];
-    $id = $_REQUEST['id'];
-    $pageRows= $_REQUEST['pageRows'];
-   
-    $page =  $_REQUEST['curPage'];
-    $method =  $_REQUEST['method'];
-    $searchSign =   $_REQUEST['searchSign'];
-    $exportmode =  $_REQUEST['exportmode'];
-    $qp_keeprowsids = $_REQUEST["qp_keeprowsids"];
-    $qp_excluderowsids = $_REQUEST["qp_excluderowsids"];
-    $qp_anchor = $_REQUEST["qp_anchor"];
+    $blank = ArrayTools::getValueFromArray($_REQUEST,"blank");
+    $id = ArrayTools::getValueFromArray($_REQUEST,"id");
+    $pageRows= ArrayTools::getValueFromArray($_REQUEST,"pageRows");
+    $page =  ArrayTools::getValueFromArray($_REQUEST,"page");
+    $method =  ArrayTools::getValueFromArray($_REQUEST,"method");
+    $searchSign =   ArrayTools::getValueFromArray($_REQUEST,"searchSign");
+    $exportmode =  ArrayTools::getValueFromArray($_REQUEST,"exportmode");
+    $qp_keeprowsids = ArrayTools::getValueFromArray($_REQUEST,"qp_keeprowsids");
+    $qp_excluderowsids = ArrayTools::getValueFromArray($_REQUEST,"qp_excluderowsids");
+    $qp_anchor =ArrayTools::getValueFromArray($_REQUEST,"qp_anchor");
     $isExport = false;
     if($blank=="1")
     {

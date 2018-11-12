@@ -1399,7 +1399,7 @@
                  else {
                     if($value!=null)
                     {
-                       if($withIn||(is_bool($this->colStyle[$key]["keepOri"])&&$this->colStyle[$key]["keepOri"]))
+                       if($withIn||(isset($this->colStyle[$key]["keepOri"])&&is_bool($this->colStyle[$key]["keepOri"])&&$this->colStyle[$key]["keepOri"]))
                        {
                           $whereClause .=" AND ".$colKey." ".$this->getOperator($key)." ".$value." ";
                        }

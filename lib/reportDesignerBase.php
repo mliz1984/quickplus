@@ -336,7 +336,7 @@
          }
          public function getCustomJs($includeTag=true)
          {
-          
+            $jsStr ="";
             if(is_array($this->customJs)&&count($this->customJs)>0)
             {
                 foreach($this->customJs as $id =>$js)
@@ -363,12 +363,12 @@
           
                $ret = true;
             }
-            else  if(($dbname==null||trim($dbname)=="")&&is_array($this->extendInfoMethod)&&count($this->extendInfoMethod)>0)
+            else  if(($dbname==null||trim($dbname)=="")&&isset($this->extendInfoMethod)&&is_array($this->extendInfoMethod)&&count($this->extendInfoMethod)>0)
             {
              
                $ret = true;
             }
-            else if($dbname!=nul&&trim($dbname)!=""&&$this->extendInfoMethod[$dbname]!=null&&trim($this->extendInfoMethod[$dbname])!="")
+            else if($dbname!=null&&trim($dbname)!=""&&isset($this->extendInfoMethod[$dbname])&&$this->extendInfoMethod[$dbname]!=null&&trim($this->extendInfoMethod[$dbname])!="")
             {
                $ret =true;
             }
@@ -475,7 +475,7 @@
          public function getColStatus($dbname)
          {
             $result = true;
-            if(is_bool($this->colSetting[$dbname]["status"]))
+            if(isset($this->colSetting[$dbname]["status"])&&is_bool($this->colSetting[$dbname]["status"]))
             {
                 $result = $this->colSetting[$dbname]["status"];
             }
@@ -488,7 +488,7 @@
          public function getColClass($dbname)
          {
             $result = null;
-            if($this->colSetting[$dbname]["class"]!=null&&trim($this->colSetting[$dbname]["class"])!="")
+            if(isset($this->colSetting[$dbname]["class"])&&$this->colSetting[$dbname]["class"]!=null&&trim($this->colSetting[$dbname]["class"])!="")
             {
                 $result = trim($this->colSetting[$dbname]["class"]);
             }
@@ -1309,7 +1309,7 @@
          public function getMultiLineSetting($dbname)
          {
             $result =  Array("size"=>10,"cols"=>100);
-            if(is_array($this->multiLineSetting[$dbname]))
+            if(isset($this->multiLineSetting[$dbname])&&is_array($this->multiLineSetting[$dbname]))
             {
                 $result =  $this->multiLineSetting[$dbname];
             }
@@ -1411,7 +1411,7 @@
         {
             $dbname = $this->getMainIdDbName();
             $colInfo = $this->getColInfo();
-            return $colInfo[$dbname];
+            return ArrayTools::getValueFromArray($colInfo,$dbname);
         }
         public function getMainIdCol()
         {
@@ -1565,7 +1565,7 @@
         }
         public function getSearchFieldMapping($dbname)
         { 
-            return $this->searchFieldMapping[$dbname];
+            return ArrayTools::getValueFromArray($this->searchFieldMapping,$dbname);
         }
         public function setSearchGroup($groupid,$dbname,$text="",$relation="AND")
         {
@@ -1599,12 +1599,22 @@
         }
 
         public function getSearchGroupName($groupid)
-        {
-            return $this->searchGroupSetting[$groupid]["groupname"];
+        { 
+            $ret = null;
+            if(isset($this->searchGroupSetting[$groupid]["groupname"]))
+            {
+               $ret = $this->searchGroupSetting[$groupid]["groupname"];
+            }
+            return  $ret;
         }
         public function getSearchGroupRelation($groupid)
         {
-            return  $this->searchGroupSetting[$groupid]["relation"];
+            $ret = null;
+            if(isset($this->searchGroupSetting[$groupid]["relation"]))
+            {
+               $ret = $this->searchGroupSetting[$groupid]["relation"];
+            }
+            return  $ret;
         }
         public function getSearchGroup()
         {
@@ -1688,7 +1698,7 @@
             $result =  $this->searchMapping;
             if($dbname!=null)
             {
-                $result = $result[$dbname];
+                $result = ArrayTools::getValueFromArray($result,$dbname);
             }
             return $result;
          }
@@ -1824,7 +1834,7 @@
         }
         public function getExportTemplate($dbname)
         {
-            return $this->exportTemplate[$dbname];
+            return ArrayTools::getValueFromArray($this->exportTemplate,$dbname);
         }
           public function setSearchTemplate($dbname,$templateKey)
         {
@@ -1832,7 +1842,7 @@
         }
         public function getSearchTemplate($dbname)
         {
-            return $this->searchTemplate[$dbname];
+            return ArrayTools::getValueFromArray($this->searchTemplate,$dbname);
         }
         public function setReportTemplate($dbname,$templateKey)
         {
@@ -1840,7 +1850,7 @@
         }
         public function getReportTemplate($dbname)
         {
-            return $this->reportTemplate[$dbname];
+           return ArrayTools::getValueFromArray( $this->reportTemplate,$dbname);
         }
         public function setEditTemplate($dbname,$templateKey)
         {
@@ -1848,7 +1858,7 @@
         }
         public function getEditTemplate($dbname)
         {
-            return $this->editTemplate[$dbname];
+         return ArrayTools::getValueFromArray( $this->editTemplate,$dbname);
         }
         public function getValueMark()
         {
@@ -1861,7 +1871,8 @@
         }
         public function getTemplate($key)
         {
-            return $this->template[$key];
+         return ArrayTools::getValueFromArray( $this->template,$key);
+            
         }
 
          public function setQuickEditPrefix($quickEditPrefix)
@@ -2906,7 +2917,7 @@ error.insertAfter( element );
 
                 $htmlid = $this->getSearchPrefix().$dbname; 
                 $plist =null;
-                if($src[$sign]!=null&&trim($src [$sign]!= ''))
+                if(isset($src[$sign])&&$src[$sign]!=null&&trim($src[$sign]!= ''))
                 {
                  
                   $psqllist = '';
@@ -3004,7 +3015,7 @@ error.insertAfter( element );
                     return $sql;
                  }
                           
-                if($src[$sign]==null||trim($src[$sign]== ''))
+                if(isset($src[$sign])&&($src[$sign]==null||trim($src[$sign]== '')))
                 {
                     $plist = $defaultValue;
                 }
@@ -3018,7 +3029,7 @@ error.insertAfter( element );
                 }
                 $withAll = true;
                 $spiltBy =",";
-                $checkBoxesSetting = $this->checkBoxesSetting[$dbname];
+                $checkBoxesSetting = ArrayTools::getValueFromArray($this->checkBoxesSetting,$dbname);
                 if(is_array($checkBoxesSetting))
                 {
                     $withAll = $checkBoxesSetting["withAll"];
@@ -3829,7 +3840,7 @@ error.insertAfter( element );
          }
          public function getAttachJs($type,$includeTag=true)
          {
-            $array =  $this->attachJsArray[$type];
+            $array =  ArrayTools::getValueFromArray($this->attachJsArray,$type);
             $result = " ";
             if(is_array($array)&&count($array)>0)
             {
@@ -3896,7 +3907,7 @@ error.insertAfter( element );
         }
       }
 
-      public function getSql($src=null)
+      public function getSql($src)
       { 
         $result =  $this->sql;
         foreach($this->sqlGroup as $dbname =>$sqlInfo)
@@ -4382,9 +4393,9 @@ error.insertAfter( element );
          
          public function execMethod($db,$method,$src)
          {
-             $methodNameArray = $this->methodArray[$method];
+             $methodNameArray = ArrayTools::getValueFromArray($this->methodArray,$method);
              $result = true;
-             if(is_array($this->methodArray[$method]))
+             if(isset($this->methodArray[$method])&&is_array($this->methodArray[$method]))
              {
                 foreach($methodNameArray as $methodName =>$methodName2)
                 {
@@ -4639,7 +4650,7 @@ error.insertAfter( element );
               
           }
       
-          public function processData($db,$dataArray,$edit=false)
+          public function processData($db,$src,$dataArray,$edit=false)
           {
               return $dataArray;
           }
@@ -5043,7 +5054,7 @@ error.insertAfter( element );
                if(!$islinkfield)
                {
                    $colname = $this->getOriDbName($dstdbname);
-                   if($this->searchField[$dstdbname]["oridbname"]!=null&&trim($this->searchField[$dstdbname]["oridbname"])!="")
+                   if(isset($this->searchField[$dstdbname]["oridbname"])&&$this->searchField[$dstdbname]["oridbname"]!=null&&trim($this->searchField[$dstdbname]["oridbname"])!="")
                    {
                         $colname = $this->searchField[$dstdbname]["oridbname"];
                    }
@@ -5085,7 +5096,11 @@ error.insertAfter( element );
                             $html = str_replace($this->getValueMark(),$html,$templateHtml);
                          }
                       }
+                      $cssClass = "";
+                      if(isset($this->attrArray[$dbname]["search"]["class"])) 
+                      {
                        $cssClass = $this->attrArray[$dbname]["search"]["class"];
+                      }
                       $cssArray = explode(" ", $cssClass);
                       if($cssClass!=null&&trim($cssClass)!="")
                       {
@@ -5252,7 +5267,7 @@ error.insertAfter( element );
 
           } 
 
-          public function currencyRangeSearchShowMode($dbname,$colname,$src,$sql=false,$defaultValue="")
+          public function currencyRangeSearchShowMode($dbname,$colname,$src,$sql=false,$defaultValue="",$isEqual=false)
           {
                $sign = $this->getSearchPrefix().$dbname; 
                $start = $sign;
@@ -5334,7 +5349,7 @@ error.insertAfter( element );
                return $result;
           }
 
-          public function numberRangeSearchShowMode($dbname,$colname,$src,$sql=false,$defaultValue="")
+          public function numberRangeSearchShowMode($dbname,$colname,$src,$sql=false,$defaultValue="",$isEqual=false)
           {
                $sign = $this->getSearchPrefix().$dbname; 
                $start = $sign;
@@ -5458,7 +5473,7 @@ error.insertAfter( element );
                 {
                     $html->setParam("class","form-control");
                 }
-                if($size==null&&$this->colSetting[$dbname]["size"]!=null&&intval($this->colSetting[$dbname]["size"])>0)
+                if($size==null&&isset($this->colSetting[$dbname]["size"])&&$this->colSetting[$dbname]["size"]!=null&&intval($this->colSetting[$dbname]["size"])>0)
                 {
                    $size = intval($this->colSetting[$dbname]["size"]);
                 }

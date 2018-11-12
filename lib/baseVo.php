@@ -30,7 +30,12 @@
       	   {
       	   	   $name = strtolower($name);
       	   }
-      	   return $this->dataArray[$name];
+           $ret = null;
+           if(isset($this->dataArray[$name]))
+           {
+              $ret = $this->dataArray[$name];
+           }
+      	   return $ret;
       	}
       }
 
