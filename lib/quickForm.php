@@ -79,6 +79,8 @@
         protected $relationData = Array();
         protected $subForm = Array();
         protected $barCodeMapping = Array();
+        protected $joinArray = Array();
+
         public function setBarCodeMapping($dbname,$colname)
         {
             $this->barCodeMapping[$dbname] = $colname;

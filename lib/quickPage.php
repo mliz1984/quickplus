@@ -227,6 +227,7 @@
                          }    
                         return result;            
                     }";
+
             $js.=" function _changePagerows(id)
                  {
               
@@ -248,7 +249,13 @@
                          {
                             var oldpage =  '".$form->getCurPage()."';
                             var oldpagerows =  '".$form->getPageRows()."';
-                            var newpage =  '".ceil(($form->getCurPage()-1)*$form->getPageRows()+1)/$form->getPageRows()."';
+                            var newpage =  '";
+                            $pages = "1";
+                            if($form->getPageRows()>0)
+                            {
+                              $pages = ceil(($form->getCurPage()-1)*$form->getPageRows()+1)/$form->getPageRows();
+                            }
+                            $js.=$pages."';
                             document.getElementById('pageRows').value = pagerows;
                             document.getElementById('curPage').value = newpage;
                             _search();

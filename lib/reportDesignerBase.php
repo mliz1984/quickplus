@@ -782,7 +782,7 @@
             $db = $this->getDb();
             $dataMsg = new DataMsg();
             $sql = "SELECT  MAX(LENGTH(".$findkey.")) maxlength,MIN(LENGTH(".$findkey.")) minlength FROM ".$tablename;
-            if($db->getSqlMode())
+            if($db->isMssql())
             {
                 $sql = "SELECT  MAX(LEN(".$findkey.")) maxlength,MIN(LEN(".$findkey.")) minlength FROM ".$tablename;
             }
@@ -1427,14 +1427,14 @@
            $this->getSqlBuilder($sqlBuilder);
            $dataMsg = new DataMsg($db);
            $srvSqlMainCol  = null;
-           if($db->getSqlMode())
+           if($db->isMssql())
            {
                 $srvSqlMainCol = $dataMsg->getSrvSqlMainCol();
                 $dataMsg->setSrvSqlMainCol($this->mainIdCol["dbname"]); 
            }
           
            $dataMsg->findByPageSql($db,$sql,$pagerows,$curpage,$this->getCountCol(),"",$sqlBuilder,false,$orderBy);
-           if($db->getSqlMode())
+           if($db->isMssql())
            {
                 $dataMsg->setSrvSqlMainCol($srvSqlMainCol); 
            }
@@ -2280,10 +2280,14 @@ error.insertAfter( element );
 
          protected function getSpanHtml($row,$name,$html)
          {
-            $atts =  $this->spanAttributes[$row][$name];
-            if(!($atts["title"]!=null&&trim($atts["title"])!=""))
+            $atts = Array();
+            if(isset($this->spanAttributes[$row][$name]))
             {
-                $tipCol = $this->tipCol[$name];
+               $atts =  $this->spanAttributes[$row][$name];
+            }
+            if(!(isset($atts["title"])&&$atts["title"]!=null&&trim($atts["title"])!=""))
+            {
+                $tipCol = ArrayTools::getValueFromArray($this->tipCol,$name);
                 
                 if(is_array($tipCol))
                 {
@@ -2308,8 +2312,11 @@ error.insertAfter( element );
             }
 
 
-
-            $atts =  $this->spanAttributes[$row][$name];
+            $atts = Array();
+            if(isset($this->spanAttributes[$row][$name])) 
+            {      
+                  $atts =  $this->spanAttributes[$row][$name];
+            }     
             if(is_array($atts)&&count($atts)>0)
             {
                 $spanHtml = "<span width='100%'";
@@ -2528,8 +2535,12 @@ error.insertAfter( element );
       
          public function getOriValueByDbName($row,$dbName,$forceOri=false)
          {
-              $field = $this->fields[$dbName];
-              $isLinkField = $field["islinkfield"];
+              $field = ArrayTools::getValueFromArray($this->fields,$dbName);
+              $isLinkField = false;
+              if(is_array($field)&&isset($field["islinkfield"]))
+              {
+                  $isLinkField = $field["islinkfield"];
+               }
               $result = "";
               if($isLinkField)
               {
@@ -2593,7 +2604,7 @@ error.insertAfter( element );
                   if(!$isExport&&!$forceOri&&$isTableItem)
                   {
                     $html = $this->getSpanHtml($row,$dbName,$html);
-                     if($this->hasExtendInfo($dbname)&&!$this->isExportMode())
+                     if($this->hasExtendInfo($dbName)&&!$this->isExportMode())
                      {
                         $html.=" ".'<i  style="cursor:pointer" class="quickform_extendinfobutton far fa-plus-square"></i>';
                      }
@@ -2877,7 +2888,7 @@ error.insertAfter( element );
                 $sql = " ".$colname." = '".$src[$sign]."' ";
                 if($this->getFindInSetMode($dbname))
                 {
-                    if($this->getDb()->getSqlMode())
+                    if($this->getDb()->isMssql())
                     {
                          $sql = ' \',\'+'.$colname.' +\',\' like \'%,'.$src[$sign].',%\'';
                     }
@@ -2946,7 +2957,7 @@ error.insertAfter( element );
 
                     if(trim($tmpStr)=="")
                     {
-                        if($this->getDb()->getSqlMode())
+                        if($this->getDb()->isMssql())
                         {
                             $tmpStr .= ' \',\'+'.$colname.' +\',\' like \'%,'.$value.',%\'';
                         }
@@ -2957,7 +2968,7 @@ error.insertAfter( element );
                     }
                     else
                     {
-                         if($this->getDb()->getSqlMode())
+                         if($this->getDb()->isMssql())
                         {
                              $tmpStr .= ' AND \',\'+'.$colname.' +\',\' like \'%,'.$value.',%\'';
                         }
@@ -3365,7 +3376,7 @@ error.insertAfter( element );
                   $sql = " ".$colname." = '".$src[$sign]."' ";
                     if($this->getFindInSetMode($dbname))
                     {
-                        if($this->getDb()->getSqlMode())
+                        if($this->getDb()->isMssql())
                         {
                               $sql = ' \',\'+'.$colname.' +\',\' like \'%,'.$src[$sign].',%\'';
                         }
@@ -3468,7 +3479,7 @@ error.insertAfter( element );
                        $sql = " ".$colname." = '".$src[$sign]."' ";
                         if($this->getFindInSetMode($dbname))
                         {
-                            if($this->getDb()->getSqlMode())
+                            if($this->getDb()->isMssql())
                             {
                                  $sql = ' \',\'+'.$colname.' +\',\' like \'%,'.$src[$sign].',%\'';
                             }
@@ -3702,7 +3713,7 @@ error.insertAfter( element );
             $valueArray = explode(",", $src[$sign]);
             foreach ($valueArray as $value) {
                if ($this->getFindInSetMode($dbname)) {
-                  if ($this->getDb()->getSqlMode()) {
+                  if ($this->getDb()->isMssql()) {
                      $sql .= ' \',\'+' . $colname . ' +\',\' like \'%,' . $value . ',%\'';
                   } else {
                      $sql .= " FIND_IN_SET('" . $value . "', " . $colname . ") ";
@@ -3716,7 +3727,7 @@ error.insertAfter( element );
          } else {
             $sql = " " . $colname . " = '" . $src[$sign] . "' ";
             if ($this->getFindInSetMode($dbname)) {
-               if ($this->getDb()->getSqlMode()) {
+               if ($this->getDb()->isMssql()) {
                   $sql = ' \',\'+' . $colname . ' +\',\' like \'%,' . $src[$sign] . ',%\'';
                } else {
                   $sql = " FIND_IN_SET('" . $src[$sign] . "', " . $colname . ") ";
@@ -5310,7 +5321,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($startValue).")";
                             }
@@ -5328,7 +5339,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($endValue).")";
                             }
@@ -5392,7 +5403,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($startValue).")";
                             }
@@ -5410,7 +5421,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($endValue).")";
                             }
@@ -5653,7 +5664,7 @@ error.insertAfter( element );
                     $sql = " ".$colname." = '".$src[$sign]."' ";
                      if($this->getFindInSetMode($dbname))
                     {
-                        if($this->getDb()->getSqlMode())
+                        if($this->getDb()->isMssql())
                         {
                              $sql = ' \',\'+'.$colname.' +\',\' like \'%,'.$src[$sign].',%\'';
                         }
@@ -5885,7 +5896,7 @@ error.insertAfter( element );
                     $sql = " ".$colname." = '".$src[$sign]."' ";
                     if($this->getFindInSetMode($dbname))
                     {
-                        if($this->getDb()->getSqlMode())
+                        if($this->getDb()->isMssql())
                         {
                             $sql = ' \',\'+'.$colname.' +\',\' like \'%,'.$src[$sign].',%\'';
                         }
@@ -6028,7 +6039,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($startValue).")";
                             }
@@ -6046,7 +6057,7 @@ error.insertAfter( element );
                        if($time)
                        {
                             $db = $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMssql())
                             {
                                 $curcolname = "SUBSTRING(".$colname.",1,".strlen($endValue).")";
                             }

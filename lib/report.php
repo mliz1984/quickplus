@@ -1111,8 +1111,11 @@ class report extends QuickChart{
      
      public function getOriValueByDbName($row,$dbName,$forceOri=false)
      {
-           
-           $result =  $this->result[$row][$dbName];
+           $result = "";
+           if(isset($this->result[$row][$dbName]))
+           {
+                $result =  $this->result[$row][$dbName];
+           }
            
            $temp = $this->getStructureByDbName($dbName,false); 
            if(is_array($temp)&&!$forceOri) 
@@ -1174,7 +1177,7 @@ class report extends QuickChart{
           }
            if($result==null||trim($result)=="")
            {   
-                $defaultValue = $this->defaultValue[$dbName];
+                $defaultValue = ArrayTools::getValueFromArray($this->defaultValue,$dbName);
 
                 if(trim(strval($defaultValue))!="")
                 {

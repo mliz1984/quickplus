@@ -351,7 +351,7 @@
           
             $sql = 'PRAGMA table_info('.$tableName.')';
          }
-         else if($this->db->getSqlMode())
+         else if($this->db->isMsSql())
          {
             $sql = 'exec sp_columns "'. $tableName .'"';
          }
@@ -363,7 +363,7 @@
          {
              $resultArray = $dataMsg->getKeyDataArray("NAME",true,true,CASE_LOWER);
          }
-         else if($this->db->getSqlMode())
+         else if($this->db->isMsSql())
          {
            $resultArray = $dataMsg->getKeyDataArray("COLUMN_NAME",true,true,CASE_LOWER);
          }
@@ -385,7 +385,7 @@
               $data["nullable"] = $data["notnull"];
               $result[$key] = $data;
            }
-           if($this->db->getSqlMode())
+           if($this->db->isMsSql())
            {
               $data["type"] = $data["type_name"];
               $data["field"] = strtolower($data["column_name"]);
@@ -1109,7 +1109,7 @@
                        else
                        {
                           $db =  $this->getDb();
-                          if($db->getSqlMode())
+                          if($db->isMsSql())
                           {
                               $value = str_replace("'","''",$value);
                           }
@@ -1317,7 +1317,7 @@
                                   }
                                     $db =  $this->getDb();
                                     $kv = $key;
-                                  if($db->getSqlMode())
+                                  if($db->isMsSql())
                                   {
                                       $kv = str_replace("'","''",$kv);
                                   }
@@ -1336,7 +1336,7 @@
                              else
                              {
                                 $db =  $this->getDb();
-                                if($db->getSqlMode())
+                                if($db->isMsSql())
                                 {
                                     $value = str_replace("'","''",$value);
                                 }
@@ -1406,7 +1406,7 @@
                        else
                        {
                           $db =  $this->getDb();
-                          if($db->getSqlMode())
+                          if($db->isMsSql())
                           {
                               $value = str_replace("'","''",$value);
                           }
@@ -1467,8 +1467,11 @@
                     $db->openQuery($sql);
                     if($db->result){
                            $this->searchResult = true;
-
-                           if($db->getSqlMode())
+                           foreach($db->result as $r)
+                           {
+                              $this->setDataArray($r);
+                           }
+                           /*if($db->isMsSql())
                            {
                               $func = "mssql_fetch_array";
                               $para = MSSQL_ASSOC;
@@ -1488,7 +1491,7 @@
                                 while($row_data=mysql_fetch_assoc($db->result)){
                                     $this->setDataArray($row_data);
                                }            
-                           }      
+                           } */     
                     }
 
               }
@@ -1907,7 +1910,7 @@
                     if((!is_bool($this->colStyle[$key]["keepOri"])||!$this->colStyle[$key]["keepOri"]))
                   {
                           $db =  $this->getDb();
-                          if($db->getSqlMode())
+                          if($db->isMsSql())
                           {
                               $value = str_replace("'","''",$value);
                           }
@@ -1948,7 +1951,7 @@
             { 
               $id = $db->lastInsertRowID();
             }
-            else if($db->getSqlMode())
+            else if($db->isMsSql())
             {
               //$id= mssql_insert_id($link);
                     $sql ="SELECT IDENT_CURRENT('".$this->getTableName()."') ";
@@ -2215,7 +2218,7 @@
                              else
                              {
                               $db =  $this->getDb();
-                              if($db->getSqlMode())
+                              if($db->isMsSql())
                               {
                                   $value = str_replace("'","''",$value);
                               }
@@ -2925,7 +2928,7 @@ class DataMsg
               $this->totalpages = $totalpage;
             }
              
-            if($db->getSqlMode())
+            if($db->isMsSql())
             {
                 $sql = $this->getSrvSqlPageSql($sql,$pagerows,$curpage,$this->srvSqlMainCol);
                 
@@ -3050,10 +3053,26 @@ class DataMsg
          
             if($db->result){
                
-                if($db->getSqlMode())
-                {
-
-                   $func = "mssql_fetch_array";
+                  foreach($db->result as $r)
+                  {
+                    if($getArray)
+                         {
+                            $result[] = $r;
+                         }
+                         else
+                         {
+                           $data = new Data($db);
+                           $data->setDataArray($r);
+                           $data->setTableName($tableName);
+                           $data->setSql($sql);
+                           if($sqlBuilder!=null)
+                            {
+                              $data->setSqlBuilder($sqlBuilder);
+                            }
+                           $result[] = $data;
+                         }
+                  }
+                 /*  $func = "mssql_fetch_array";
                     $para = MSSQL_ASSOC;
                     if($db->isSqlSrv())
                     {
@@ -3101,9 +3120,10 @@ class DataMsg
                            $result[] = $data;
                          }
                       }        
-                }
+                }*/
                       
            }
+         
 
         if($getArray)
         {
@@ -3300,7 +3320,7 @@ class DataMsg
        $result = false;  
        $queryFunc = "mysql_query";
        $numFunc = "mysql_num_rows";
-       if($db->getSqlMode())
+       if($db->isMsSql())
        {
            $queryFunc = "mssql_query";
            $numFunc = "mssql_num_rows";
