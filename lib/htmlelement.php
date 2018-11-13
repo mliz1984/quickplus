@@ -409,7 +409,7 @@
                     $text = $data[$textKey];
                     $result.= "<option value=\"".$value."\"";
                     
-                    if(($i==0&&$defaultTitle==null&&$mustSelected)||strval($chooseValue)==strval($value)||in_array(strval($value), $chooseValue))
+                    if(($i==0&&$defaultTitle==null&&$mustSelected)||strval($chooseValue)==strval($value)||(is_array($chooseValue)&&in_array(strval($value), $chooseValue)))
                     {
                         $result.=" selected ";
                     }

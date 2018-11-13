@@ -114,11 +114,11 @@
                 $this->setSearchFieldType("parentpage_id","getSelectByParentWithAll");
                 $this->setSearchFieldType("has_right_control","getSelectByStatusWithAll");
                 $this->setSearchFieldType("is_active","getSelectByStatusWithAll");
-                if($src[$this->getSearchPrefix()."parentpage_id"]!=null&&trim($src[$this->getSearchPrefix()."parentpage_id"])!="")
+                if(isset($src[$this->getSearchPrefix()."parentpage_id"])&&$src[$this->getSearchPrefix()."parentpage_id"]!=null&&trim($src[$this->getSearchPrefix()."parentpage_id"])!="")
                         {
                                 $this->addTransfer("categoryid",trim($src[$this->getSearchPrefix()."parentpage_id"]));
                         }
-                        else if($src["categoryid"]!=null&&trim($src["categoryid"])!="")
+                        else if(isset($src["categoryid"])&&$src["categoryid"]!=null&&trim($src["categoryid"])!="")
                         {
                                 $this->addTransfer("categoryid",trim($src["categoryid"]));
                         }
@@ -145,7 +145,7 @@
                         $this->setEditFieldType("order_sequence","defaultSearchShowMode");
                 $this->setEditFieldType("is_active","getSelectByStatus");
                 $this->setEditDefaultValue("target","right");
-                if($src["categoryid"]!=null&&trim($src["categoryid"])!="")
+                if(isset($src["categoryid"])&&$src["categoryid"]!=null&&trim($src["categoryid"])!="")
                 {
                         $this->setEditDefaultValue("parentpage_id",trim($src["categoryid"]));
                 }

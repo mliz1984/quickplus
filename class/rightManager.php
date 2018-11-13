@@ -123,7 +123,7 @@ class RightManager extends QuickForm
         $src =  $this->prepareCheckboxsDataForEdit($src);
         $dataArray = CommonTools::getDataArray($src, $editPrefix); 
         $access_right = "";
-        if($dataArray['right']!=null&&trim($dataArray['right'])!="")
+        if(isset($dataArray['right'])&&$dataArray['right']!=null&&trim($dataArray['right'])!="")
         {
 	        $data = new Data($db,"qp_menu_manage","id");
 	        $where = "parentpage_id IS NOT NULL AND parentpage_id <> '0' AND (id IN (".$dataArray['right'].") OR parentpage_id IN (".$dataArray['right']."))";
@@ -136,7 +136,7 @@ class RightManager extends QuickForm
         
         $data->set("login",$dataArray["login"]);
         
-        if($dataArray["password"]!=null&&$dataArray["login"]!="")
+        if(isset($dataArray['password'])&&$dataArray["password"]!=null&&$dataArray["login"]!="")
         {
             $data->set("password","password('".$dataArray["password"]."')");
         }

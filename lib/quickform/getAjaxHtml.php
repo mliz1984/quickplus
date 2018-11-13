@@ -4,9 +4,9 @@ header('Content-Type: text/html; charset=utf-8');
         
 	    require_once(dirname(__FILE__)."/include.php");
 	    $db =  new QuickFormConfig::$SqlType();
-        $formMark = $_REQUEST['formmark'];
-        $isreport =  $_REQUEST['isreport'];
-        $method =  $_REQUEST['method'];
+        $formMark = ArrayTools::getValueFromArray($_REQUEST,'formmark');
+        $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+        $method =  ArrayTools::getValueFromArray($_REQUEST,'method');
         $form = null;
         if(intval($isreport)==1)
         {

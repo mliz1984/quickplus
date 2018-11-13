@@ -523,7 +523,7 @@
          public function getCommonSelectOption($dbname)
          {
             $result = Array();
-            if(is_array($this->commonSelectOption[$dbname]))
+            if(isset($this->commonSelectOption[$dbname])&&is_array($this->commonSelectOption[$dbname]))
             {
                 $result = $this->commonSelectOption[$dbname];
             }
@@ -1073,8 +1073,13 @@
         }
 
         public function getExtendValidateRule($tableid,$dbname,$rule)
-        {
-           return $this->validateRulesMapping["rules"]["'".$this->getExtendTablePrefix().$tableid."[".$dbname."][]'"][$rule];
+        { 
+           $ret =null;
+           if(isset($this->validateRulesMapping["rules"]["'".$this->getExtendTablePrefix().$tableid."[".$dbname."][]'"][$rule]))
+           {
+             $ret = $this->validateRulesMapping["rules"]["'".$this->getExtendTablePrefix().$tableid."[".$dbname."][]'"][$rule];
+           }
+           return $ret;
           
         }
 
@@ -1634,7 +1639,7 @@
                  $name = " ";
             }
             $validateRules = $this->getValidateRules();
-            if($editform&&$validateRules["rules"][$this->getEditPrefix().$dbname]["required"])
+            if($editform&&isset($validateRules["rules"][$this->getEditPrefix().$dbname]["required"])&&$validateRules["rules"][$this->getEditPrefix().$dbname]["required"])
             {
                 $name .= " (*)";
             }
@@ -3736,7 +3741,7 @@ error.insertAfter( element );
          }
          return $sql;
       }
-      if ($this->validateRulesMapping["rules"][$this->getEditPrefix() . $dbname]["required"]) {
+      if (isset($this->validateRulesMapping["rules"][$this->getEditPrefix() . $dbname]["required"])&&$this->validateRulesMapping["rules"][$this->getEditPrefix() . $dbname]["required"]) {
          $this->validateRulesMapping["rules"][$this->getEditPrefix() . $dbname]["min"] = 1;
       }
        $this->setCustomJs("initCol_" .  $className, $js);
@@ -4784,8 +4789,11 @@ error.insertAfter( element );
 
               $this->applyEditFieldLink($dbname);
               $this->applyColMapping($dbname,"edit");
-             
-              $cssClass = $this->attrArray[$dbname]["edit"]["class"];
+              $cssClass = "";
+              if(isset($this->attrArray[$dbname]["edit"]["class"]))
+              {
+                  $cssClass = $this->attrArray[$dbname]["edit"]["class"];
+              }
               $cssArray = explode(" ", $cssClass);
               if($cssClass!=null&&trim($cssClass)!="")
               {
@@ -4843,7 +4851,7 @@ error.insertAfter( element );
                 $quickEditidValue = $quickEditid;
                
                 $colMapping = $this->editColMapping;
-                $row = strval($row);
+               
 
                 if($keyValue!=null&&trim($keyValue)!="")
                 {
@@ -4857,7 +4865,7 @@ error.insertAfter( element );
          
             }
 
-            if($colMapping[$dbname]!=null&&trim($colMapping[$dbname])!="")
+            if(isset($colMapping[$dbname])&&$colMapping[$dbname]!=null&&trim($colMapping[$dbname])!="")
             {
                 $ajaxmethod = $colMapping[$dbname];
                
@@ -4910,7 +4918,7 @@ error.insertAfter( element );
              $onblur  = "";
              $key = "onblur";
              $id = $this->getEditPrefix().$dbname;
-             if(is_array($this->editFieldLink[$dbname]))
+             if(isset($this->editFieldLink[$dbname])&&is_array($this->editFieldLink[$dbname]))
             {
              foreach($this->attrArray[$dbname]["edit"] as $name =>$value)
              {
@@ -4994,7 +5002,7 @@ error.insertAfter( element );
                     $js.=$attr;
                     $js.= "});";
                   }
-                  if($type=="quickEdit"&&intval($this->colSetting[$dbname]["isChceckBoxWithHidden"])==1)
+                  if($type=="quickEdit"&&isset($this->colSetting[$dbname]["isChceckBoxWithHidden"])&&intval($this->colSetting[$dbname]["isChceckBoxWithHidden"])==1)
                   {
                      $js .= '$("#chk_'. $this->getSearchPrefix().$dbname.'").attr({';
                      $js.=$onBlur;

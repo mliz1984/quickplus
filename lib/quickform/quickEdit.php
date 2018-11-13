@@ -1,13 +1,13 @@
 <?php
  require_once(dirname(__FILE__)."/include.php");
 
-    /*$colSign = $_REQUEST["colsign"];
+    /*$colSign = ArrayTools::getValueFromArray($_REQUEST,"colsign"];
     $src = CommonTools::getDataArray($_REQUEST,$colSign);
     print_r($src);*/
     $db =  new QuickFormConfig::$SqlType();
-    $formMark = $_REQUEST['formmark'];
-    $isreport =  $_REQUEST['isreport'];
-    $method= $_REQUEST["method"];
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'formmark');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+    $method= ArrayTools::getValueFromArray($_REQUEST,"method");
     $form = null;
     if(intval($isreport)==1)
     {

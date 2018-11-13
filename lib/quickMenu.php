@@ -139,7 +139,7 @@
 	    {
 	    	$result = false;
 
-	    	if(is_array($this->categroyMapping[$categoryid])&&count($this->categroyMapping[$categoryid])>0)
+	    	if(isset($this->categroyMapping[$categoryid])&&is_array($this->categroyMapping[$categoryid])&&count($this->categroyMapping[$categoryid])>0)
 	    	{
 	    		$result = true;
 	    	}
@@ -317,15 +317,21 @@
 			 	if($hasChild)
 			 	{
 					$html .= '<ul class="nav-stacked collapse left-submenu" id="'.$topid.'_child_'.$categoryId.'">'; 
-				 	foreach($this->data[$categoryId] as $id => $data)
-				 	{
+					if(isset($this->data[$categoryId]))
+					{
+					 	foreach($this->data[$categoryId] as $id => $data)
+					 	{
 
-				 		$html.="<li style='list-style-type:none'>".$this->getItemUrl($data)."</li>";
-				 	}
-				 	foreach($this->categroyData[$categoryId] as $id => $name)
+					 		$html.="<li style='list-style-type:none'>".$this->getItemUrl($data)."</li>";
+					 	}
+					 }
+				 	if(isset($this->categroyData[$categoryId]))
 				 	{
-				 		$html.="<li style='list-style-type:none'>".$this->getCategoryUrl($id,$name,$categoryId,$topid)."</li>";
-				 	}
+					 	foreach($this->categroyData[$categoryId] as $id => $name)
+					 	{
+					 		$html.="<li style='list-style-type:none'>".$this->getCategoryUrl($id,$name,$categoryId,$topid)."</li>";
+					 	}
+					 }
 				 	$html .='</ul>';
 				}
 			 }
@@ -365,7 +371,7 @@
 				       {
 				       		$sessionKey = $this->lasturlsession;
 				       		$js =   "$.session.set('".$sessionKey."', '".$url."');";
-				       		if($params["onClick"]!=null&&trim($params["onClick"])!="")
+				       		if(isset($params["onClick"])&&$params["onClick"]!=null&&trim($params["onClick"])!="")
 				       		{
 				       			$js .= $params["onClick"];
 				       		}

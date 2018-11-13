@@ -2,10 +2,10 @@
 
  require_once(dirname(__FILE__)."/include.php");
     $db =  new QuickFormConfig::$SqlType();
-    $formMark = $_REQUEST['formMark'];
-    $method = $_REQUEST['method'];
-    $isreport =  $_REQUEST['isreport'];
-    $ids =  $_REQUEST['ids'];
+    $formMark =ArrayTools::getValueFromArray($_REQUEST,'formMark');
+    $method =ArrayTools::getValueFromArray($_REQUEST,'method');
+    $isreport = ArrayTools::getValueFromArray($_REQUEST,'isreport');
+    $ids = ArrayTools::getValueFromArray($_REQUEST,'ids');
     if(intval($isreport)==1)
     {
     	$reportDesigner = new reportDesigner();

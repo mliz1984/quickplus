@@ -844,7 +844,7 @@
               return $tmp[count($tmp)-1];
           }  
 
-        public static function getCountSql($sql,$colname="",$countcol=null)
+        public static function getCountSql($sql,$colname="",$col=null)
         {
 
            $sql = trim($sql);

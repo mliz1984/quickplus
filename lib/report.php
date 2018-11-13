@@ -855,16 +855,21 @@ class report extends QuickChart{
      {
   
          $this->checkStructure();
-         if($dbName == null)
+         $result = Array();
+         if($dbName==null)
          {
-            return null;
+            $result = null;
          }
-         if($this->structure[$dbName]==null&&$check)
+         if((!isset($this->structure[$dbName])||$this->structure[$dbName]==null)&&$check)
          {
               die("getStructureByDbName:please define the structure of ".$dbName." at first !");
          }
+         else if(isset($this->structure[$dbName]))
+         {
+            $result = $this->structure[$dbName];
+         }
 
-         return $this->structure[$dbName];
+         return $result;
      }
      public function getStructureByName($name,$check=true)
      {
@@ -1120,13 +1125,13 @@ class report extends QuickChart{
            $temp = $this->getStructureByDbName($dbName,false); 
            if(is_array($temp)&&!$forceOri) 
            {
-              $csvCol = $temp['extendCol'];
-              $csvName = $temp['extendName'];
-              if($temp['extendType']=="csv")
+              $csvCol = ArrayTools::getValueFromArray($temp,'extendCol');
+              $csvName = ArrayTools::getValueFromArray($temp,'extendName');
+              if(ArrayTools::getValueFromArray($temp,'extendType')=="csv")
               {                           
                 $result =  $this->getOriValueByCsvCol($row,$csvName,$csvCol);
               }   
-              else if($temp['extendType']=="json")
+              else if(ArrayTools::getValueFromArray($temp,'extendType')=="json")
               {
                  $result =  $this->getOriValueByJsonCol($row,$csvName,$csvCol);
               }

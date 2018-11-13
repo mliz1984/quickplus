@@ -1,11 +1,11 @@
 <?php
  require_once(dirname(__FILE__)."/include.php");
     $db =  new QuickFormConfig::$SqlType();
-    $formMark = $_REQUEST['formMark'];
-    $quickAjaxMethod = $_REQUEST['quickAjaxMethod'];
-    $isreport =  $_REQUEST['isreport'];
-    $mainid =  $_REQUEST['mainid'];
-    $dbname =  $_REQUEST['dbname'];
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'formMark');
+    $quickAjaxMethod = ArrayTools::getValueFromArray($_REQUEST,'quickAjaxMethod');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+    $mainid =  ArrayTools::getValueFromArray($_REQUEST,'mainid');
+    $dbname =  ArrayTools::getValueFromArray($_REQUEST,'dbname');
     if(intval($isreport)==1)
     {
     	$reportDesigner = new reportDesigner();

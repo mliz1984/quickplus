@@ -1,8 +1,8 @@
 <?php 
   require_once(dirname(__FILE__)."/include.php");
-  $id = $_REQUEST["id"];
-  $tableid = $_REQUEST["tableid"];
-  $class = $_REQUEST["class"];
+  $id = ArrayTools::getValueFromArray($_REQUEST,"id");
+  $tableid = ArrayTools::getValueFromArray($_REQUEST,"tableid");
+  $class = ArrayTools::getValueFromArray($_REQUEST,"class");
   $db =  new QuickFormConfig::$SqlType();
   $obj = new $class();
   $obj->initEdit();

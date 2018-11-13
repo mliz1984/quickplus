@@ -9,7 +9,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/class/session.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickLoginManager.php");          
 $db = new  QuickFormConfig::$SqlType();
 $loginmanager = QuickLoginManager::getQuickLoginManager();
-$flag = intval($_REQUEST["flag"]);
+$flag = intval(ArrayTools::getValueFromArray($_REQUEST,"flag"));
 if($flag==1)
 {
 	$loginmanager->reloadUserRight($db);

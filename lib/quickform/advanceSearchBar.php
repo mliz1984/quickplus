@@ -1,9 +1,9 @@
 <?php
     require_once(dirname(__FILE__)."/include.php");
     $db =  new QuickFormConfig::$SqlType();
-    $formMark = $_REQUEST['formmark'];
-    $isreport =  $_REQUEST['isreport'];
-    $parent = $_REQUEST["parent"];
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'formmark');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+    $parent = ArrayTools::getValueFromArray($_REQUEST,'parent');
     
     if(intval($isreport)==1)
     {

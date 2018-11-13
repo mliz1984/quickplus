@@ -1453,7 +1453,7 @@
           $db = $this->db;
               if($this->pdoMode)
               {
-                  $pdo = $db->getPdo();
+                  $pdo = $db;
                   $stmt = $pdo->prepare($sql);
                   $stmt = $this->bindPKValue($stmt);
                   $this->searchResult = $stmt->execute();
@@ -1465,9 +1465,9 @@
               }
               else {
                     $db->openQuery($sql);
-                    if($db->result){
+                    if($db->getResult()){
                            $this->searchResult = true;
-                           foreach($db->result as $r)
+                           foreach($db->getResult() as $r)
                            {
                               $this->setDataArray($r);
                            }
@@ -1664,7 +1664,7 @@
            }
            if($this->pdoMode)
            {
-               $pdo = $this->db->getPdo();
+               $pdo = $this->db;
                $stmt = $pdo->prepare($sql);
                foreach ($this->getDataArray() as $key=>$value)
                {
@@ -1749,7 +1749,7 @@
          {
              return $sql;
          }
-         $pdo = $this->db->getPdo();
+         $pdo = $this->db;
         
          $stmt = $pdo->prepare($sql);
          foreach ($this->getDataArray() as $key=>$value)
@@ -1947,22 +1947,8 @@
           $id = null;
           if($temp)
           {
-            if($db instanceof sqlLiteb)
-            { 
-              $id = $db->lastInsertRowID();
-            }
-            else if($db->isMsSql())
-            {
-              //$id= mssql_insert_id($link);
-                    $sql ="SELECT IDENT_CURRENT('".$this->getTableName()."') ";
-                    $dataMsg = new DataMsg();
-                    $id = $dataMsg->getUniString($db,$sql,$colname);
-             
-            }
-            else {
-                 $link = $db->getLink();
-                 $id = mysql_insert_id($link);
-            }
+               $id = $db->getLastInsertRowID();
+        
           }
           if(!$this->updateCrypt($id))
            {
@@ -2039,7 +2025,7 @@
          {
              return $sql;
          }
-         $pdo = $this->db->getPdo();
+         $pdo = $this->db;
          $stmt = $pdo->prepare($sql);
          foreach ($this->getDataArray() as $key=>$value)
          {         
@@ -2969,9 +2955,9 @@ class DataMsg
           $mutilSql .=$sql;
           $tableArray[] = $tablename;
       }  
-    $pdo = $db->getPdo();
-    $stmt = $pdo->query($mutilSql); 
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $pdo = $db;
+    $dataset = $pdo->openQuery($mutilSql); 
+
     $result = Array();
     $i = -1;
     do {
@@ -2980,8 +2966,6 @@ class DataMsg
       
          if($getArray)
          {
-            $dataset = $stmt->fetchAll();
-
             $result[$tableName] = $dataset;
          }
          else
@@ -3051,9 +3035,9 @@ class DataMsg
          }
          $db->openQuery($sql);
          
-            if($db->result){
+            if($db->getResult()){
                
-                  foreach($db->result as $r)
+                  foreach($db->getResult() as $r)
                   {
                     if($getArray)
                          {
@@ -3317,21 +3301,11 @@ class DataMsg
    }
    public function isExistTable($db,$tablename)
    {
-       $result = false;  
-       $queryFunc = "mysql_query";
-       $numFunc = "mysql_num_rows";
-       if($db->isMsSql())
-       {
-           $queryFunc = "mssql_query";
-           $numFunc = "mssql_num_rows";
-           if($db->isSqlSrv())
-           {
-              $queryFunc = "sqlsrv_query";
-             $numFunc = "sqlsrv_num_rows";
-           }
-       }
-
-       if($numFunc($queryFunc("SHOW TABLES LIKE '%" . $tablename . "%'")==1)) {
+       $sql = "SHOW TABLES LIKE '%" . $tablename . "%'";
+       $tmp = $db->openQuery($sql);
+       $result = false;
+       if(count($result)==1)
+        {
           $result = true; 
        }
        return $result; 
