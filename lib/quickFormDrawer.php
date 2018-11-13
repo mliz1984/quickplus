@@ -3,6 +3,7 @@ namespace Quickplus\Lib;
 use Quickplus\Lib\Tools\StringTools;
 use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\QuickLoginManager;
+use Quickplus\Lib\Tools\ArrayTools;
 class quickFormDrawer 
 {
         protected $quickForm;
@@ -47,13 +48,18 @@ class quickFormDrawer
            {
               $checkLogin = false;
               $url = $_SERVER['PHP_SELF'];
-              $method = $src["method"];
-              $loginManager  = QuickLoginManager::getQuickLoginManager();
-              if(!$loginManager->checkRight($url,$method,$src))
+              if(isset($src["method"]))
               {
-                $loginManager->goToErrorPage();
+                  $method = $src["method"];
+                  $loginManager  = QuickLoginManager::getQuickLoginManager();
+                  if(!$loginManager->checkRight($url,$method,$src))
+                  {
+                    $loginManager->goToErrorPage();
+                  }
+                  $checkLogin = true;
               }
            }
+           return $checkLogin;
         }
 
         public function setQuickForm($db,$quickForm,$src=null,$edit=true)
@@ -160,8 +166,7 @@ class quickFormDrawer
             $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."bootstrap/js/bootstrap.min.js"); 
             $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."bootstrap/css/bootstrap.min.css");  
            // $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."bootstrap-select/js/bootstrap-select.min.js"); 
-           // $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."bootstrap-select/css/bootstrap-select.min.css");
-            
+           // $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."bootstrap-select/css/bootstrap-select.min.css")
             $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."select2/js/select2.full.min.js"); 
             $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."select2/css/select2.min.css");
               $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."awesomplete/awesomplete.min.js"); 
@@ -381,11 +386,11 @@ class quickFormDrawer
             }
             $src = $this->quickForm->editSrc($db,$src);
             $this->quickForm->setDataSrc($src);
-            $method = $src['method'];
+            $method = ArrayTools::getValueFromArray($src,'method');
 
-            $debug = $src["debug"];
-            $exportmode = trim(strtolower($src["exportmode"]));
-            $searchSign = intval($src["searchSign"]);
+            $debug = ArrayTools::getValueFromArray($src,'debug');
+            $exportmode = trim(strtolower(ArrayTools::getValueFromArray($src,'exportmode')));
+            $searchSign = intval(ArrayTools::getValueFromArray($src,'searchSign'));
             $this->quickForm->setIsExport($isExport);
             $this->quickForm->deleteFormDataByMainId($db,$src);
             if($isExport)

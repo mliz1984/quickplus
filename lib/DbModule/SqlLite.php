@@ -53,7 +53,7 @@ class SqlLite extends SQLite3
         return $obj;
     }
 
-    public function getSqlMode()
+    public function isMssql()
     {
         return false;
     }

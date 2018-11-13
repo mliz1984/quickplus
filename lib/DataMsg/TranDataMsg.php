@@ -24,11 +24,11 @@ class TranDataMsg extends DataMsg{
 
         $temp =Array(
             "prefix" => $prefix,
-            "prefixmethod" => $prefixMethodName,
+            "prefixmethod" => $prefixMethod,
             "isexoprt" => $isExoprt,
 
         );
-        $this->tranList = array_merge($this->tranList,array($temp,));
+        $this->$tranList = array_merge($this->$tranList,array($temp,));
         $dataMsg = $this->getTranDataMsg($prefix,$prefixMethodName,$isExoprt);
         $this->setDataMsg($dataMsg);
     }

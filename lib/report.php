@@ -847,7 +847,7 @@ class report extends QuickChart{
          {
             return null;
          }
-         if($this->structure[$dbName]==null&&$check)
+         if(empty($this->structure[$dbName])&&$check)
          {
               die("getStructureByDbName:please define the structure of ".$dbName." at first !");
          }
@@ -1004,14 +1004,14 @@ class report extends QuickChart{
           $this->getData($db,$sql,$pagerows,$curpage,$sqlBuilder);
      }
      
-     public function getData($db,$sql,$pagerows=0,$curpage=1,$sqlBuilder=null)
+    public function getData($db,$sql,$orderBy,$pagerows=0,$curpage=1,$sqlBuilder=null)
      {
 
            $this->setDb($db);
            $this->setExecSql($sql);
            $this->getSqlBuilder($sqlBuilder);
            $dataMsg = new DataMsg($db);
-           $dataMsg->findByPageSql($db,$sql,$pagerows,$curpage,$this->getCountCol(),"",$sqlBuilder);
+           $dataMsg->findByPageSql($db,$sql,$pagerows,$curpage,$this->getCountCol(),"",$sqlBuilder,false,$orderBy);
            $this->totalcount = $dataMsg->getTotalCount();
 
            $this->pagerows = $dataMsg->getPageRows();
@@ -1099,8 +1099,11 @@ class report extends QuickChart{
      
      public function getOriValueByDbName($row,$dbName,$forceOri=false)
      {
-           
-           $result =  $this->result[$row][$dbName];
+           $result = "";
+           if(isset($this->result[$row][$dbName]))
+           {
+                $result =  $this->result[$row][$dbName];
+           }
            
            $temp = $this->getStructureByDbName($dbName,false); 
            if(is_array($temp)&&!$forceOri) 
@@ -1162,7 +1165,7 @@ class report extends QuickChart{
           }
            if($result==null||trim($result)=="")
            {   
-                $defaultValue = $this->defaultValue[$dbName];
+                $defaultValue = ArrayTools::getValueFromArray($this->defaultValue,$dbName);
 
                 if(trim(strval($defaultValue))!="")
                 {

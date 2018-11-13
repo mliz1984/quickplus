@@ -2,6 +2,7 @@
 use \Quickplus\Lib\DbModule\Database as Database;
 use \Quickplus\Lib\DataMsg\Data as Data;
 use \Quickplus\Lib\DataMsg\DataMsg as DataMsg;
+use Quickplus\Lib\Tools\ArrayTools;
 use Quickplus\Lib\QuickMenu;
 use \Quickplus\Lib\Tools;
 
@@ -27,9 +28,7 @@ use \Quickplus\Lib\Tools;
        
         public function login($db,$username,$password)
 		{
-			
-
-			$result = false;
+		    $result = false;
 			$db = new DataBase();
 			$data = new Data($db,"qp_rightcontrol","login");
 			$data->set("login",$username);
@@ -66,7 +65,7 @@ use \Quickplus\Lib\Tools;
 		public function reloadUserRight($db)
 		{
 			$result = false;
-			$userinfo = $_SESSION[$this->sessionArea];
+			$userinfo = ArrayTools::getValueFromArray($_SESSION,$this->sessionArea);
 			$id = $userinfo["accountid"];
 			if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
 			{
@@ -85,15 +84,16 @@ use \Quickplus\Lib\Tools;
 		{
 			
 			$result = false;
-			$userinfo = $_SESSION[$this->sessionArea];
-			if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
-			{
-				$result = true;
-				if($getUserInfo)
+			$userinfo = ArrayTools::getValueFromArray($_SESSION,$this->sessionArea);
+				if(is_array($userinfo)&&$userinfo["accountid"]!=null&&trim($userinfo["accountid"])!="")
 				{
-					$result =  $userinfo;
+					$result = true;
+					if($getUserInfo)
+					{
+						$result =  $userinfo;
+					}
 				}
-			}
+				
 			return $result;
 		}
 

@@ -6,7 +6,7 @@ use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
 use \Quickplus\Lib\QuickLoginManager as QuickLoginManager;
 $db = new  QuickFormConfig::$SqlType();
-if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
+if(!empty($_REQUEST['username']))
 {
   $loginmanager = QuickLoginManager::getQuickLoginManager();
   $result = $loginmanager->login($db,$_REQUEST['username'],$_REQUEST['pwd']);
@@ -25,6 +25,42 @@ if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
   } 
 }
 
+/*
+if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
+{
+	$username = $_REQUEST['username'];
+	$pwd = $_REQUEST['pwd'];
+
+	//echo $username."<br>";
+	$sha1pwd =  sha1($pwd);
+
+	//$sql = "SELECT a.username,a.password,a.groupid FROM qp_users a where a.username='".$username."' and a.password='".$sha1pwd."'";
+
+	$data = new Data($db,"qp_users","id");
+	$data->set("username",$username);
+	$data->set("password",$sha1pwd);
+	$datamsg = $data->find();
+	$totalrows = $datamsg->getSize(); // return the total rows of the results
+
+	if($totalrows!=1)
+	{
+		echo "<script>alert('ÓÃ»§Ãû»òÕßÃÜÂë´íÎó')</script>";
+	}
+	else if($totalrows==1)
+	{
+		$data = $datamsg->getData(0);
+    $id = $data->getInt("id");
+		$session = new Session();
+		$session->setsession('username',$username);
+    $session->setsession('id',$id);
+    //echo $_SESSION['username']."@@@";
+    //echo "<script>alert('µÇÂ¼³É¹¦£¡')</script>";
+		echo "<script>window.location='/pages/admin.php'</script>";
+
+	}
+	
+}
+*/
 
 ?>
 
@@ -52,7 +88,7 @@ if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
 </script>
  <!--SIGN UP-->
  
- <h1>QuickPlus</h1>
+ <h1>Report System</h1>
 <div class="login-form">
 	<!--
 		<div class="head-info">

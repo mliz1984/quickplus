@@ -53,7 +53,7 @@ class Database
         return $this->pdoConn;
     }
 
-    public function getSqlMode()
+    public function isMssql()
     {
         return false;
     }
@@ -140,15 +140,22 @@ class Database
             $encodeSql = "set names '".QuickFormConfig::$dbEncode."'";
             mysql_query($encodeSql, $this->link);
         }
-        if($this->result = mysql_query($strsql, $this->link))
+        $result = Array();
+        if($result = mysql_query($strsql, $this->link))
         {
             //echo "<br>db pass 3";
             if($this->debug)
             {
                 echo " Run time:".(microtime(true)-$time)/1000;
             }
-            $this->rownum = mysql_num_rows($this->result);
-            $this->fieldnum = mysql_num_fields($this->result);
+            $this->rownum = mysql_num_rows($result);
+            $this->fieldnum = mysql_num_fields($result);
+            $this->result = Array();
+
+            while($row_data=mysql_fetch_assoc($result))
+            {
+                $this->result[] = $row_data ;
+            }
 
             return TRUE;
         }

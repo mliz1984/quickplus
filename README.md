@@ -1,4 +1,4 @@
-# Quickplus v1.0
+# QuickPlus 
 
 ## License
 
@@ -8,5 +8,17 @@ This software is copyrighted by Quickplus.
 
 ## Project installation 
 
-Sample
+QuickPlus is a quick develop tools for develop web system,now it's just support php 5.6,we are working for php 7.2 now.
+
+Version History:
+
+0.7Build20181105  First open source version
+
+
+RoadMap:
+2018.DEC 
+0.8  Support PHP 7.2
+
+
+
 

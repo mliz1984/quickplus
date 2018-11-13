@@ -10,8 +10,8 @@ namespace Quickplus\Lib\DataMsg;
 use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 use \Quickplus\Lib\Tools\StringTools as StringTools;
 
-class Data extends BaseVo
-{
+class Data extends BaseVo{
+
     protected $tableSign = null;
     protected $encode = null;
     protected $subTable = array();
@@ -355,7 +355,7 @@ class Data extends BaseVo
 
             $sql = 'PRAGMA table_info('.$tableName.')';
         }
-        else if($this->db->getSqlMode())
+        else if($this->db->isMsSql())
         {
             $sql = 'exec sp_columns "'. $tableName .'"';
         }
@@ -367,7 +367,7 @@ class Data extends BaseVo
         {
             $resultArray = $dataMsg->getKeyDataArray("NAME",true,true,CASE_LOWER);
         }
-        else if($this->db->getSqlMode())
+        else if($this->db->isMsSql())
         {
             $resultArray = $dataMsg->getKeyDataArray("COLUMN_NAME",true,true,CASE_LOWER);
         }
@@ -389,7 +389,7 @@ class Data extends BaseVo
                 $data["nullable"] = $data["notnull"];
                 $result[$key] = $data;
             }
-            if($this->db->getSqlMode())
+            if($this->db->isMsSql())
             {
                 $data["type"] = $data["type_name"];
                 $data["field"] = strtolower($data["column_name"]);
@@ -764,6 +764,7 @@ class Data extends BaseVo
 
     function __construct($db,$tableName="",$primaryKey=null,$src=null,$prefix=null,$blank=true)
     {
+
         $this->db = $db;
         $this->tableSign = "main";
         $this->tableName = $tableName;
@@ -1112,7 +1113,7 @@ class Data extends BaseVo
                     else
                     {
                         $db =  $this->getDb();
-                        if($db->getSqlMode())
+                        if($db->isMsSql())
                         {
                             $value = str_replace("'","''",$value);
                         }
@@ -1320,7 +1321,7 @@ class Data extends BaseVo
                         }
                         $db =  $this->getDb();
                         $kv = $key;
-                        if($db->getSqlMode())
+                        if($db->isMsSql())
                         {
                             $kv = str_replace("'","''",$kv);
                         }
@@ -1339,7 +1340,7 @@ class Data extends BaseVo
                 else
                 {
                     $db =  $this->getDb();
-                    if($db->getSqlMode())
+                    if($db->isMsSql())
                     {
                         $value = str_replace("'","''",$value);
                     }
@@ -1402,14 +1403,14 @@ class Data extends BaseVo
                 else {
                     if($value!=null)
                     {
-                        if($withIn||(is_bool($this->colStyle[$key]["keepOri"])&&$this->colStyle[$key]["keepOri"]))
+                        if($withIn||(isset($this->colStyle[$key]["keepOri"])&&is_bool($this->colStyle[$key]["keepOri"])&&$this->colStyle[$key]["keepOri"]))
                         {
                             $whereClause .=" AND ".$colKey." ".$this->getOperator($key)." ".$value." ";
                         }
                         else
                         {
                             $db =  $this->getDb();
-                            if($db->getSqlMode())
+                            if($db->isMsSql())
                             {
                                 $value = str_replace("'","''",$value);
                             }
@@ -1470,28 +1471,31 @@ class Data extends BaseVo
             $db->openQuery($sql);
             if($db->result){
                 $this->searchResult = true;
-
-                if($db->getSqlMode())
+                foreach($db->result as $r)
                 {
-                    $func = "mssql_fetch_array";
-                    $para = MSSQL_ASSOC;
-                    if($db->isSqlSrv())
-                    {
-                        $func = "sqlsrv_fetch_array";
-                        $para = SQLSRV_FETCH_ASSOC;
+                    $this->setDataArray($r);
+                }
+                /*if($db->isMsSql())
+                {
+                   $func = "mssql_fetch_array";
+                   $para = MSSQL_ASSOC;
+                   if($db->isSqlSrv())
+                   {
+                       $func = "sqlsrv_fetch_array";
+                       $para = SQLSRV_FETCH_ASSOC;
 
-                    }
+                   }
 
                     while($row_data= $func($db->result,$para)){
 
-                        $this->setDataArray($row_data);
+                         $this->setDataArray($row_data);
                     }
                 }
                 else {
-                    while($row_data=mysql_fetch_assoc($db->result)){
-                        $this->setDataArray($row_data);
+                     while($row_data=mysql_fetch_assoc($db->result)){
+                         $this->setDataArray($row_data);
                     }
-                }
+                } */
             }
 
         }
@@ -1910,7 +1914,7 @@ class Data extends BaseVo
                     if((!is_bool($this->colStyle[$key]["keepOri"])||!$this->colStyle[$key]["keepOri"]))
                     {
                         $db =  $this->getDb();
-                        if($db->getSqlMode())
+                        if($db->isMsSql())
                         {
                             $value = str_replace("'","''",$value);
                         }
@@ -1951,7 +1955,7 @@ class Data extends BaseVo
             {
                 $id = $db->lastInsertRowID();
             }
-            else if($db->getSqlMode())
+            else if($db->isMsSql())
             {
                 //$id= mssql_insert_id($link);
                 $sql ="SELECT IDENT_CURRENT('".$this->getTableName()."') ";
@@ -2218,7 +2222,7 @@ class Data extends BaseVo
                             else
                             {
                                 $db =  $this->getDb();
-                                if($db->getSqlMode())
+                                if($db->isMsSql())
                                 {
                                     $value = str_replace("'","''",$value);
                                 }

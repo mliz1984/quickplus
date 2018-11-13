@@ -205,7 +205,7 @@ use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
             public function getNumber($value="",$numberFormatSetting=null)
             {
                 $head = "<input type=\"number\" ";
-                $$main = "";
+                $main = "";
                 if($value!=null&&trim($value)!="")
                 {
                   $main = " value=\"".$value."\" ";
@@ -227,7 +227,7 @@ use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
             public function getInput($value="")
             {
                 $head = "<input type=\"text\" ";
-                $$main = "";
+                $main = "";
                 if($value!=null&&trim($value)!="")
                 {
                   $main = " value=\"".$value."\" ";
@@ -624,7 +624,7 @@ use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
                     $result.= $this->getParamString();
                     $result .=" value='".$value."' ";
                   
-                    $point = $idArray[$value];
+                    $point = ArrayTools::getValueFromArray($idArray,$value);
 
                     if($point!=null&&strval($value) == strval($point))
                     {

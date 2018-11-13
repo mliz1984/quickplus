@@ -62,34 +62,9 @@ use Quickplus\Lib\QuickProxy;
    	    $ret = Array();
    	     if($db->result)
    	     {
-                if($db->getSqlMode())
-                {
-
-                   $func = "mssql_fetch_array";
-                    $para = MSSQL_ASSOC;
-                    if($db->isSqlSrv())
-                    {
-                                  $func = "sqlsrv_fetch_array";
-                                  $para = SQLSRV_FETCH_ASSOC;
-                                   
-                    }          
-                    while($row_data=$func($db->result, $para))
-                    {
-
+              $ret = $db->result;
                       
-                            $ret[] = $row_data;
-                       
-                    }
-                }
-                else 
-                {
-                     while($row_data=mysql_fetch_array($db->result)){
-                    
-                            $ret[] = $row_data;
-                        }           
-                }                
-                      
-           }   
+        }   
            return $ret;
    }
 }

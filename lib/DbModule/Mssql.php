@@ -83,7 +83,7 @@ class Mssql
         return TRUE;
     }
 
-    public function getSqlMode()
+    public function isMssql()
     {
         return true;
     }

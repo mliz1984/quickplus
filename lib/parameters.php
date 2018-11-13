@@ -7,4 +7,5 @@ define('DB_HOST', 'test.quickplus.org');
 define('DB_NAME', 'admin_test');
 define('DB_USERNAME', 'admin_test');
 define('DB_PASSWORD', 'YANx1984');
+
 ?>
