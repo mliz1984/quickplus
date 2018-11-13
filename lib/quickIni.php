@@ -1,5 +1,6 @@
-<?php 
-	    require_once(dirname(__FILE__) . "/commonTools.php");
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\FileTools as FileTools;
 	    class QuickIni 
 	    {
 	    	 protected $iniData = Array();

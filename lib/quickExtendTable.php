@@ -1,4 +1,6 @@
-<?php  
+<?php
+namespace Quickplus\Lib;
+
    class QuickExtendTable
    {
    	    protected $extendTablePrefix = "";

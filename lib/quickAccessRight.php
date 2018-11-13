@@ -1,7 +1,9 @@
 <?php
-	    require_once(dirname(__FILE__)."/quickClassLoader.php");
-	    class QuickAccessRight extends QuickClassLoader
-	    {
-	    	
-	    }
+namespace Quickplus\Lib;
+use Quickplus\Lib\QuickClassLoader;
+
+class QuickAccessRight extends QuickClassLoader
+{
+
+}
 ?>

@@ -1,5 +1,6 @@
 <?php
-   require_once(dirname(__FILE__) . "/htmlelement.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\HtmlElement;
    class QuickHtmlDesignerExtend
    {
          protected $designMode = true;
@@ -9,7 +10,7 @@
          }
    		public function getCellAttr($cellContent,$col,$row)
    		{
-   			$html .= '  colval="'.strtolower($col).'" rowval="'.strtolower($row).'" title="' . $col . $row .'" linkcell=""'. ' id="cell_'.strtolower($col.$row).'"';
+   			$html = '  colval="'.strtolower($col).'" rowval="'.strtolower($row).'" title="' . $col . $row .'" linkcell=""'. ' id="cell_'.strtolower($col.$row).'"';
 			
          if($this->designMode)
          {
@@ -34,10 +35,6 @@
             $hidden->setParam("rowval",$row);
             return $hidden->getHidden();
          }
-
-         
-
-
 
    }
 

@@ -1,8 +1,7 @@
 <?php
-namespace Quickplus\Lib\Quicklayout;
-   require_once(dirname(__FILE__) . "/reportDesignerBase.php");
-   require_once(dirname(__FILE__) . "/htmlelement.php");
-
+namespace Quickplus\Lib;
+use Quickplus\Lib\reportDesignerBase as reportDesignerBase;
+use Quickplus\Lib\Tools\HtmlElement as HtmlElement;
     
 	class quickLayout  extends reportDesignerBase{
 		protected $colData = Array();

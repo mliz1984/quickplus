@@ -1,15 +1,20 @@
-<?php 
-  require_once(dirname(__FILE__) . "/quickLayout.php");
-  require_once(dirname(__FILE__) . "/UrlTools.php");
-  require_once(dirname(__FILE__) . "/DataMsg.php");
-  require_once(dirname(__FILE__) . "/htmlelement.php");
-  require_once(dirname(__FILE__) . "/quickFormConfig.php");
-  require_once(dirname(__FILE__)."/quickUploader.php");
-  require_once(dirname(__FILE__)."/quickUrl.php");
-  require_once(dirname(__FILE__)."/dateUtil.php");
-  require_once(dirname(__FILE__)."/quickSql.php");
-  require_once(dirname(__FILE__)."/barcode/BarcodeGenerator.php");
-  require_once(dirname(__FILE__)."/barcode/BarcodeGeneratorSVG.php");
+<?php
+namespace  Quickplus\Lib;
+
+use Quickplus\Lib\quickLayout as quickLayout;
+use Quickplus\Lib\DataMsg\DataMsg;
+use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\Tools\DbTools;
+use Quickplus\Lib\Tools\StringTools;
+use Quickplus\Lib\Tools\HtmlElement;
+use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+use Quickplus\Lib\DateUtil as DateUtil;
+use Quickplus\Lib\quickUploader as quickUploader;
+use Quickplus\Lib\QuickUrl as QuickUrl;
+use Quickplus\Lib\QuickSql as QuickSql;
+use Picqer\Barcode\BarcodeGeneratorSVG;
+use Picqer\Barcode\BarcodeGenerator;
+
   class quickForm extends quickLayout
   {
         protected $debug = false;

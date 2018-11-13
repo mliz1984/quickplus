@@ -1,5 +1,6 @@
 <?php
-    require_once(dirname(__FILE__) . "/UrlTools.php");
+    namespace Quickplus\Lib;
+    use Quickplus\Lib\Tools\UrlTools;
     class QuickClassLoader
     {
     	protected $classLoader = "quickClassLoader";

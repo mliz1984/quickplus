@@ -58,7 +58,7 @@ class Database
         return false;
     }
 
-    function Database($hostname=DB_HOST,$dbname=DB_NAME,$username=DB_USERNAME,$password=DB_PASSWORD,$needEcho=false)
+    function __construct($hostname=DB_HOST,$dbname=DB_NAME,$username=DB_USERNAME,$password=DB_PASSWORD,$needEcho=false)
     {
         $this->hostname = $hostname;
         $this->dbname   = $dbname;

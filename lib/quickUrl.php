@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
      class QuickUrl{
       	public static function post($url,$data)
       	{

@@ -1,7 +1,8 @@
-<?php 
-    require_once(dirname(__FILE__) . "/UrlTools.php");
-    require_once(dirname(__FILE__)."/PHPExcel.php");
-
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\UrlTools as UrlTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\PHPExcel;
 
 class QuickHtmlWriter extends PHPExcel_Writer_Abstract implements PHPExcel_Writer_IWriter {
 	/**

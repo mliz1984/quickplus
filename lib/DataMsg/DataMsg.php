@@ -1,9 +1,9 @@
 <?php
 namespace Quickplus\Lib\DataMsg;
-use Quickplus\Lib\Tools;
 use Quickplus\Lib\DataMsg\BaseVo as BaseVo;
 use Quickplus\Lib\DataMsg\Data as Data;
 use Quickplus\Lib\QuickCrypt as QuickCrypt;
+use Quickplus\Lib\Tools\DbTools as DbTools;
 use Quickplus\Lib\QuickFromConfig;
 
 class DataMsg 

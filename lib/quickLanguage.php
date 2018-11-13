@@ -1,6 +1,7 @@
-<?php 
-	 require_once(dirname(__FILE__) . "/commonTools.php");
-	 require_once(dirname(__FILE__)."/quickIni.php");
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\QuickIni;
 	class QuickLanguage
 	{
 		protected $languagePath = Array();

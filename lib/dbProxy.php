@@ -6,7 +6,7 @@ use Quickplus\Lib\Database as Database;
 use Quickplus\Lib\SqlServer as SqlServer;
 use Quickplus\Lib\Mssql as Mssql;
 use Quickplus\Lib\Parameters;
-require_once(dirname(__FILE__)."/quickProxy.php");
+use Quickplus\Lib\QuickProxy;
 
   class DbProxy extends QuickProxy
   {

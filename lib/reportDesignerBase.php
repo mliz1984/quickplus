@@ -1,11 +1,17 @@
-<?php 
-      require_once(dirname(__FILE__)."/report.php");
-      require_once(dirname(__FILE__) . "/UrlTools.php");
-      require_once(dirname(__FILE__) . "/htmlelement.php");
-      require_once(dirname(__FILE__) . "/quickFormConfig.php");
-      require_once(dirname(__FILE__)."/quickExtendTable.php");
-      require_once(dirname(__FILE__)."/treeobject.php"); 
-      require_once(dirname(__FILE__)."/dateUtil.php");         
+<?php
+namespace Quickplus\Lib;
+require_once(dirname(__FILE__)."/report.php");
+use Quickplus\Lib\Tools\ArrayTools as ArrayTools;
+use Quickplus\Lib\Tools\DbTools as DbTools;
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\Tools\UrlTools as UrlTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\Tools\HtmlElement as HtmlElement;
+use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+use Quickplus\Lib\DataMsg\DataMsg as DataMsg;
+require_once(dirname(__FILE__)."/quickExtendTable.php");
+require_once(dirname(__FILE__)."/treeobject.php");
+require_once(dirname(__FILE__)."/dateUtil.php");
 
     class reportDesignerBase extends categoryReport
     {

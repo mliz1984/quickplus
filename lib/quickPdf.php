@@ -1,6 +1,7 @@
 <?php
+namespace Quickplus\Lib;
 	set_time_limit(0);
-	require_once(dirname(__FILE__) . "/quickFormConfig.php");
+use Quickplus\Lib\QuickFormConfig;
 	class QuickPdf 
 	{   
 		public static function createPdf($url,$file,$check=ture,$pageSize="Letter")

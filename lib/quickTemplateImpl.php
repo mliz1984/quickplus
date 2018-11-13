@@ -1,8 +1,7 @@
-<?php 
-	 require_once(dirname(__FILE__)."/quickForm.php");
- 	 require_once(dirname(__FILE__)."/quickTemplateConfig.php");
-
-
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\quickForm as quickForm;
+use Quickplus\Lib\QuickTemplateConfig as QuickTemplateConfig;
 
      class QuickTemplateTools extends QuickTemplateConfig
      {

@@ -1,9 +1,13 @@
 <?php 
-    require_once(dirname(__FILE__)."/quickForm.php"); 
-    require_once(dirname(__FILE__) . "/UrlTools.php");
-    require_once(dirname(__FILE__) . "/htmlelement.php");
-    require_once(dirname(__FILE__)."/quickExcelReader.php"); 
-    require_once(dirname(__FILE__)."/quickHtmlDesignerExtend.php"); 
+namespace Quickplus\Lib;
+use Quickplus\Lib\quickForm;
+use Quickplus\Lib\Tools\DbTools as DbTools;
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\Tools\UrlTools as UrlTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\Tools\HtmlElement as HtmlElement;
+use Quickplus\Lib\QuickExcelReader;
+use Quickplus\Lib\QuickHtmlDesignerExtend;
     require_once(dirname(__FILE__)."/mpdf/mpdf.php"); 
     class QuickDesigner extends QuickForm
     {

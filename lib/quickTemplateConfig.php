@@ -1,5 +1,6 @@
-<?php 
-   require_once(dirname(__FILE__)."/quickForm.php"); 
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\quickForm as quickForm;
 	class QuickTemplateConfig extends quickForm
 	{
 		protected $dbTableName = "qp_template";

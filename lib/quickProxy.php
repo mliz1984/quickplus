@@ -1,7 +1,8 @@
 <?php
 namespace Quickplus\Lib;
 use Quickplus\Lib\QuickProxyConfig as QuickProxyConfig;
-require_once(dirname(__FILE__) . "/commonTools.php");
+use Quickplus\Lib\Tools\CommonTools;
+
 class QuickProxy extends QuickProxyConfig
 {
     protected $options = Array(

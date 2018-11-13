@@ -1,7 +1,8 @@
 <?php
     require_once(dirname(__FILE__)."/include.php"); 
 	require_once(dirname(dirname(__FILE__))."/quickDesigner.php");
-		require_once(dirname(dirname(__FILE__)) . "/commonTools.php");
+use Quickplus\Lib\Tools\ArrayTools as ArrayTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
 	$row = $_REQUEST["row"];
     $col = $_REQUEST["col"];
 	if($row!=null&&trim($row)!=""&&$col!=null&&trim($col)!="")

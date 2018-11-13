@@ -1,11 +1,11 @@
 <?php
-
+    require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php");
-    require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/UrlTools.php");
-	  require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormDrawer.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickPage.php");   
-    require_once($_SERVER['DOCUMENT_ROOT']."/class/menuManager.php");
+    use \Quickplus\Lib\Tools\UrlTools as UrlTools;
+    use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+    use \Quickplus\Lib\quickFormDrawer as quickFormDrawer;
+    use Quickplus\Lib\QuickPage;
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/class/menuManager.php");
     $db = new QuickFormConfig::$SqlType();
   
     if($_GET['language']) $languageid = $_GET['language'];

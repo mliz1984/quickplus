@@ -1,5 +1,5 @@
-<?php 
-    require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+<?php
+namespace Quickplus\Lib;
 class QuickSql
 {
           protected $parser = null;

@@ -1,7 +1,8 @@
-<?php 
+<?php
+    namespace Quickplus\Lib;
     require_once(dirname(__FILE__)."/quickStatistics.php");
     require_once(dirname(__FILE__) . "/quickFormConfig.php");
-    require_once(dirname(__FILE__) . "/UrlTools.php");
+    use Quickplus\Lib\Tools;
 	class QuickChart extends QuickStatistics
 	{ 
 		protected $chartDefaultSetting = Array();

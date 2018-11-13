@@ -1,11 +1,10 @@
 <?php
-
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/dbmodule.php");
-    require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/commonTools.php");
-	  require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/quickFormDrawer.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickPage.php");   
-require_once($_SERVER['DOCUMENT_ROOT']."/class/rightManager.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
+use \Quickplus\Lib\Tools\UrlTools;
+use \Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\quickFormDrawer;
+use Quickplus\Lib\QuickPage;
+require_once($_SERVER['DOCUMENT_ROOT'] . "/class/rightManager.php");
     $db = new QuickFormConfig::$SqlType();
     if($_GET['language']) $languageid = $_GET['language'];
     else $languageid = 1;

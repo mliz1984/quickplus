@@ -1,8 +1,10 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
+
 	set_time_limit(0);
-    require_once(dirname(__FILE__)."/PHPExcel.php");
-	require_once(dirname(__FILE__) . "/quickFormConfig.php");
-	require_once(dirname(__FILE__) . "/UrlTools.php");
+    use Quickplus\Lib\PHPExcel;
+    use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+	use Quickplus\Lib\Tools\UrlTools;
 	class excelArray
 	{
 		protected $keyColMapping = Array();

@@ -1,5 +1,7 @@
 <?php
-  require_once(dirname(__FILE__)."/quickForm.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\UrlTools;
+require_once(dirname(__FILE__)."/quickForm.php");
 	class QuickPage
 	{
 		protected static function getDataTableJs($src,$form,$tableId="quickTable")

@@ -1,6 +1,7 @@
 <?php 
-	require_once(dirname(__FILE__)."/quickForm.php");
-  require_once(dirname(__FILE__) . "/quickFormDrawer.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\quickForm;
+use Quickplus\Lib\quickFormDrawer;
   class QuickDashBoardBase extends quickForm
   {
       protected $commonSettingPrefix ="csp_";

@@ -1,5 +1,7 @@
 <?php 
-     require_once($_SERVER['DOCUMENT_ROOT']."/include/DataMsg.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\DataMsg\Data;
+
 	class QuickData extends Data{
 		protected $linkMap = Array();
 		protected $relationMap = Array();

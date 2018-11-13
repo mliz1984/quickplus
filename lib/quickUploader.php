@@ -1,12 +1,13 @@
 <?php
+namespace Quickplus\Lib;
 	set_time_limit(0);
-	require_once(dirname(__FILE__)."/dbmodule.php");
-	require_once(dirname(__FILE__)."/quickWord.php");
-	require_once(dirname(__FILE__)."/PHPExcel.php");
-    require_once(dirname(__FILE__) . "/DataMsg.php");
-    require_once(dirname(__FILE__) . "/commonTools.php");
-    require_once(dirname(__FILE__) . "/quickFormConfig.php");
-    require_once(dirname(__FILE__)."/PHPExcel.php");
+use Quickplus\Lib\DataMsg\DataMsg as DataMsg;
+use Quickplus\Lib\DataMsg\Data as Data;
+use Quickplus\Lib\QuickWord;
+use Quickplus\Lib\PHPExcel;
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\QuickFormConfig;
 	class quickUploader
 	{
 		protected $cols = Array();

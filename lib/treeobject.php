@@ -1,5 +1,6 @@
- <?php 
-    class TreeObject{
+<?php
+ namespace Quickplus\Lib;
+ class TreeObject{
         protected $idkey;
         protected $parentKey;
         protected $data;
@@ -255,5 +256,4 @@ class TreeVo extends TreeObject
                 $this->addMap($item,$idkey,$valkey);
             }
         }
-
 }

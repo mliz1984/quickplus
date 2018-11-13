@@ -1,4 +1,4 @@
-<?php   
+<?php
     require_once(dirname(__FILE__)."/quickTemplateImpl.php");  
     require_once(dirname(__FILE__)."/quickPage.php");
     $db = new QuickFormConfig::$SqlType();

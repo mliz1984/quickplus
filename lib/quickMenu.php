@@ -1,8 +1,10 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
 use \Quickplus\Lib\Tools\HtmlElement as HtmlElement;
+
 	class QuickMenu
-	{
-		protected $data = Array();
+    {
+        protected $data = Array();
 		protected $categroyData = Array();
 		protected $allowEmptyTopSign = true;
 		protected $topData = Array();

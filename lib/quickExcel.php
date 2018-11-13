@@ -1,7 +1,9 @@
-<?php 
-    require_once(dirname(__FILE__) . "/UrlTools.php");
-    require_once(dirname(__FILE__) . "/quickFormConfig.php");
-    require_once(dirname(__FILE__)."/PHPExcel.php");	
+<?php
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\PHPExcel;
 	class QuickExcel 
 	{
 		protected $cellData = Array();
@@ -134,8 +136,8 @@
 			$result = null;
 			if($this->objPHPExcel!=null)
 			{
-				$objPHPExcel->setActiveSheetIndex($sheetIndex);
-				$result = $objPHPExcel->getActiveSheet()->getCell($col.$row)->getValue();
+                $this->objPHPExcel->setActiveSheetIndex($sheetIndex);
+				$result = $this->objPHPExcel->getActiveSheet()->getCell($col.$row)->getValue();
 			}
 			return $result;
 

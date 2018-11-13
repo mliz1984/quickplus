@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
 class QuickFreshdesk {
     private $domain = '';
     private $apiKey = '';

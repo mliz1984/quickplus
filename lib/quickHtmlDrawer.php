@@ -1,7 +1,8 @@
 <?php
- require_once(dirname(__FILE__) . "/quickFormDrawer.php");
- require_once(dirname(__FILE__) . "/quickFormConfig.php");
- require_once(dirname(__FILE__) . "/htmlelement.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\quickFormDrawer;
+use Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\Tools\HtmlElement;
  	class quickHtmlDrawer extends quickFormDrawer 
  	{
  		protected $withTitle = true;

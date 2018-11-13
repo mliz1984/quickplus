@@ -1,8 +1,11 @@
-<?php 
-    require_once(dirname(__FILE__) . "/UrlTools.php");
-    require_once(dirname(__FILE__)."/PHPExcel.php");
-    require_once(dirname(__FILE__)."/quickHtmlWriter.php"); 
-    require_once(dirname(__FILE__) . "/quickFormConfig.php");
+<?php
+namespace Quickplus\Lib;
+
+use Quickplus\Lib\Tools\FileTools as FileTools;
+use Quickplus\Lib\PHPExcel;
+use Quickplus\Lib\QuickHtmlWriter;
+use Quickplus\Lib\QuickFormConfig;
+
     class QuickExcelReader
     {
     	protected $excelObj = null; 

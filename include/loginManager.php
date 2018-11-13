@@ -1,8 +1,10 @@
 <?php
 use \Quickplus\Lib\DbModule\Database as Database;
 use \Quickplus\Lib\DataMsg\Data as Data;
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/quickMenu.php");
+use \Quickplus\Lib\DataMsg\DataMsg as DataMsg;
+use Quickplus\Lib\QuickMenu;
 use \Quickplus\Lib\Tools;
+
     if(!isset($_SESSION)){	
 		session_start();
 	}
@@ -53,7 +55,7 @@ use \Quickplus\Lib\Tools;
 						 $userinfo["rightinfo"] = $rightinfo["rightinfo"];
 						 $userinfo["menuClassMapping"] = $this->menuClassMapping;
 					     $_SESSION[$this->sessionArea] = $userinfo;
-					   
+
 						 $result = true;
 					}
 				

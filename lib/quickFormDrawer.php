@@ -1,10 +1,8 @@
 <?php
-namespace Quickplus\Lib\QuickFormDrawer;
-
-use Quickplus\Lib\DataMsg;
-use Quickplus\Lib\Tools;
-use Quickplus\Lib\QuickFromConfig as QuickFormConfig;
-     require_once(dirname(__FILE__) . "/quickLoginManager.php");
+namespace Quickplus\Lib;
+use Quickplus\Lib\Tools\StringTools;
+use Quickplus\Lib\DataMsg\DataMsg;
+use Quickplus\Lib\QuickLoginManager;
 class quickFormDrawer 
 {
         protected $quickForm;

@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
 	class QuickSSH
 	{
 		protected $connection = null;
