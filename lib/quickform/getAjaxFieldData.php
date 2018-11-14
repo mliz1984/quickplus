@@ -1,11 +1,11 @@
     <?php
          require_once(dirname(__FILE__)."/include.php");
         $db =  new QuickFormConfig::$SqlType();
-        $formMark = $_REQUEST['formmark'];
-        $isreport =  $_REQUEST['isreport'];
-        $dbname =  $_REQUEST['dbname'];
-        $method =  $_REQUEST['method'];
-        $id = $_REQUEST["id"];
+        $formMark = ArrayTools::getValueFromArray($_REQUEST,'formmark');
+        $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+        $dbname =  ArrayTools::getValueFromArray($_REQUEST,'dbname');
+        $method =  ArrayTools::getValueFromArray($_REQUEST,'method');
+        $id = ArrayTools::getValueFromArray($_REQUEST,"id");
         $form = null;
         if(intval($isreport)==1)
         {

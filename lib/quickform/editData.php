@@ -1,15 +1,14 @@
 <?php 
    require_once(dirname(__FILE__)."/include.php");
     //print_r($_REQUEST);
+    session_start();
     $db =  new QuickFormConfig::$SqlType();
-    if($_GET['language']) $languageid = $_GET['language'];
-    else $languageid = 1;
     $testing = 0;
-    $formMark = $_REQUEST['ed_formmark'];
-    $isreport =  $_REQUEST['ed_isreport'];
-    $id = $_REQUEST["ed_dataid"];
-    $processname= $_REQUEST["ed_processname"];
-    $method = $_REQUEST["method"];
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'ed_formmark');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'ed_isreport');
+    $id = ArrayTools::getValueFromArray($_REQUEST,"ed_dataid");
+    $processname= ArrayTools::getValueFromArray($_REQUEST,"ed_processname");
+    $method = ArrayTools::getValueFromArray($_REQUEST,"method");
     $addMode = true;
 
     if($id!=null&&trim($id)!="")
@@ -67,7 +66,6 @@ $processMethod = null;
          $js .= 'window.close();';
     }
     $js .= '</script>';
-    session_start();
     if($method!=null&&trim($method)!="")
     {  
       

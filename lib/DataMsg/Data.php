@@ -7,8 +7,8 @@
  */
 
 namespace Quickplus\Lib\DataMsg;
-use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
-use \Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+use Quickplus\Lib\Tools\StringTools as StringTools;
 
 class Data extends BaseVo{
 
@@ -1457,7 +1457,7 @@ class Data extends BaseVo{
         $db = $this->db;
         if($this->pdoMode)
         {
-            $pdo = $db->getPdo();
+            $pdo = $db;
             $stmt = $pdo->prepare($sql);
             $stmt = $this->bindPKValue($stmt);
             $this->searchResult = $stmt->execute();
@@ -1469,9 +1469,9 @@ class Data extends BaseVo{
         }
         else {
             $db->openQuery($sql);
-            if($db->result){
+            if($db->getResult()){
                 $this->searchResult = true;
-                foreach($db->result as $r)
+                foreach($db->getResult() as $r)
                 {
                     $this->setDataArray($r);
                 }
@@ -1668,7 +1668,7 @@ class Data extends BaseVo{
             }
             if($this->pdoMode)
             {
-                $pdo = $this->db->getPdo();
+                $pdo = $this->db;
                 $stmt = $pdo->prepare($sql);
                 foreach ($this->getDataArray() as $key=>$value)
                 {
@@ -1753,7 +1753,7 @@ class Data extends BaseVo{
         {
             return $sql;
         }
-        $pdo = $this->db->getPdo();
+        $pdo = $this->db;
 
         $stmt = $pdo->prepare($sql);
         foreach ($this->getDataArray() as $key=>$value)
@@ -1951,22 +1951,8 @@ class Data extends BaseVo{
         $id = null;
         if($temp)
         {
-            if($db instanceof sqlLiteb)
-            {
-                $id = $db->lastInsertRowID();
-            }
-            else if($db->isMsSql())
-            {
-                //$id= mssql_insert_id($link);
-                $sql ="SELECT IDENT_CURRENT('".$this->getTableName()."') ";
-                $dataMsg = new DataMsg();
-                $id = $dataMsg->getUniString($db,$sql,$colname);
+            $id = $db->getLastInsertRowID();
 
-            }
-            else {
-                $link = $db->getLink();
-                $id = mysql_insert_id($link);
-            }
         }
         if(!$this->updateCrypt($id))
         {
@@ -2043,7 +2029,7 @@ class Data extends BaseVo{
         {
             return $sql;
         }
-        $pdo = $this->db->getPdo();
+        $pdo = $this->db;
         $stmt = $pdo->prepare($sql);
         foreach ($this->getDataArray() as $key=>$value)
         {

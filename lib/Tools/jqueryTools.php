@@ -48,3 +48,4 @@ class jqueryTools{
         return $result;
     }
 }
+?>

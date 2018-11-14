@@ -4,13 +4,13 @@
 
      $db =  new QuickFormConfig::$SqlType();
     $src = CommonTools::getDataArray($_REQUEST,"ed_");
-    $formMark = $src['formmark'];
-    $ajaxMethod = $src['ajaxmethod'];
-    $isreport =  $src['isreport'];
-    $type =  $src['colmappingtype'];
-    $keyvalue =  $src['colmappingkey'];
-    $mainid =  $src['colmappingmainid'];
-    $choosedvalue =  $src['colmappingchoosedvalue'];
+    $formMark = ArrayTools::getValueFromArray($src,'formmark');
+    $ajaxMethod = ArrayTools::getValueFromArray($src,'ajaxmethod');
+    $isreport =  ArrayTools::getValueFromArray($src,'isreport');
+    $type =  ArrayTools::getValueFromArray($src,'colmappingtype');
+    $keyvalue =  ArrayTools::getValueFromArray($src,'colmappingkey');
+    $mainid =  ArrayTools::getValueFromArray($src,'colmappingmainid');
+    $choosedvalue =  ArrayTools::getValueFromArray($src,'colmappingchoosedvalue');
     if(intval($isreport)==1)
     {
         $reportDesigner = new reportDesigner();

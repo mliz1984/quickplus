@@ -77,7 +77,7 @@ class FileTools
                 {
                     if (is_dir($path . "/" . $filename))
                     {
-                        $zip = self::addFileToZip($path . "/" . $filename, $zip,$bashpath);
+                        $zip = self::addFileToZip($path . "/" . $filename, $zip,$basepath);
                     }
                     else
                     {
@@ -451,3 +451,4 @@ class FileTools
 
     }
 }
+?>

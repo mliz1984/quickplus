@@ -1025,7 +1025,7 @@ use Picqer\Barcode\BarcodeGenerator;
                     }
                     else 
                     {
-                        $value = $colDetail["COLUMN_DEF"];
+                        $value = ArrayTools::getValueFromArray($colDetail,"COLUMN_DEF");
                         if($value!=null&&trim($value)!="")
                         {
                             $value= substr(2, strlen($value)-4);
@@ -1169,7 +1169,7 @@ use Picqer\Barcode\BarcodeGenerator;
                          //$this->validateRulesMapping["rules"][$this->getEditPrefix().$dbname]["min"] = 1;
                       }
                     }
-                    if((intval(trim($colDetail["length"]))>0||intval(trim($colDetail["LENGTH"]))>0)&&!isset($this->validateRulesMapping["rules"][$this->getEditPrefix().$dbname]["maxlength"]))
+                    if(((isset($colDetail["length"])&&intval(trim($colDetail["length"]))>0)||(isset($colDetail["LENGTH"])&&intval(trim($colDetail["LENGTH"]))>0))&&!isset($this->validateRulesMapping["rules"][$this->getEditPrefix().$dbname]["maxlength"]))
                     {
                       if($extendTable)
                       {
@@ -1618,7 +1618,7 @@ use Picqer\Barcode\BarcodeGenerator;
                 {
                   $id = $this->getEditPrefix().$tableInfo["pk"];
                   $html = new HtmlElement($id,$id);
-                  $value = $dataArray[$tableInfo["pk"]];
+                  $value = ArrayTools::getValueFromArray($dataArray,$tableInfo["pk"]);
                   $hidden[$id] = $html->getHidden($value);
                 }
             }
@@ -1977,9 +1977,9 @@ use Picqer\Barcode\BarcodeGenerator;
                  }
               }
             }*/
-            $id = $src["mainid"];
-            $value = $src["value"];
-            $dbname = $src["dbname"];
+            $id = ArrayTools::getValueFromArray($src,"mainid");
+            $value =ArrayTools::getValueFromArray($src,"value");
+            $dbname = ArrayTools::getValueFromArray($src,"dbname");
             $tables = $this->getTables();
 
             $data = $this->getFormDataByMainId($this->getDb(), $id,false);
@@ -1987,7 +1987,7 @@ use Picqer\Barcode\BarcodeGenerator;
             {
                 $data->set($key,$value);
             }
-            $data->setSql($this->getSql());
+            $data->setSql($this->getSql($src));
             $data->setTables($tables);
             $cols = $data->getCols();
 
@@ -2515,7 +2515,7 @@ use Picqer\Barcode\BarcodeGenerator;
        
         public function getSqlByMainId($mainId,$sign="=")
         {
-            $sql = $this->getSql();
+            $sql = $this->getSql(null);
             $mainIdCol = $this->getMainIdCol();
             $colinfo  = $this->getColInfo();
             $colname = $mainIdCol["oridbname"];
@@ -3126,7 +3126,7 @@ use Picqer\Barcode\BarcodeGenerator;
 
         public function getQuickEditShowModeHtml($mainid,$idvalue,$prefix,$dbname,$value,$methodname=null,$export=false,$isAjax=true)
         {
-                $html = $this->quickEditDefaultText[$dbname];
+                $html = ArrayTools::getValueFromArray($this->quickEditDefaultText,$dbname);
                 if($idvalue!=null&&trim($idvalue)!="")
                 {
                    $searchPrefix = $this->getSearchPrefix();

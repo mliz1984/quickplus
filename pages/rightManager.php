@@ -7,10 +7,6 @@ use Quickplus\Lib\Tools\UrlTools;
 use Quickplus\Lib\Tools\ArrayTools;
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/rightManager.php");
     $db = new QuickFormConfig::$SqlType();
-    if(!empty($_GET['language'])) $languageid = $_GET['language'];
-    else $languageid = 1;
-     
-    $testing = 0; 
 ?>
 <?php
    
@@ -141,7 +137,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/class/rightManager.php");
  <tr><td>
  <?php 
     $isCollapse = null;
-    if($_REQUEST["searchBarCollapseStatus"]!=null&&trim($_REQUEST["searchBarCollapseStatus "])!="")
+    if(isset($_REQUEST["searchBarCollapseStatus"])&&$_REQUEST["searchBarCollapseStatus"]!=null&&trim($_REQUEST["searchBarCollapseStatus "])!="")
     {
         $tmp = intval(trim($_REQUEST["searchBarCollapseStatus"]));
         if($tmp==1)
@@ -397,7 +393,6 @@ if($toolbar!=null&&!$blank){
      <?php }}?>
            </tr></thead><tbody>
      <?php 
-           $temp = substr($temp,1);
           
      
           for($j=0;$j<$resultSize;$j++)

@@ -1,11 +1,11 @@
 <?php
     require_once(dirname(__FILE__)."/include.php");
     $db =  new QuickFormConfig::$SqlTyoe();
-    $formid = $_REQUEST['formid'];
-    $formMark = $_REQUEST['formMark'];
-    $page = $_REQUEST['page'];
-    $pagerows = $_REQUEST['pagerows'];
-    $isreport =  $_REQUEST['isreport'];
+    $formid = ArrayTools::getValueFromArray($_REQUEST,'formid');
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'formMark');
+    $page = ArrayTools::getValueFromArray($_REQUEST,'page');
+    $pagerows = ArrayTools::getValueFromArray($_REQUEST,'pagerows');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
     $form = null;
     if(intval($isreport)==1)
     {

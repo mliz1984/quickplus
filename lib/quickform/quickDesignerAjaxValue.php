@@ -1,15 +1,18 @@
 <?php
     require_once(dirname(__FILE__)."/include.php"); 
-	require_once(dirname(dirname(__FILE__))."/quickDesigner.php");
-use Quickplus\Lib\Tools\ArrayTools as ArrayTools;
-use Quickplus\Lib\Tools\StringTools as StringTools;
-	$row = $_REQUEST["row"];
-    $col = $_REQUEST["col"];
+	use Quickplus\Lib\QuickDesigner;
+    use Quickplus\Lib\Tools\ArrayTools;
+    use Quickplus\Lib\Tools\StringTools;
+    use Quickplus\Lib\QuickFormConfig;
+
+	$row = ArrayTools::getValueFromArray($_REQUEST,"row");
+    $col = ArrayTools::getValueFromArray($_REQUEST,"col");
+
 	if($row!=null&&trim($row)!=""&&$col!=null&&trim($col)!="")
 	{
 	    $db = new QuickFormConfig::$SqlType();
-		$value = htmlspecialchars_decode($_REQUEST["value"]);
-		$classname = $_REQUEST["classname"];
+		$value = htmlspecialchars_decode(ArrayTools::getValueFromArray($_REQUEST,"value"));
+		$classname = ArrayTools::getValueFromArray($_REQUEST,"classname");
 		$quickForm = new $classname();
 		$quickFormDrawer = new quickFormDrawer();
 		$obj = $quickFormDrawer->setQuickForm($db, $quickForm, $_REQUEST, true);

@@ -586,9 +586,9 @@ class DataMsg
             $mutilSql .=$sql;
             $tableArray[] = $tablename;
         }
-        $pdo = $db->getPdo();
-        $stmt = $pdo->query($mutilSql);
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $pdo = $db;
+        $dataset = $pdo->openQuery($mutilSql);
+
         $result = Array();
         $i = -1;
         do {
@@ -597,8 +597,6 @@ class DataMsg
 
             if($getArray)
             {
-                $dataset = $stmt->fetchAll();
-
                 $result[$tableName] = $dataset;
             }
             else
@@ -668,9 +666,9 @@ class DataMsg
         }
         $db->openQuery($sql);
 
-        if($db->result){
+        if($db->getResult()){
 
-            foreach($db->result as $r)
+            foreach($db->getResult() as $r)
             {
                 if($getArray)
                 {
@@ -934,21 +932,11 @@ class DataMsg
     }
     public function isExistTable($db,$tablename)
     {
+        $sql = "SHOW TABLES LIKE '%" . $tablename . "%'";
+        $tmp = $db->openQuery($sql);
         $result = false;
-        $queryFunc = "mysql_query";
-        $numFunc = "mysql_num_rows";
-        if($db->isMsSql())
+        if(count($result)==1)
         {
-            $queryFunc = "mssql_query";
-            $numFunc = "mssql_num_rows";
-            if($db->isSqlSrv())
-            {
-                $queryFunc = "sqlsrv_query";
-                $numFunc = "sqlsrv_num_rows";
-            }
-        }
-
-        if($numFunc($queryFunc("SHOW TABLES LIKE '%" . $tablename . "%'")==1)) {
             $result = true;
         }
         return $result;

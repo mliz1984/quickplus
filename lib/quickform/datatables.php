@@ -2,14 +2,14 @@
   require_once(dirname(__FILE__)."/include.php");
    
     $db =  new QuickFormConfig::$SqlType();
-    $formid = $_REQUEST['formid'];
-    $formMark = $_REQUEST['formMark'];
-    $start = $_REQUEST['start'];
-    $pagerows = $_REQUEST['length'];
+    $formid = ArrayTools::getValueFromArray($_REQUEST,'formid');
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'formMark');
+    $start = ArrayTools::getValueFromArray($_REQUEST,'start');
+    $pagerows = ArrayTools::getValueFromArray($_REQUEST,'length');
     $page = $start/$pagerows + 1;
-    $isreport =  $_REQUEST['isreport'];
-    $json = $_REQUEST['json'];
-    $draw = $_REQUEST['draw'];
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'isreport');
+    $json = ArrayTools::getValueFromArray($_REQUEST,'json');
+    $draw = ArrayTools::getValueFromArray($_REQUEST,'draw');
     $form = null;
 
     if(intval($isreport)==1)

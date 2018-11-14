@@ -3,12 +3,11 @@ set_time_limit(0);
    require_once(dirname(__FILE__)."/include.php");
     //print_r($_REQUEST);
     $db =  new QuickFormConfig::$SqlType();
-    if($_GET['language']) $languageid = $_GET['language'];
-    else $languageid = 1;
+  
     $testing = 0;
-    $formMark = $_REQUEST['_statistics_formmark'];
-    $isreport =  $_REQUEST['_statistics_isreport'];
-    $setname =  $_REQUEST['_statistics_setname'];
+    $formMark = ArrayTools::getValueFromArray($_REQUEST,'_statistics_formmark');
+    $isreport =  ArrayTools::getValueFromArray($_REQUEST,'_statistics_isreport');
+    $setname =  ArrayTools::getValueFromArray($_REQUEST,'_statistics_setname');
     $form = null;
     if(intval($isreport)==1)
     {

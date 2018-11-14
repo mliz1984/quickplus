@@ -8,11 +8,7 @@
     use Quickplus\Lib\Tools\ArrayTools;
     require_once($_SERVER['DOCUMENT_ROOT'] . "/class/menuManager.php");
     $db = new QuickFormConfig::$SqlType();
-  
-    if($_GET['language']) $languageid = $_GET['language'];
-    else $languageid = 1;
-     
-    $testing = 0; 
+   
 ?>
 <?php
    
@@ -143,7 +139,8 @@
  <tr><td>
  <?php 
     $isCollapse = null;
-    if(!empty($_REQUEST["searchBarCollapseStatus"]))
+
+    if(isset($_REQUEST["searchBarCollapseStatus"])&&$_REQUEST["searchBarCollapseStatus"]!=null&&trim($_REQUEST["searchBarCollapseStatus "])!="")
     {
         $tmp = intval(trim($_REQUEST["searchBarCollapseStatus"]));
         if($tmp==1)

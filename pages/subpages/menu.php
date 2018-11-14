@@ -2,14 +2,15 @@
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
 use Quickplus\Lib\quickFormDrawer;
-use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
-use \Quickplus\Lib\QuickLoginManager as QuickLoginManager;
-use Quickplus\Lib\QuickMenu as QuickMenu;
+use Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\QuickLoginManager;
+use Quickplus\Lib\QuickMenu;
+use Quickplus\Lib\Tools\ArrayTools;
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
 
 $db = new  QuickFormConfig::$SqlType();
 $loginmanager = QuickLoginManager::getQuickLoginManager();
-$flag = intval($_REQUEST["flag"]);
+$flag = intval(ArrayTools::getValueFromArray($_REQUEST,"flag"));
 if($flag==1)
 {
 	$loginmanager->reloadUserRight($db);
