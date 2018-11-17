@@ -86,7 +86,7 @@ use Picqer\Barcode\BarcodeGenerator;
         protected $subForm = Array();
         protected $barCodeMapping = Array();
         protected $joinArray = Array();
-
+        protected $reportHead = null;
         public function setBarCodeMapping($dbname,$colname)
         {
             $this->barCodeMapping[$dbname] = $colname;
@@ -2559,6 +2559,14 @@ use Picqer\Barcode\BarcodeGenerator;
             }
             return $reportField;
   	    }
+        public  function getReportHead()
+        {
+            return $this->reportHead;
+        }
+        public function setReportHead($reportHead)
+        {
+            $this->reportHead = $reportHead;
+        }
          public function getTitleInfo($all=false)
          {
             $titleinfo = $this->titleInfo;

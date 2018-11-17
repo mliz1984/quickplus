@@ -401,11 +401,31 @@ if($toolbar!=null&&!$blank){
      </style>
      <div id="quickTableDiv"  <?php if(!$obj->isAllowWrap()){?>style="position:relative; margin:0px auto; padding:0px;overflow: auto;"<?php }?>>
     <table id="quickTable"  class="table table-striped  table-hover table-responsive" >
-       <thead>    
+       <thead>   
+       <?php
+          $reportHead = $obj->getReportHead();
+          $colCount = 0;
+          if($reportHead!=null&&trim($reportHead)!="")
+          {
+             $titleinfo = $obj->getTitleInfo();
+             
+            foreach($titleinfo as $dbname =>$title)
+             {
+                     
+                 $titleName = $title["name"];    
+                 if($title['ischecked']){
+                         $colCount ++;
+                 }
+             } 
+       ?>  
+          <tr>
+            <td colspan="<?php echo $colCount;?>"><?php echo $reportHead;?></td>
+          </tr>
+        <?php }?>
        <tr>
      <?php       
      
-          $titleinfo = $obj->getTitleInfo();
+         
           $showTitle = $obj->isShowTitle();
           foreach($titleinfo as $dbname =>$title)
           {

@@ -48,16 +48,17 @@ class quickFormDrawer
            {
               $checkLogin = false;
               $url = $_SERVER['PHP_SELF'];
+              $loginManager  = QuickLoginManager::getQuickLoginManager();
+              $method = null;
               if(isset($src["method"]))
               {
                   $method = $src["method"];
-                  $loginManager  = QuickLoginManager::getQuickLoginManager();
-                  if(!$loginManager->checkRight($url,$method,$src))
+              }
+               if(!$loginManager->checkRight($url,$method,$src))
                   {
                     $loginManager->goToErrorPage();
                   }
                   $checkLogin = true;
-              }
            }
            return $checkLogin;
         }
