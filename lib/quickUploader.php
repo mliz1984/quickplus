@@ -1,13 +1,10 @@
 <?php
 namespace Quickplus\Lib;
 	set_time_limit(0);
-use Quickplus\Lib\DataMsg\DataMsg as DataMsg;
-use Quickplus\Lib\DataMsg\Data as Data;
-use Quickplus\Lib\QuickWord;
-use Quickplus\Lib\PHPExcel;
-use Quickplus\Lib\Tools\FileTools as FileTools;
-use Quickplus\Lib\Tools\StringTools as StringTools;
-use Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\DataMsg\DataMsg;
+use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\Tools\FileTools;
+use Quickplus\Lib\Tools\StringTools;
 	class quickUploader
 	{
 		protected $cols = Array();

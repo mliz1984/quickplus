@@ -1,6 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
+use Quickplus\Lib\parameters;
 use Quickplus\Lib\DbModule\Database;
 use Quickplus\Lib\Tools\UrlTools;
 use Quickplus\Lib\Tools\ArrayTools;

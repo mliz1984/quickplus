@@ -1,8 +1,8 @@
 <?php
-namespace Quickplus\Lib;
+    namespace Quickplus\Lib;
 	set_time_limit(0);
-use Quickplus\Lib\QuickFormConfig;
-	class QuickPdf 
+
+	class QuickPdf
 	{   
 		public static function createPdf($url,$file,$check=ture,$pageSize="Letter")
 		{

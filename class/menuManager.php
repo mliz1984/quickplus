@@ -1,5 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+
 use Quickplus\Lib\quickForm;
 	class MenuManager extends quickForm
 	{

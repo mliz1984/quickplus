@@ -1,13 +1,5 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\pdoConn as pdoConn;
-use Quickplus\Lib\SqlLite as SqlLite;
-use Quickplus\Lib\Database as Database;
-use Quickplus\Lib\SqlServer as SqlServer;
-use Quickplus\Lib\Mssql as Mssql;
-use Quickplus\Lib\Parameters;
-use Quickplus\Lib\QuickProxy;
-
   class DbProxy extends QuickProxy
   {
   	function __construct()
@@ -29,22 +21,22 @@ use Quickplus\Lib\QuickProxy;
    		{
    			$dbtype = $data["dbtype"];
    		}
-   		$hostname=DB_HOST;
+   		$hostname=parameters::DB_HOST;
    		if(isset($data["hostname"])&&trim($data["hostname"])!="")
    		{
    			$hostname = $data["hostname"];
    		}
-   		$dbname=DB_NAME;
+   		$dbname=parameters::DB_NAME;
    		if(isset($data["dbname"])&&trim($data["dbname"])!="")
    		{
    			$dbname = $data["dbname"];
    		}
-   		$username=DB_USERNAME;
+   		$username=parameters::DB_USERNAME;
    		if(isset($data["username"])&&trim($data["username"])!="")
    		{
    			$username = $data["username"];
    		}
-   		$password=DB_PASSWORD;
+   		$password=parameters::DB_PASSWORD;
    		if(isset($data["password"])&&trim($data["password"])!="")
    		{
    			$password = $data["password"];

@@ -1,18 +1,12 @@
 <?php
 namespace  Quickplus\Lib;
 
-use Quickplus\Lib\quickLayout as quickLayout;
 use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\DataMsg\Data;
 use Quickplus\Lib\Tools\DbTools;
 use Quickplus\Lib\Tools\StringTools;
 use Quickplus\Lib\Tools\HtmlElement;
 use Quickplus\Lib\Tools\ArrayTools;
-use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
-use Quickplus\Lib\DateUtil as DateUtil;
-use Quickplus\Lib\quickUploader as quickUploader;
-use Quickplus\Lib\QuickUrl as QuickUrl;
-use Quickplus\Lib\QuickSql as QuickSql;
 use Picqer\Barcode\BarcodeGeneratorSVG;
 use Picqer\Barcode\BarcodeGenerator;
 

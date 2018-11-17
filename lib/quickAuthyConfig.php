@@ -1,10 +1,7 @@
-<?php 
+<?php
+    namespace Quickplus\Lib;
  	require_once(dirname(__FILE__)."/guzzle/autoloader.php");
- 	require_once(dirname(__FILE__)."/authy/AuthyApi.php");
- 	require_once(dirname(__FILE__)."/authy/AuthyResponse.php");
- 	require_once(dirname(__FILE__)."/authy/AuthyFormatException.php");
- 	require_once(dirname(__FILE__)."/authy/AuthyToken.php");
- 	require_once(dirname(__FILE__)."/authy/AuthyUser.php");
+    use Authy;
 
  	 class QuickAuthyConfig extends Authy\AuthyApi
  	 {

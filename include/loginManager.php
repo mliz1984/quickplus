@@ -1,10 +1,9 @@
 <?php
-use \Quickplus\Lib\DbModule\Database as Database;
-use \Quickplus\Lib\DataMsg\Data as Data;
-use \Quickplus\Lib\DataMsg\DataMsg as DataMsg;
+use Quickplus\Lib\DbModule\Database;
+use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\Tools\ArrayTools;
 use Quickplus\Lib\QuickMenu;
-use \Quickplus\Lib\Tools;
 
     if(!isset($_SESSION)){	
 		session_start();

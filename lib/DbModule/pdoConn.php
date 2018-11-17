@@ -7,7 +7,7 @@
  */
 
 namespace Quickplus\Lib\DbModule;
-
+use Quickplus\Lib\parameters;
 class pdoConn
 {
     public function getTablePrefix()
@@ -20,7 +20,7 @@ class pdoConn
         return $obj;
     }
 
-    function pdoConn($hostname=DB_HOST,$dbname=DB_NAME,$username=DB_USERNAME,$password=DB_PASSWORD)
+    function pdoConn($hostname=parameters::DB_HOST,$dbname=parameters::DB_NAME,$username=parameters::DB_USERNAME,$password=parameters::DB_PASSWORD)
     {
         $dsn = "mysql:";
         $dsn .="host=".$hostname.";dbname=".$dbname;

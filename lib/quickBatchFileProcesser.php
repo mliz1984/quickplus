@@ -1,7 +1,7 @@
-<?php 
+<?php
+    namespace Quickplus\Lib;
     set_time_limit(0);
-    require_once(dirname(__FILE__)."/quickUploader.php");
-    require_once(dirname(__FILE__) . "/UrlTools.php");
+    use Quickplus\Lib\Tools\UrlTools;
 
     class quickBatchFileProcesser extends quickUploader
     {

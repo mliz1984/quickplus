@@ -1,7 +1,6 @@
 <?php
 namespace Quickplus\Lib;
 use Quickplus\Lib\Tools\FileTools as FileTools;
-use Quickplus\Lib\QuickIni;
 	class QuickLanguage
 	{
 		protected $languagePath = Array();

@@ -1,5 +1,5 @@
 <?php
- require_once(dirname(__FILE__) . "/quickFormDrawer.php");
+namespace Quickplus\Lib;
 class quickBuilder extends quickFormDrawer 
 {
 

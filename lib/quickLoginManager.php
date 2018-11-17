@@ -1,6 +1,5 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 
  class QuickLoginManager
   {

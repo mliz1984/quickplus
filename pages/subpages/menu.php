@@ -1,12 +1,13 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
+
+use Quickplus\Lib\parameters;
 use Quickplus\Lib\quickFormDrawer;
 use Quickplus\Lib\QuickFormConfig;
 use Quickplus\Lib\QuickLoginManager;
 use Quickplus\Lib\QuickMenu;
 use Quickplus\Lib\Tools\ArrayTools;
-require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
 
 $db = new  QuickFormConfig::$SqlType();
 $loginmanager = QuickLoginManager::getQuickLoginManager();

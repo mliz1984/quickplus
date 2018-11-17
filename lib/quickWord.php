@@ -1,6 +1,5 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\QuickFormConfig;
 use Quickplus\Lib\Tools\FileTools as FileTools;
 	class QuickWord 
 	{

@@ -7,7 +7,7 @@
  */
 
 namespace Quickplus\Lib\DbModule;
-
+use Quickplus\Lib\parameters;
 class SqlServer extends Mssql
 {
     var $isSqlSrv = true;
@@ -21,7 +21,7 @@ class SqlServer extends Mssql
         }
         return $this->pdoConn;
     }
-    function SqlServer($hostname=DB_HOST,$dbname=DB_NAME,$username=DB_USERNAME,$password=DB_PASSWORD)
+    function SqlServer($hostname=parameters::DB_HOST,$dbname=parameters::DB_NAME,$username=parameters::DB_USERNAME,$password=parameters::DB_PASSWORD)
     {
 
         $this->hostname = $hostname;

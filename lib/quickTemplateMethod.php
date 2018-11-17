@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Quickplus\Lib;
 	class QuickTemplateMethod
 	{
 		protected $methodList = Array();

@@ -1,5 +1,5 @@
-<?php 
- require_once(dirname(__FILE__)."/quickTwilioConfig.php");  
+<?php
+    namespace Quickplus\Lib;
  	class QuickTwilio extends QuickTwilioConfig
  	{
  		protected $client;
@@ -47,7 +47,7 @@
             if(is_array($to))
             {
                 $echo = Array();
-                foreach($to as $number as $name)
+                foreach($to as $number)
                 {
                     $tmp = $client->account->messages->sendMessage($from, $number, $msg,$media);
                 }  

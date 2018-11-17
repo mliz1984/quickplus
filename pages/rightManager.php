@@ -1,26 +1,24 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-use \Quickplus\Lib\QuickFormConfig;
-use Quickplus\Lib\quickFormDrawer;
-use Quickplus\Lib\QuickPage;
-use Quickplus\Lib\Tools\UrlTools;
-use Quickplus\Lib\Tools\ArrayTools;
-require_once($_SERVER['DOCUMENT_ROOT'] . "/class/rightManager.php");
+    use \Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\quickFormDrawer;
+    use Quickplus\Lib\QuickPage;
+    use Quickplus\Lib\Tools;
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/class/rightManager.php");
     $db = new QuickFormConfig::$SqlType();
 ?>
 <?php
    
-    $url = UrlTools::getFullUrl();
-    $blank = ArrayTools::getValueFromArray($_REQUEST,"blank");
-    $id = ArrayTools::getValueFromArray($_REQUEST,"id");
-    $pageRows= ArrayTools::getValueFromArray($_REQUEST,"pageRows");
-    $page =  ArrayTools::getValueFromArray($_REQUEST,"page");
-    $method =  ArrayTools::getValueFromArray($_REQUEST,"method");
-    $searchSign =   ArrayTools::getValueFromArray($_REQUEST,"searchSign");
-    $exportmode =  ArrayTools::getValueFromArray($_REQUEST,"exportmode");
-    $qp_keeprowsids = ArrayTools::getValueFromArray($_REQUEST,"qp_keeprowsids");
-    $qp_excluderowsids = ArrayTools::getValueFromArray($_REQUEST,"qp_excluderowsids");
-    $qp_anchor =ArrayTools::getValueFromArray($_REQUEST,"qp_anchor");
+    $url = Tools\UrlTools::getFullUrl();
+    $blank = Tools\ArrayTools::getValueFromArray($_REQUEST,"blank");
+    $id = Tools\ArrayTools::getValueFromArray($_REQUEST,"id");
+    $pageRows= Tools\ArrayTools::getValueFromArray($_REQUEST,"pageRows");
+    $page =  Tools\ArrayTools::getValueFromArray($_REQUEST,"page");
+    $method =  Tools\ArrayTools::getValueFromArray($_REQUEST,"method");
+    $searchSign =   Tools\ArrayTools::getValueFromArray($_REQUEST,"searchSign");
+    $exportmode =  Tools\ArrayTools::getValueFromArray($_REQUEST,"exportmode");
+    $qp_keeprowsids = Tools\ArrayTools::getValueFromArray($_REQUEST,"qp_keeprowsids");
+    $qp_excluderowsids = Tools\ArrayTools::getValueFromArray($_REQUEST,"qp_excluderowsids");
+    $qp_anchor =Tools\ArrayTools::getValueFromArray($_REQUEST,"qp_anchor");
     $isExport = false;
     if($blank=="1")
     {

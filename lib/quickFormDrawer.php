@@ -2,7 +2,6 @@
 namespace Quickplus\Lib;
 use Quickplus\Lib\Tools\StringTools;
 use Quickplus\Lib\DataMsg\DataMsg;
-use Quickplus\Lib\QuickLoginManager;
 use Quickplus\Lib\Tools\ArrayTools;
 class quickFormDrawer 
 {

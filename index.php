@@ -1,10 +1,10 @@
 <?php
 require("/vendor/autoload.php");
-// Start the session
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-use \Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
-use \Quickplus\Lib\QuickLoginManager as QuickLoginManager;
+// Start the session
+use Quickplus\Lib\parameters;
+use Quickplus\Lib\QuickFormConfig;
+use Quickplus\Lib\QuickLoginManager;
 $db = new  QuickFormConfig::$SqlType();
 if(!empty($_REQUEST['username']))
 {

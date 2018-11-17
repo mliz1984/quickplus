@@ -1,7 +1,5 @@
 <?php 
- require_once(dirname(__FILE__)."/QuickAuthyConfig.php");
- 
-
+namespace Quickplus\Lib;
  class QuickAuthy extends QuickAuthyConfig
  {
 

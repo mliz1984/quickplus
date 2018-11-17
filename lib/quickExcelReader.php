@@ -2,9 +2,6 @@
 namespace Quickplus\Lib;
 
 use Quickplus\Lib\Tools\FileTools as FileTools;
-use Quickplus\Lib\PHPExcel;
-use Quickplus\Lib\QuickHtmlWriter;
-use Quickplus\Lib\QuickFormConfig;
 
     class QuickExcelReader
     {

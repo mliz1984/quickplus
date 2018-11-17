@@ -1,6 +1,5 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\QuickProxyConfig as QuickProxyConfig;
 use Quickplus\Lib\Tools\CommonTools;
 
 class QuickProxy extends QuickProxyConfig

@@ -1,7 +1,5 @@
 <?php 
 namespace Quickplus\Lib;
-use Quickplus\Lib\quickForm;
-use Quickplus\Lib\quickFormDrawer;
   class QuickDashBoardBase extends quickForm
   {
       protected $commonSettingPrefix ="csp_";

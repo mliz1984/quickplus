@@ -1,9 +1,7 @@
 <?php
-	require_once(dirname(__FILE__)."/parameters.php");
-    require_once(dirname(__FILE__)."/dbmodule.php");
-    require_once(dirname(__FILE__) . "/quickFormConfig.php");
-	require_once(dirname(__FILE__) . "/DataMsg.php");
-	require_once(dirname(__FILE__)."/quickTemplateImpl.php");
+    use Quickplus\Lib\DataMsg\Data;
+    use Quickplus\Lib\QuickFormConfig;
+	use Quickplus\Lib\DataMsg\DataMsg;
     $db = new QuickFormConfig::$SqlType();
 	$id = $_REQUEST["id"];
 	$for = $_REQUEST["for"];

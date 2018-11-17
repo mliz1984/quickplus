@@ -1,7 +1,6 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\reportDesignerBase as reportDesignerBase;
-use Quickplus\Lib\Tools\HtmlElement as HtmlElement;
+use Quickplus\Lib\Tools\HtmlElement;
     
 	class quickLayout  extends reportDesignerBase{
 		protected $colData = Array();

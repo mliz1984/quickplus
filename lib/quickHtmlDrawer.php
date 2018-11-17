@@ -1,7 +1,5 @@
 <?php
-namespace Quickplus\Lib;
-use Quickplus\Lib\quickFormDrawer;
-use Quickplus\Lib\QuickFormConfig;
+namespace Quickplus\Lib;;
 use Quickplus\Lib\Tools\HtmlElement;
  	class quickHtmlDrawer extends quickFormDrawer 
  	{

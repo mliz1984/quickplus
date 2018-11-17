@@ -1,6 +1,6 @@
-<?php   
-    require_once(dirname(__FILE__)."/quickTemplateImpl.php");  
-    require_once(dirname(__FILE__)."/quickPage.php");
+<?php
+use Quickplus\Lib\QuickTemplateDesigner;
+use Quickplus\Lib\Tools\UrlTools;
 
     if($_GET['language']) $languageid = $_GET['language'];
     else $languageid = 1;

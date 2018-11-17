@@ -1,7 +1,5 @@
 <?php
 namespace Quickplus\Lib;
-use Quickplus\Lib\quickForm as quickForm;
-use Quickplus\Lib\QuickTemplateConfig as QuickTemplateConfig;
 
      class QuickTemplateTools extends QuickTemplateConfig
      {

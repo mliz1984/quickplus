@@ -1,5 +1,10 @@
 <?php 
    require_once(dirname(__FILE__)."/include.php");
+   use Quickplus\Lib\QuickFormConfig;
+   use Quickplus\Lib\Tools\ArrayTools;
+   use Quickplus\Lib\quickFormDrawer;
+   use Quickplus\Lib\Tools\StringTools;
+
     //print_r($_REQUEST);
     session_start();
     $db =  new QuickFormConfig::$SqlType();

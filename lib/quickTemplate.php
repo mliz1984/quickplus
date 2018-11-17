@@ -1,6 +1,5 @@
 <?php
-    require_once(dirname(__FILE__)."/quickTemplateImpl.php");  
-    require_once(dirname(__FILE__)."/quickPage.php");
+    use Quickplus\Lib\Tools\UrlTools;
     $db = new QuickFormConfig::$SqlType();
     if($_GET['language']) $languageid = $_GET['language'];
     else $languageid = 1;

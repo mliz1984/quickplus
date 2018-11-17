@@ -10,6 +10,7 @@ namespace Quickplus\Lib\DbModule;
 use \PDO;
 use Quickplus\Lib\Tools\StringTools as StringTools;
 use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+use Quickplus\Lib\parameters;
 class Database extends PDO
 {
     protected  $hostname ;
@@ -54,7 +55,7 @@ class Database extends PDO
         return $dsn;
     }
 
-    function __construct($hostname=DB_HOST,$dbname=DB_NAME,$username=DB_USERNAME,$password=DB_PASSWORD,$needEcho=false)
+    function __construct($hostname=parameters::DB_HOST,$dbname=parameters::DB_NAME,$username=parameters::DB_USERNAME,$password=parameters::DB_PASSWORD,$needEcho=false)
     {
         $this->hostname = $hostname;
         $this->dbname   = $dbname;

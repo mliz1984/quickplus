@@ -2,7 +2,6 @@
 namespace Quickplus\Lib;
 
 	set_time_limit(0);
-    use Quickplus\Lib\PHPExcel;
     use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 	use Quickplus\Lib\Tools\UrlTools;
 	class excelArray

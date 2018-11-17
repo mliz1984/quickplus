@@ -1,9 +1,8 @@
 <?php
 set_time_limit(0);
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
-use \Quickplus\Lib\DataMsg\Data;
-use \Quickplus\Lib\quickForm as quickForm;
+use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\quickForm;
 
 class RightManager extends quickForm
 {
