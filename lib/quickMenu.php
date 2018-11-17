@@ -111,10 +111,10 @@ use \Quickplus\Lib\Tools\HtmlElement as HtmlElement;
         public function getKeySetting($key)
         {
         	$result = Array("fromFunc"=>false,"method"=>null);
-        	if(is_array($this->keySetting[$key]))
+        	if(!empty($this->keySetting[$key]) && is_array($this->keySetting[$key]))
         	{
-        		$result = $this->keySetting[$key];
-        	}
+                $result = $this->keySetting[$key];
+            }
         	return $result;
         }
      
@@ -249,7 +249,7 @@ use \Quickplus\Lib\Tools\HtmlElement as HtmlElement;
 	    			$method = trim($this->keySetting[$key]["method"]);
 	    			$value = $this->$method($data);
 	    		}
-	    		if($this->nameMapping[$key][$value]!=null&&trim($this->nameMapping[$key][$value])!="")
+	    		if(!empty($this->nameMapping[$key][$value]))
 	    		{
 	    			$value = $this->nameMapping[$key][$value];
 	    		}
