@@ -1,5 +1,9 @@
 <?php 
   require_once(dirname(__FILE__)."/include.php");
+   require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools;
   $id = ArrayTools::getValueFromArray($_REQUEST,"id");
   $tableid = ArrayTools::getValueFromArray($_REQUEST,"tableid");
   $class = ArrayTools::getValueFromArray($_REQUEST,"class");

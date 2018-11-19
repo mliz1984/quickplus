@@ -1,7 +1,10 @@
 <?php 
 set_time_limit(0);
    require_once(dirname(__FILE__)."/include.php");
-    //print_r($_REQUEST);
+   require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools;
     $db =  new QuickFormConfig::$SqlType();
     $testing = 0;
     $formMark = ArrayTools::getValueFromArray($_REQUEST,'_statistics_formmark');

@@ -1,9 +1,9 @@
 <?php
     require_once(dirname(__FILE__)."/include.php"); 
-	use Quickplus\Lib\QuickDesigner;
-    use Quickplus\Lib\Tools\ArrayTools;
-    use Quickplus\Lib\Tools\StringTools;
+   require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
     use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools;
 
 	$row = ArrayTools::getValueFromArray($_REQUEST,"row");
     $col = ArrayTools::getValueFromArray($_REQUEST,"col");

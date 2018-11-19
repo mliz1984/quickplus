@@ -1,6 +1,9 @@
 <?php
  require_once(dirname(__FILE__)."/include.php");
-
+   require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools;
     $db =  new QuickFormConfig::$SqlType();
     $tablename = ArrayTools::getValueFromArray($_REQUEST,"tablename");
     $findkey = ArrayTools::getValueFromArray($_REQUEST,"findkey");

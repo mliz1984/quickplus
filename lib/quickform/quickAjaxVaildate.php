@@ -1,9 +1,9 @@
 <?php
  require_once(dirname(__FILE__)."/include.php");
- require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
-    use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
-    use Quickplus\Lib\QuickFormDrawer as QuickFormDrawer;
-    use Quickplus\Lib\Tools\ArrayTools as ArrayTools;
+   require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools;
     $db =  new QuickFormConfig::$SqlType();
     $formMark = ArrayTools::getValueFromArray($_REQUEST,'formMark');
     $quickAjaxMethod = ArrayTools::getValueFromArray($_REQUEST,'quickAjaxMethod');
