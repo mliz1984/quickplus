@@ -73,7 +73,7 @@
            {
 
                $parentValue = $value[$this->parentKey];
-               if($parentValue!=null&&trim($parentValue)!="")
+               if($parentValue!=null&&trim($parentValue)!=""&&$parentValue!=$this->getTopSign)
                {
                     $this->tree[$key] = $parentValue;    
                }

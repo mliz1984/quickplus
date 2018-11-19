@@ -1,9 +1,9 @@
 <?php
-    require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
     require_once($_SERVER['DOCUMENT_ROOT'] . "/class/menuManager.php");
-    use \Quickplus\Lib\Tools;
-    use \Quickplus\Lib\QuickFormConfig;
-    use \Quickplus\Lib\quickFormDrawer;
+    use Quickplus\Lib\Tools;
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\QuickPage;
 
     $db = new QuickFormConfig::$SqlType();

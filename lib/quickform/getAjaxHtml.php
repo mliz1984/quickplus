@@ -1,4 +1,8 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\Tools\ArrayTools;
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\quickFormDrawer;
 header('Content-Type: text/html; charset=utf-8');
         //echo '[{"title":"PrimeCables","key":"1000","expanded":false},{"title":"(*) FactoryGlobal","key":"3000","expanded":false}]';
         

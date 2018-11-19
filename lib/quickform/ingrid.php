@@ -1,6 +1,10 @@
 <?php
     require_once(dirname(__FILE__)."/include.php");
-    $db =  new QuickFormConfig::$SqlTyoe();
+    require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+    use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
+    use Quickplus\Lib\QuickFormDrawer as QuickFormDrawer;
+    use Quickplus\Lib\Tools\ArrayTools as ArrayTools;
+    $db =  new QuickFormConfig::$SqlType();
     $formid = ArrayTools::getValueFromArray($_REQUEST,'formid');
     $formMark = ArrayTools::getValueFromArray($_REQUEST,'formMark');
     $page = ArrayTools::getValueFromArray($_REQUEST,'page');

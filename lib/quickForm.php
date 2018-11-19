@@ -7,6 +7,7 @@ use Quickplus\Lib\Tools\DbTools;
 use Quickplus\Lib\Tools\StringTools;
 use Quickplus\Lib\Tools\HtmlElement;
 use Quickplus\Lib\Tools\ArrayTools;
+use Quickplus\Lib\Tools\CommonTools;
 use Picqer\Barcode\BarcodeGeneratorSVG;
 use Picqer\Barcode\BarcodeGenerator;
 

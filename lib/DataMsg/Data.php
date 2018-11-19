@@ -9,6 +9,7 @@
 namespace Quickplus\Lib\DataMsg;
 use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 use Quickplus\Lib\Tools\StringTools as StringTools;
+use Quickplus\Lib\Tools\DbTools as DbTools;
 
 class Data extends BaseVo{
 
