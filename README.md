@@ -9,7 +9,7 @@ QuickPlus is a quick develop tools for develop web system.
 
 Version History:
 
-0.7Build20181105  First open source version
+0.70Build20181105  First open source version
 
 0.72b1Build20181119  php7.2 beta version 
   
