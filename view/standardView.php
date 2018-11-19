@@ -405,9 +405,10 @@ if($toolbar!=null&&!$blank){
        <?php
           $reportHead = $obj->getReportHead();
           $colCount = 0;
+          $titleinfo = $obj->getTitleInfo();
           if($reportHead!=null&&trim($reportHead)!="")
           {
-             $titleinfo = $obj->getTitleInfo();
+             
              
             foreach($titleinfo as $dbname =>$title)
              {
