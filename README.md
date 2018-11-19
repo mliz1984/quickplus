@@ -3,10 +3,7 @@
 ## License
 
 The QuickPlus Library is open-sourced software licensed under the MIT license.
-
-##### Copyright 2018
-
-## Project installation 
+ 
 
 QuickPlus is a quick develop tools for develop web system.
 
