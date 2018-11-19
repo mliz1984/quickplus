@@ -11,7 +11,7 @@ Version History:
 
 0.7Build20181105  First open source version
 
-0.72Build20181119  php7.2 beta version 
+0.72b1Build20181119  php7.2 beta version 
   
  Now,QuickPlus support php5.6 - 7.2,now we are working for namespace.
  
