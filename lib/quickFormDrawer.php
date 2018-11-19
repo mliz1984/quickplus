@@ -503,7 +503,6 @@ class quickFormDrawer
                     {
 
                         $fullSql = $this->getSql($src); 
-                     
                         if($this->quickForm->getDebug())
                         {
                             print_r($src);

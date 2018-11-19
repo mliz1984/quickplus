@@ -1458,6 +1458,7 @@ use Quickplus\Lib\DataMsg\DataMsg;
                $r =  $data->getDataArray();
                $this->result[] =$this->modifyData($r);
            }
+         
        }
         
         public function modifyData($data)

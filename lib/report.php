@@ -2,7 +2,7 @@
      namespace Quickplus\Lib;
      set_time_limit(0);
      use Quickplus\Lib\DataMsg\DataMsg;
-
+     use Quickplus\Lib\Tools\ArrayTools;
 class report extends QuickChart{
      protected $title;
      protected $titleInfo;

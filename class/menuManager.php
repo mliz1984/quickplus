@@ -23,7 +23,7 @@ use Quickplus\Lib\quickForm;
         
         public function initField($src=null)
         {
-                //$this->setDebug(true);
+            //$this->setDebug(true);
         	$this->setRaeFieldType("showname");
         	$this->setRaeFieldType("name");
         	$this->setQuickEditFieldType("order_sequence","defaultSearchShowMode");
