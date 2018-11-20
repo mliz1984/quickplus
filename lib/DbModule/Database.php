@@ -131,7 +131,7 @@ class Database extends PDO
             $this->fieldnum = $stmt->columnCount();;
             return TRUE;
         }
-        $this->errormsg = $stmt->errorCode() . ": " . $stmt->errorInfo() . "\n";
+        $this->errormsg = "Query ".$strsql." Error" . "\n";
         return FALSE;
     }
 
@@ -155,7 +155,7 @@ class Database extends PDO
             $this->result  =null;
             return TRUE;
         }
-        $this->errormsg = $stmt->errorCode() . ": " . $stmt->errorInfo() . "\n";
+        $this->errormsg = "Exec ".$strsql." Error" . "\n";
         return FALSE;
     }
 

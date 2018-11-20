@@ -28,14 +28,21 @@ use Quickplus\Lib\Tools\UrlTools;
                 $js.=$form->getStatisticsScript();
                 $js.=$form->getChartsScript();
                 $js.=$form->getColVisScript();
-                $js.= $form->getTemplateScript(); 
-
+                $js.= $form->getTemplateScript();
                 $js.="  {extend: 'colvis',collectionLayout: 'fixed four-column'},
                          {
                                 extend: 'colvisGroup',
                                 text: 'Show All',
                                 show: ':hidden'
-                            } ]});
+                            },{text: 'Open New Window',action: function ( e, dt, node, config ) {  
+                               document.getElementById('searchSign').value = 1;
+                               document.getElementById('method').value = ''; 
+                               document.getElementById('exportmode').value = ''; 
+                               document.quickForm.target = '_blank';
+                               document.quickForm.action = '".UrlTools::getFullUrl()."';
+                               document.getElementById('ed_processname').value = ''; 
+                               document.quickForm.submit();  
+                              }} ]});
                 quickTable.buttons().container()
                     .appendTo( '#quickTable_wrapper .col-sm-6:eq(0)' 
                 ";
