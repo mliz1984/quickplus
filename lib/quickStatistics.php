@@ -439,7 +439,7 @@ namespace Quickplus\Lib;
 	    	return $array;
 	    }
 
-	    public function statisticsCount($array,$oldvalue,$params)
+	    public function statisticsCount($array,$oldvalue,$params=null)
 	    {
 	    	return intval($oldvalue)+1;
 	    } 
@@ -536,7 +536,7 @@ namespace Quickplus\Lib;
 	    	$titleMark =false;
 	    	$totalData = $this->statisticsTotalResult[$setname]["statistics_result"];
 	    	$title.="<tr><td align='center' style='vertical-align:middle'></td>";
-	    	$total.="<tr><td align='center' style='vertical-align:middle'>".$this->getStatisticTotalRowName()."</td>";
+	    	$total.="<tr><td align='center' style='vertical-align:middle'>".$this->getStatisticTotalRowName($setname)."</td>";
 	    	foreach($array as $key => $value)
 	    	{
 	    		$html.="<tr><td align='center' style='vertical-align:middle'>".$key."</td>";
