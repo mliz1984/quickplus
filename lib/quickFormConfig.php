@@ -1,7 +1,7 @@
 <?php
 namespace Quickplus\Lib;
 
-    const defaultTableWidth = "1500px";
+    const defaultTableWidth = "100%";
     const defatltFullScreenMode = false;
 	const defaultTableAllowWrap = false;
 	const defaultSearchDivMode = true;
