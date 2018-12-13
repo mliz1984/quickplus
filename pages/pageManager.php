@@ -3,7 +3,8 @@
     use Quickplus\Lib\Tools;
     use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\QuickPage;
-
+    use Quickplus\Lib\QuickFormConfig;
+    use Quickplus\Lib\DataMsg\Data;
     $db = new QuickFormConfig::$SqlType();
   
 ?>

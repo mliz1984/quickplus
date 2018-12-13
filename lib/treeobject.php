@@ -69,11 +69,11 @@
         
         public function buildTree()
         { 
-           foreach($this->data as $key => $value)
+          foreach($this->data as $key => $value)
            {
 
                $parentValue = $value[$this->parentKey];
-               if($parentValue!=null&&trim($parentValue)!=""&&$parentValue!=$this->getTopSign)
+               if($parentValue!=null&&trim($parentValue)!=""&&$parentValue!=$this->topSign)
                {
                     $this->tree[$key] = $parentValue;    
                }

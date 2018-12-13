@@ -2,6 +2,9 @@
 require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 
 use Quickplus\Lib\quickForm;
+use Quickplus\Lib\Tools\HtmlElement;
+use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\QuickFormConfig;
 	class MenuManager extends quickForm
 	{
 	    protected $sql = "SELECT a.id,a.parentpage_id,a.url,a.order_sequence,a.name,a.showname,a.target,a.has_right_control,a.is_active,a.classsrc,a.classname,a.viewsrc FROM qp_menu_manage a";
