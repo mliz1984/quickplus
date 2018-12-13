@@ -20,11 +20,12 @@ Version History:
  1 full support namespace.
  2 devide quickpay as a indenpent library.
  3 add quickplus-lavavel adapter,let's quickplus work as a lavavel package
+ 4 add quickplus-CodeIgniter adapter, let's quickplus could be work with CodeIgniter.
  
  
  QuickPlus is a php develop tools library for report and other crud functon ,we want to make a library which is  quick develop and quick learn.
  
- QuickPlus made by Mathieu Yang since 2013, and Zack Fu is another important contributor,He joined quickplus team from 2018.
+ QuickPlus made by Mathieu Yang since 2013, and Zack Fu is another important contributor,He joined quickplus team since 2018.
  
  
 
