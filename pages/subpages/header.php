@@ -43,8 +43,7 @@ $userinfo = $loginmanager ->getUserInfo()
         <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" rel="home" href="/pages/subpages/dashboard.php" title="Brand" target="right">
-        <img style="height: 30px; margin-top: -5px;"
-             src="/image/logo_small.png">
+        
     </a>
 
       

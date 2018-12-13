@@ -88,7 +88,7 @@ if($_REQUEST['username']!=NULL&&trim($_REQUEST['username'])!='')
 </script>
  <!--SIGN UP-->
  
- <h1>Report System</h1>
+ <h1>QuickPlus</h1>
 <div class="login-form">
 	<!--
 		<div class="head-info">
