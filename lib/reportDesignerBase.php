@@ -3035,9 +3035,9 @@ error.insertAfter( element );
                     return $sql;
                  }
                           
-                if(isset($src[$sign])&&($src[$sign]==null||trim($src[$sign]== '')))
+                if(!(isset($src[$sign])))
                 {
-                    $plist = $defaultValue;
+                  $plist = $defaultValue;
                 }
                 $list = $this->getAttachData($keyStr);
                 $result = null;
