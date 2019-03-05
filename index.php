@@ -1,5 +1,5 @@
 <?php
-require("/vendor/autoload.php");
+require_once($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
 // Start the session
 use Quickplus\Lib\parameters;

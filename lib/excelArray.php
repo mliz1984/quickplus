@@ -155,7 +155,6 @@ namespace Quickplus\Lib;
 			}
 
 			$result = $this->afterLoad($result);
-			print_r($result);
 			return $result;
 		}
 	}

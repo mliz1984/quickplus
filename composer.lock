@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "phpmyadmin/sql-parser",
-            "version": "v4.2.5",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/sql-parser.git",
-                "reference": "a156028d60b4b9e11f43cc432f0a19507e87c658"
+                "reference": "0eb16ef5e3acacbc792be336754e42d98791a33f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/a156028d60b4b9e11f43cc432f0a19507e87c658",
-                "reference": "a156028d60b4b9e11f43cc432f0a19507e87c658",
+                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/0eb16ef5e3acacbc792be336754e42d98791a33f",
+                "reference": "0eb16ef5e3acacbc792be336754e42d98791a33f",
                 "shasum": ""
             },
             "require": {
@@ -65,7 +65,7 @@
                 "parser",
                 "sql"
             ],
-            "time": "2018-10-31T18:40:52+00:00"
+            "time": "2019-01-05T13:46:38+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
