@@ -1,6 +1,7 @@
 <?php
 namespace Quickplus\Lib;
-	set_time_limit(0);
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/PHPExcel.php");
+set_time_limit(0);
 use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\DataMsg\Data;
 use Quickplus\Lib\Tools\FileTools;
@@ -204,7 +205,7 @@ use Quickplus\Lib\Tools\StringTools;
         
         public function importFile($db,$src,$fileName)
         {
-			$objPHPExcel = PHPExcel_IOFactory::load($fileName);
+			$objPHPExcel = \PHPExcel_IOFactory::load($fileName);
 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 			$dataMsg = new DataMsg();
 			$dataMsg->setDb($db);
@@ -242,10 +243,10 @@ use Quickplus\Lib\Tools\StringTools;
 								}
 
 							
-								if(isset($value[PHPExcel_Cell::stringFromColumnIndex($point)]))
+								if(isset($value[\PHPExcel_Cell::stringFromColumnIndex($point)]))
 								{	
 							   
-									$tmpvalue = $value[PHPExcel_Cell::stringFromColumnIndex($point)];
+									$tmpvalue = $value[\PHPExcel_Cell::stringFromColumnIndex($point)];
 									$tmpvalue = iconv(mb_detect_encoding($tmpvalue), QuickFormConfig::$encode, $tmpvalue);
 								}
 								else

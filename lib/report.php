@@ -25,6 +25,11 @@ class report extends QuickChart{
      protected $oriCsv = false;
      protected $defaultValue = array();
      protected $isExportMainData = true;
+     protected $exportImageSetting = Array();
+         public function setExportImageSetting($dbname,$height,$width)
+         {
+            $this->exportImageSetting[$dbname] = Array("height"=>$height,"width"=>$width);
+         }
          public function setIsExportMainData($isExportMainData)
          {
             $this->isExportMainData = $isExportMainData;
@@ -415,7 +420,7 @@ class report extends QuickChart{
         }
         if($this->isExportMainData)
         {
-            $quickExcel->setCellDataFromArray($exportData,$mapping);
+            $quickExcel->setCellDataFromArray($exportData,$mapping,1,null,$this->exportImageSetting);
         }
         $quickExcel = $this->customExport($quickExcel,$mapping,$data,$withTitle,$titleData);
     

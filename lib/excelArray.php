@@ -1,18 +1,26 @@
 <?php
 namespace Quickplus\Lib;
-
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/PHPExcel.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
 	set_time_limit(0);
     use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 	use Quickplus\Lib\Tools\UrlTools;
+	use Quickplus\Lib\Tools\FileTools as FileTools;
+	use Quickplus\Lib\Tools\StringTools;
 	class excelArray
 	{
+		protected $filePath = null;
 		protected $keyColMapping = Array();
-
+		protected $keyColFileMapping = Array();
 		protected $startRow = 1;
-
 		protected $endRow = null;
-      
         protected $skipEmpty = true;
+
+        public function setFilePath($filePath)
+        {
+        	$this->filePath = $filePath;
+        }
+
 
 
         public function setSkipEmpty($skipEmpty)
@@ -48,9 +56,13 @@ namespace Quickplus\Lib;
 		{
 			return $this->endRow;
 		}
-
+        public function setKeyFile($key,$col)
+        {
+        	$this->keyColFileMapping[$key] = $col;
+        }
 		public function setKey($key,$col,$isNum=false,$allowEmptyValue=true,$defaultValue="")
 		{
+
 			$this->keyColMapping[$key] = Array("col"=>$col,"isNum"=>$isNum,"allowEmptyValue"=>$allowEmptyValue,"defaultValue"=>$defaultValue);
 		}
 		public function setKeyMethod($key,$customMethod)
@@ -80,7 +92,7 @@ namespace Quickplus\Lib;
 		}
 		public function getArrayFromFile($fileName)
 		{
-			$objPHPExcel = PHPExcel_IOFactory::load($fileName);
+			$objPHPExcel = \PHPExcel_IOFactory::load($fileName);
 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 			$endRow = $this->getEndRow();
 			$result = Array();	
@@ -153,9 +165,53 @@ namespace Quickplus\Lib;
 				    $curRow ++;
 				}
 			}
-
+			$fileResult = $this->loadFiles($objPHPExcel->getActiveSheet());
+			if(count($fileResult)>0&&count($this->keyColFileMapping)>0)
+			{
+				$curRow =$this->getStartRow();
+				$newResult = Array();
+				foreach($result as $r)
+				{
+					foreach($this->keyColFileMapping as $key =>$col)
+					{
+						if(isset($fileResult[$curRow][$col])&&!empty($fileResult[$curRow][$col]))
+						{
+							$r[$key] = $fileResult[$curRow][$col];
+						}
+						else
+						{
+							$r[$key] = "";
+						}
+					}
+					$newResult[] = $r;
+					$curRow += 1;
+				}
+				$result = $newResult;
+			}
 			$result = $this->afterLoad($result);
 			return $result;
 		}
+	
+
+	public function loadFiles($sheet)
+	{
+		$imgData=array();
+		if($this->filePath!=null&&count($this->keyColFileMapping)>0)
+		{
+			$data=$sheet->toArray();
+
+			foreach($sheet->getDrawingCollection() as $img){
+			    list ($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString($img->getCoordinates());//获取列与行号
+			    $p_w_picpathFileName=$img->getCoordinates().mt_rand(100,999);
+			    $p_w_picpathFileName.=".".$img->getExtension();
+			    $filename = $img->getPath();
+			    echo FileTools::connectPath(FileTools::getRealPath($this->filePath),$p_w_picpathFileName)."<br>";  
+			    copy($filename, FileTools::connectPath(FileTools::getRealPath($this->filePath),$p_w_picpathFileName)); 
+			    $imgData[$startRow][$startColumn]=$p_w_picpathFileName;
+			     
+			}
+		}
+		return $imgData;
+	}
 	}
 ?>

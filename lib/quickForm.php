@@ -3731,7 +3731,7 @@ use Picqer\Barcode\BarcodeGenerator;
         }
         if($this->isExportMainData)
         {
-            $quickExcel->setCellDataFromArray($exportData,$mapping);
+           $quickExcel->setCellDataFromArray($exportData,$mapping,1,null,$this->exportImageSetting);
         }
         $quickExcel = $this->customExport($quickExcel,$mapping,$data,$withTitle,$titleData);
     

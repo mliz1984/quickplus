@@ -1,9 +1,11 @@
 <?php
 namespace Quickplus\Lib;
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/PHPExcel.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
 use Quickplus\Lib\Tools\FileTools as FileTools;
 use Quickplus\Lib\Tools\StringTools as StringTools;
 use Quickplus\Lib\QuickFormConfig;
-use Quickplus\Lib\PHPExcel;
+
 	class QuickExcel 
 	{
 		protected $cellData = Array();
@@ -14,7 +16,7 @@ use Quickplus\Lib\PHPExcel;
 		protected $colWidth = null;
 		protected $sheetName = null;
 	    protected $attachSheet = Array();
-	    public  function setCellDataFromArray($array,$mappingArray,$startRow=1,$attachSheetId=null)
+	    public  function setCellDataFromArray($array,$mappingArray,$startRow=1,$attachSheetId=null,$exportImageSetting=Array())
 	    {
 	        $cellData = Array(); 
 	    	for($i=0;$i<count($array);$i++)
@@ -23,13 +25,32 @@ use Quickplus\Lib\PHPExcel;
 	    		foreach($mappingArray as $col =>$key)
 	    		{
 	    			$data = $array[$i][$key];
+	    			$isImg = false;
+	    			if(isset($exportImageSetting[$key])&&is_array($exportImageSetting[$key]))
+	    			{
+	    				$isImg =true;
+	    			}
 	    			if($attachSheetId!=null&&trim($attachSheetId)!="")
 	    			{
-	    				$this->setAttachSheetCellData($attachSheetId,$col,$row,$data);
+	    				if($isImg)
+	    				{
+	    					$this->setAttachSheetCellImg($attachSheetId,$col,$row,$exportImageSetting[$key]["height"],$exportImageSetting[$key]["width"],$data);
+	    				}
+	    				else
+	    				{
+	    					$this->setAttachSheetCellData($attachSheetId,$col,$row,$data);
+	    				}
 	    			}
 	    			else
 	    			{
-						$this->setCellData($col,$row,$data);		
+	    				if($isImg)
+	    				{
+	    					$this->setCellImg($col,$row,$exportImageSetting[$key]["height"],$exportImageSetting[$key]["width"],$data);
+	    				}
+	    				else
+	    				{
+							$this->setCellData($col,$row,$data);	
+					    }	
 	    			}
 	    		}
 	    		if($attachSheetId!=null&&trim($attachSheetId)!="")
@@ -62,7 +83,7 @@ use Quickplus\Lib\PHPExcel;
 	    	}
 	    	$this->attachSheet[$sheetid]["startrow"] = $startRow;
 	    }
-	  
+	    
 	    public function setAttachSheetCellData($sheetid,$col,$row,$data,$method=null)
 	    {
 	    	if(!is_array($this->attachSheet[$sheetid]))
@@ -71,14 +92,41 @@ use Quickplus\Lib\PHPExcel;
 	    	}
 	    	$this->attachSheet[$sheetid]["celldata"][$col.$row] =  Array("col"=>$col,"row"=>$row,"data"=>$data,"method"=>$method,"type"=>"normal");
 	    }
-
-	    public function setAttachSheetCellImage($sheetid,$col,$row,$height,$width,$picpath,$isAbsolutePath=true,$method=null)
+	    public function setAttachSheetCellImg($sheetid,$col,$row,$height,$width,$picpath,$method=null)
 	    {
 	    	if(!is_array($this->attachSheet[$sheetid]))
 	    	{
 				$this->attachSheet[$sheetid] = Array();
 	    	}
-	    	$this->attachSheet[$sheetid]["celldata"][$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+	    	if(filter_var($picpath, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+			{
+	    		$this->attachSheet[$sheetid]["celldata"][$col.$row] = Array("col"=>$col,"row"=>$row,"path"=>$picpath,"method"=>$method,"type"=>"img","height"=>$height,"width"=>$width,"method"=>$method,);
+	    	}
+	    	else
+	    	{
+	    		$this->attachSheet[$sheetid]["celldata"][$col.$row] =  Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+	    	}
+	    }
+
+	    public function setAttachSheetCellImage($sheetid,$col,$row,$height,$width,$picpath,$isAbsolutePath=true,$method=null)
+	    {
+
+	    	if(!is_array($this->attachSheet[$sheetid]))
+	    	{
+				$this->attachSheet[$sheetid] = Array();
+	    	}
+	        if(!$isAbsolutePath)
+			{
+				$picpath = FileTools::getRealPath($picpath);
+			}
+			if(file_exists($picpath))
+			{
+	    		$this->attachSheet[$sheetid]["celldata"][$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+	    	}
+	    	else
+	    	{
+	    		$this->attachSheet[$sheetid]["celldata"][$col.$row] =  Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+	    	}
 	    }
 
 		public function setSheetName($sheetName)
@@ -103,7 +151,25 @@ use Quickplus\Lib\PHPExcel;
 				{
 					$picpath = FileTools::getRealPath($picpath);
 				}
-				$this->colData[$col] = Array("col"=>$col,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+				if(file_exists($picpath))
+				{
+					$this->colData[$col] = Array("col"=>$col,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+				}
+				else
+				{
+						$this->colData[$col] = Array("col"=>$col,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+				}
+		}
+		public function setColImg($col,$height,$width,$picpath,$method=null)
+		{
+			   if(filter_var($picpath, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+			   {
+				 $this->colData[$col] = Array("col"=>$col,"data"=>$picpath,"method"=>$method,"type"=>"img","height"=>$height,"width"=>$width);
+			   }
+			   else
+			   {
+			   	$this->colData[$col] = Array("col"=>$col,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+			   }
 		}
 		public function setCellImage($col,$row,$height,$width,$picpath,$isAbsolutePath=true,$method=null)
 		{
@@ -111,7 +177,25 @@ use Quickplus\Lib\PHPExcel;
 				{
 					$picpath = FileTools::getRealPath($picpath);
 				}
-				$this->cellData[$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+				if(file_exists($picpath))
+				{
+					$this->cellData[$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"image","height"=>$height,"width"=>$width);
+				}
+				else
+				{
+					$this->cellData[$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+				}
+		}
+		public function setCellImg($col,$row,$height,$width,$picpath,$method=null)
+		{
+			 if(filter_var($picpath, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+			   {
+				 $this->cellData[$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"img","height"=>$height,"width"=>$width);
+			   }
+			   else
+			   {
+			   	$this->cellData[$col.$row] = Array("col"=>$col,"row"=>$row,"data"=>$picpath,"method"=>$method,"type"=>"normal");
+			   }
 		}
 		public function setCellData($col,$row,$data,$method=null)
 		{
@@ -136,8 +220,8 @@ use Quickplus\Lib\PHPExcel;
 			$result = null;
 			if($this->objPHPExcel!=null)
 			{
-                $this->objPHPExcel->setActiveSheetIndex($sheetIndex);
-				$result = $this->objPHPExcel->getActiveSheet()->getCell($col.$row)->getValue();
+				$objPHPExcel->setActiveSheetIndex($sheetIndex);
+				$result = $objPHPExcel->getActiveSheet()->getCell($col.$row)->getValue();
 			}
 			return $result;
 
@@ -158,15 +242,67 @@ use Quickplus\Lib\PHPExcel;
 				$cellwidth = ceil($objPHPExcel->getActiveSheet()->getColumnDimension($col)->getWidth()*3.7795*10); 
 				$cellheight = ceil($objPHPExcel->getActiveSheet()->getRowDimension($row)->getRowHeight()*10);
 				$curColWidth = null;
-				if($type=="image")
+				$add = true;
+				if($type=="img"&&!empty($newValue))
 				{
-				
+					  if(filter_var($newValue, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+			   		 {
+						$add = false;
+						$height = $dataArray["height"];
+						$width = $dataArray["width"];
+						$picpath = $newValue;
+						$ext = FileTools::getExtension($picpath);
+						$image = null;
+						if($ext=="jpg" || $ext=="jpeg")
+						{
+							$image = imagecreatefromjpeg($picpath);
+						}
+						else if($ext=="png")
+						{
+							$image = imagecreatefrompng($picpath);
+						}
+						else if($ext=="gif")
+						{
+							$image = imagecreatefromgif($picpath);
+						}
+						else if($ext=="bmp")
+						{
+							$image = imagecreatefrombmp($picpath);
+						}
+
+						$objPHPExcel->getActiveSheet()->getColumnDimension()->setAutoSize(true);
+						$objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight($height);
+						$objDrawing = new \PHPExcel_Worksheet_MemoryDrawing();
+						$objDrawing->setCoordinates($col.$row); 
+						$objPHPExcel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+   					    $objPHPExcel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					    $objDrawing->setImageResource($image);	
+						$objDrawing->setRenderingFunction(\PHPExcel_Worksheet_MemoryDrawing::RENDERING_DEFAULT);//渲染方法
+						$objDrawing->setMimeType(\PHPExcel_Worksheet_MemoryDrawing::MIMETYPE_DEFAULT);
+						if($height!=null&&trim($height)!="")
+							{	
+								$objDrawing->setHeight($height);
+							}  
+							if($width!=null&&trim($width)!="")
+							{
+								$objDrawing->setWidth($width);
+							}  
+					     $objDrawing->setWorksheet($objPHPExcel->getActiveSheet()); 
+					}
+				}
+				else if($type=="image")
+				{
+						$add = false;
 						$height = $dataArray["height"];
 						$width = $dataArray["width"];
 						 $curColWidth = intval($width);
+						 if($method!=null&&trim($method)!="")
+					    {
+							$picpath = $this->$method($col,$row,$oldValue,$newValue);
+					    }
 						$picpath = $newValue;
 						$oldValue = null;
-						$objDrawing = new PHPExcel_Worksheet_Drawing();  
+						$objDrawing = new \PHPExcel_Worksheet_Drawing();  
 						$objDrawing->setPath($picpath);
 					    $objDrawing->setCoordinates($col.$row);
 						if($height!=null&&trim($height)!="")
@@ -175,7 +311,7 @@ use Quickplus\Lib\PHPExcel;
 							$offsety = ($cellheight-$height)/2;
 							$objDrawing->setHeight($height);
 							
-							$objDrawing->setOffsetY(40);
+							$objDrawing->setOffsetY($offsety);
 							$objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight($height);	
 							
 						}  
@@ -187,16 +323,13 @@ use Quickplus\Lib\PHPExcel;
 							$objDrawing->setWidth($width);
 						}  
 
-						if($method!=null&&trim($method)!="")
-					    {
-							$picpath = $this->$method($col,$row,$oldValue,$newValue);
-					    }
+						
 	
 					    $objDrawing->setWorksheet($objPHPExcel->getActiveSheet()); 
 					    
 
 				}
-				else
+				if($add)
 				{
 					if(!$newMark)
 					{
@@ -209,10 +342,10 @@ use Quickplus\Lib\PHPExcel;
 						$newValue = $this->$method($col,$row,$oldValue,$newValue);
 					}
 					$newValue  =StringTools::conv($newValue);
-	                $objPHPExcel->getActiveSheet()->setCellValueExplicit($col.$row, $newValue ,PHPExcel_Cell_DataType::TYPE_STRING);
+	                $objPHPExcel->getActiveSheet()->setCellValueExplicit($col.$row, $newValue ,\PHPExcel_Cell_DataType::TYPE_STRING);
 	          	    $objPHPExcel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setWrapText(true);
 	          	    $curColWidth = strlen($newValue);
-					$objPHPExcel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+					$objPHPExcel->getActiveSheet()->getStyle($col.$row)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 				}
 				    $maxColWidth = intval($this->colWidth[$col]);
 	               	if($curColWidth>$maxColWidth)
@@ -238,13 +371,13 @@ use Quickplus\Lib\PHPExcel;
 			{	
 				if($this->templateFile!=null||file_exists($this->templateFile))
 				{
-					$objPHPExcel = PHPExcel_IOFactory::load($this->templateFile);
+					$objPHPExcel = \PHPExcel_IOFactory::load($this->templateFile);
 					$this->objPHPExcel = $objPHPExcel;
 					$newMark = false;
 				}
 				else 
 				{
-					$objPHPExcel = new PHPExcel();
+					$objPHPExcel = new \PHPExcel();
 					$newMark = true;
 				}
 			}
@@ -256,19 +389,19 @@ use Quickplus\Lib\PHPExcel;
 			$objPHPExcel->getDefaultStyle()
 			    ->getBorders()
 			    ->getTop()
-			        ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			        ->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
 			$objPHPExcel->getDefaultStyle()
 			    ->getBorders()
 			    ->getBottom()
-			        ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			        ->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
 			$objPHPExcel->getDefaultStyle()
 			    ->getBorders()
 			    ->getLeft()
-			        ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			        ->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
 			$objPHPExcel->getDefaultStyle()
 			    ->getBorders()
 			    ->getRight()
-			        ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			        ->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
 			$sheetName = $this->getSheetName();
 			if($sheetName!=null&&trim($sheetName)!="")
 			{
@@ -327,7 +460,7 @@ use Quickplus\Lib\PHPExcel;
         {
         	$objWriter = null;
 			$objPHPExcel = $this->getExcelData($sheetIndex,$src);
-			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'HTML');
+			$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'HTML');
             $objWriter->save('php://output');
         }
 		
@@ -344,12 +477,12 @@ use Quickplus\Lib\PHPExcel;
 			$saveFileName = $fileName;
 			if($type=="xlsx")
 			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007'); 
+				$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007'); 
 				$headerStr = 'Content-Type: application/vnd.ms-excel;charset=utf-8';
 			}
 			else if($type=="xls")
 			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
+				$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
 				$headerStr = 'Content-Type: application/vnd.ms-excel;charset=utf-8';
 			}
 			else if($type=="pdf")
@@ -359,16 +492,16 @@ use Quickplus\Lib\PHPExcel;
 					$libpath = FileTools::getRealPath(QuickFormConfig::$quickPdfRendererPath);
 					if(is_dir($libpath))
 					{
-						PHPExcel_Settings::setPdfRenderer(QuickFormConfig::$quickPdfRenderer,$libpath);
+						\PHPExcel_Settings::setPdfRenderer(QuickFormConfig::$quickPdfRenderer,$libpath);
 					}
 				}
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'PDF'); 
+				$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'PDF'); 
 				$objWriter->SetFont('arialunicid0-chinese-simplified');
 				$headerStr = 'Content-Type: application/pdf;charset=utf-8';
 			}
 			else if($type=="csv")
 			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV'); 
+				$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV'); 
 				$headerStr = 'Content-Type: text/csv;charset=utf-8';
 			}
 			if($isExport)
