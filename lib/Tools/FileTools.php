@@ -7,7 +7,7 @@
  */
 
 namespace Quickplus\Lib\Tools;
-
+  use Quickplus\Lib\QuickFormConfig as QuickFormConfig;
 
 class FileTools
 {
@@ -41,7 +41,7 @@ class FileTools
     {
         if($dirSep==null||trim($dirSep)=="")
         {
-            $dirSep = quickFormConfig::$dirSep;
+            $dirSep = DIRECTORY_SEPARATOR;
         }
         $path1 = str_replace("/",$dirSep,$path1);
         $path1 = str_replace("\\",$dirSep,$path1);
@@ -54,7 +54,7 @@ class FileTools
     {
         if($dirSep==null||trim($dirSep)=="")
         {
-            $dirSep = quickFormConfig::$dirSep;
+            $dirSep = DIRECTORY_SEPARATOR;
         }
         $path = str_replace("/",$dirSep,$path);
         $path = str_replace("\\",$dirSep,$path);
@@ -172,13 +172,14 @@ class FileTools
         {
             $aimUrl =  FileTools::getRealPath($aimUrl);
         }
-
-        $aimUrl = str_replace('', '/', $aimUrl);
+         
+        $aimUrl = str_replace('', DIRECTORY_SEPARATOR, $aimUrl);
+      
         $aimDir = '';
-        $arr = explode('/', $aimUrl);
+        $arr = explode(DIRECTORY_SEPARATOR, $aimUrl);
         $result = true;
         foreach ($arr as $str) {
-            $aimDir .= $str . '/';
+            $aimDir .= $str . DIRECTORY_SEPARATOR;
 
             if (!file_exists($aimDir)) {
                 $result = mkdir($aimDir, $right);
@@ -365,7 +366,6 @@ class FileTools
 
     public static function copyFile($fileUrl, $aimUrl, $overWrite = false) {
         if (!file_exists($fileUrl)) {
-
             return false;
         }
         if (file_exists($aimUrl) && $overWrite == false) {

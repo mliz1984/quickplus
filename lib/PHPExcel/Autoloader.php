@@ -73,7 +73,6 @@ class PHPExcel_Autoloader
             //    Either already loaded, or not a PHPExcel class request
             return FALSE;
         }
-
         $pClassFilePath = PHPEXCEL_ROOT .
                           str_replace('_',DIRECTORY_SEPARATOR,$pClassName) .
                           '.php';

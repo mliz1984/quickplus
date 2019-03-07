@@ -198,15 +198,17 @@ require_once($_SERVER['DOCUMENT_ROOT']."/lib/parameters.php");
 		$imgData=array();
 		if($this->filePath!=null&&count($this->keyColFileMapping)>0)
 		{
+
 			$data=$sheet->toArray();
 
 			foreach($sheet->getDrawingCollection() as $img){
 			    list ($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString($img->getCoordinates());//获取列与行号
-			    $p_w_picpathFileName=$img->getCoordinates().mt_rand(100,999);
+			    $p_w_picpathFileName=$img->getCoordinates().date('Ymdhis').StringTools::getRandStr();
 			    $p_w_picpathFileName.=".".$img->getExtension();
 			    $filename = $img->getPath();
-			    echo FileTools::connectPath(FileTools::getRealPath($this->filePath),$p_w_picpathFileName)."<br>";  
-			    copy($filename, FileTools::connectPath(FileTools::getRealPath($this->filePath),$p_w_picpathFileName)); 
+			    $dir = FileTools::getRealPath($this->filePath);
+			    FileTools::createDir($dir);
+			    copy($filename, FileTools::connectPath($dir,$p_w_picpathFileName)); 
 			    $imgData[$startRow][$startColumn]=$p_w_picpathFileName;
 			     
 			}

@@ -17,7 +17,7 @@ use Quickplus\Lib\Tools\StringTools;
 		protected $extensionSetting = null;
 		protected $colPostion = Array();
 		protected $process = null;
-		protected $errmsg=null;
+		protected $msg=null;
 		protected $maxSize=2097152;
 		protected $processMethod = "importFile";
 		protected $fileName = null;
@@ -79,23 +79,19 @@ use Quickplus\Lib\Tools\StringTools;
 		{
 			return $this->maxSize;
 		}
-		public function setErrMsg($errmsg)
+		public function setMsg($msg)
 		{
-			$this->errmsg = $errmsg;
+			$this->msg = $msg;
 		}
-		public function getErrMsg()
+		public function getMsg()
 		{
-			return $this->errmsg;
+			return $this->msg;
 		}	
 
 		public function upload($db,$src,$id,$path,$process=null,$mark=null)
         {    
-
-             if($this->process!=null)
-             {
-             	$process = $this->process;
-             }
         	 $this->init($db,$src,$id,$path);
+        	 $process = $this->process;
         	 if($this->extensionSetting!=null)
         	 {
         	 	if($this->extensionSetting["override"])
@@ -108,13 +104,14 @@ use Quickplus\Lib\Tools\StringTools;
         	    }
         	 }
         	 $result  = $this->uploadFile($src,$id,$path,$mark);
-        	 
         	 if($result&&$process)
         	 {
 
         	 	 $processMethod = $this->processMethod;
-        	 	 $tmp =  $this->$processMethod($db,$src,$result);
-        	 	 if($tmp!=null&&is_bool($tmp))
+
+        	 	 $tmp =  $this->$processMethod($db,$src,$result,$this->returnString);
+        	 	
+        	 	 if(is_bool($tmp))
         	 	 {
         	 	 	$result = $tmp;
         	 	 }
@@ -203,9 +200,9 @@ use Quickplus\Lib\Tools\StringTools;
 			return $load;
 		}
         
-        public function importFile($db,$src,$fileName)
+        public function importFile($db,$src,$fullFileName,$filename)
         {
-			$objPHPExcel = \PHPExcel_IOFactory::load($fileName);
+			$objPHPExcel = \PHPExcel_IOFactory::load($fullFileName);
 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 			$dataMsg = new DataMsg();
 			$dataMsg->setDb($db);
@@ -288,7 +285,7 @@ use Quickplus\Lib\Tools\StringTools;
 				    }
 				    else
 				    {
-				    	$this->setErrMsg("Database Operation Error ,please check.");
+				    	$this->setMsg("Database Operation Error ,please check.");
 				    }
 					return $result;
 				}
@@ -306,7 +303,9 @@ use Quickplus\Lib\Tools\StringTools;
        
 		public function getExtension($filename)
 		{
-			return strtolower(end(explode(".",$filename)));
+			$array = explode(".",$filename);
+			$str = end($array);
+			return strtolower($str);
 		}
 		public function getDstFileName($fileName,$mark=null)
 		{
@@ -331,7 +330,7 @@ use Quickplus\Lib\Tools\StringTools;
         	//print_r($_FILES);
         	if(!isset($_FILES[$id]['name'])||$_FILES[$id]['name']==null&&trim($_FILES[$id]['name'])=="")
         	{
-        		$this->errmsg = "Please choose a file at first.";
+        		$this->msg = "Please choose a file at first.";
         		return $result;
         	}
 
@@ -342,13 +341,13 @@ use Quickplus\Lib\Tools\StringTools;
 				if(!in_array($extension,$this->allowExtend)&&$this->fileExtCheck)
 				{
 					
-					$this->errmsg = "The extension '".$extension."' is not supported.";
+					$this->msg = "The extension '".$extension."' is not supported.";
 					return $result;
 				}
 
 				if($_FILES[$id]['size']>$this->maxSize)
 				{
-					$this->errmsg = "File size can not exceed ".$this->maxSize.".";
+					$this->msg = "File size can not exceed ".$this->maxSize.".";
 					return $result;
 				}
 	        	$fileNameStr = explode('.',$_FILES[$id]['name']);
@@ -357,11 +356,9 @@ use Quickplus\Lib\Tools\StringTools;
 
 			    FileTools::createDir($path);
 			    $fileName = FileTools::connectPath($path,$this->returnString);
-			   //echo $fileName."@@";
-			    //die();
+			 	
 			    $srcFileName = iconv(mb_detect_encoding($_FILES[$id]['tmp_name']), QuickFormConfig::$encode,$_FILES[$id]['tmp_name']);
-
-			    move_uploaded_file($srcFileName, $fileName);
+			   move_uploaded_file($srcFileName, $fileName);
 		        $result = $fileName;
 		  
 			}
@@ -431,7 +428,7 @@ use Quickplus\Lib\Tools\StringTools;
 	        			//check file extension
 	        			if(!in_array($ext,$this->allowExtend))
 	        			{
-	        				$this->errmsg = "File extension '".$ext."' is not supported.";
+	        				$this->msg = "File extension '".$ext."' is not supported.";
 	        				$uploadedFiles = Array();
 	        				break;
 	        			}
@@ -440,7 +437,7 @@ use Quickplus\Lib\Tools\StringTools;
 	        			{
 	        				if(!getimagesize($file['tmp_name']))
 	        				{
-		        				$this->errmsg = "It is not a image format file.";
+		        				$this->msg = "It is not a image format file.";
 		        				$uploadedFiles = Array();
 	        					break;
 	        				}
@@ -448,14 +445,14 @@ use Quickplus\Lib\Tools\StringTools;
 	        			//check fiel size
 	        			if($file['size']>$this->maxSize)
 	        			{
-	        				$this->errmsg = "File size exceed the limit(".$this->maxSize.").";
+	        				$this->msg = "File size exceed the limit(".$this->maxSize.").";
 	        				$uploadedFiles = Array();
 							break;
 	        			}
 	        			//check upload file way is right?
 	        			if(!is_uploaded_file($file['tmp_name']))
 	        			{
-	        				$this->errmsg = "It is not uploded as HTTP or POST method.";
+	        				$this->msg = "It is not uploded as HTTP or POST method.";
 	        				$uploadedFiles = Array();
 							break;
 	        			}
@@ -475,25 +472,25 @@ use Quickplus\Lib\Tools\StringTools;
 	        			switch($file['error'])
 	        			{
 	        				case 1:
-	        					$this->errmsg="Exceed the size that configure file allowed";//UPLOAD_ERR_INI_SIZE
+	        					$this->msg="Exceed the size that configure file allowed";//UPLOAD_ERR_INI_SIZE
 	        					break;
 	        				case 2:
-	        					$this->errmsg="Exceed the size that form allowed";			//UPLOAD_ERR_FORM_SIZE
+	        					$this->msg="Exceed the size that form allowed";			//UPLOAD_ERR_FORM_SIZE
 	        					break;
 	        				case 3:
-	        					$this->errmsg="File uploaded is not intact";//UPLOAD_ERR_PARTIAL
+	        					$this->msg="File uploaded is not intact";//UPLOAD_ERR_PARTIAL
 	        					break;
 	        				case 4:
-	        					$this->errmsg="No file upload";//UPLOAD_ERR_NO_FILE
+	        					$this->msg="No file upload";//UPLOAD_ERR_NO_FILE
 	        					break;
 	        				case 6:
-	        					$this->errmsg="Can not find temporary dir";//UPLOAD_ERR_NO_TMP_DIR
+	        					$this->msg="Can not find temporary dir";//UPLOAD_ERR_NO_TMP_DIR
 	        					break;
 	        				case 7:
-	        					$this->errmsg="File is not writeable";//UPLOAD_ERR_CANT_WRITE;
+	        					$this->msg="File is not writeable";//UPLOAD_ERR_CANT_WRITE;
 	        					break;
 	        				case 8:
-	        					$this->errmsg="File uploading is interrupted by the extension program of PHP";//UPLOAD_ERR_EXTENSION
+	        					$this->msg="File uploading is interrupted by the extension program of PHP";//UPLOAD_ERR_EXTENSION
 	        					break;
 	        			}
         				$uploadedFiles = Array();

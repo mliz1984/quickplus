@@ -1,5 +1,4 @@
 <?php
-namespace Quickplus\Lib;
 /**
  * PHPExcel
  *
