@@ -5,10 +5,10 @@ define('BASE_PATH',str_replace('\\','/',realpath(dirname(dirname(__FILE__)).'/')
 
 class parameters
 {
-    const DB_HOST = 'tlw.quickplus.org';
-    const DB_NAME = 'admin_tlw';
-    const DB_USERNAME = 'admin_tlw';
-    const DB_PASSWORD = 'YANx1984';
+    const DB_HOST = '';
+    const DB_NAME = '';
+    const DB_USERNAME = '';
+    const DB_PASSWORD = '';
 }
 
 ?>
