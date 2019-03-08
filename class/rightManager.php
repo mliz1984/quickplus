@@ -1,9 +1,9 @@
 <?php
 set_time_limit(0);
-require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 use Quickplus\Lib\DataMsg\Data;
 use Quickplus\Lib\quickForm;
-
+use Quickplus\Lib\Tools\CommonTools;
 class RightManager extends quickForm
 {
 	protected $sql = "SELECT 
@@ -34,7 +34,6 @@ class RightManager extends quickForm
 		 $this->addField("is_admin","Admin Right");
 		 $this->addField("right","Access Right");
   		 $this->setRaeFieldType("login",true,"editUrlReportMode");
-		 $this->setRaeFieldType("email");
 		 $this->setRaeFieldType("can_login",true,"translateByStatus");
          $this->setRaeFieldType("is_admin",true,"translateByStatus");
          $this->setRaeFieldType("right",true,"getAccessRight");
@@ -129,7 +128,7 @@ class RightManager extends quickForm
 			$access_right =$datamsg->getIdstrs("id",",","");
 
 	    }
-        $data = new Data($this->getDb(),"qp_rightcontrol","login");
+        $data = new Data($this->getDb(),"qp_rightcontrol","id");
         
         $data->set("login",$dataArray["login"]);
         
@@ -141,7 +140,6 @@ class RightManager extends quickForm
         $data->set("can_login",$dataArray["can_login"]);
         $data->set("is_admin",$dataArray["is_admin"]);
         $data->set("right",$access_right);
-
        $result = $data->createUpdate();
        $array = array("result"=>$result,"src"=>$src);
        return $array;

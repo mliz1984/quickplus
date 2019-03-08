@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/class/session.php");
 use Quickplus\Lib\parameters;
 use Quickplus\Lib\quickFormDrawer;
@@ -51,7 +51,8 @@ $userinfo = $loginmanager ->getUserInfo()
     </div>
 
        <div class="nav pull-right">
-            <span>Welcome <?php echo $userinfo['login'];?></span>
+
+            <span>Welcome <?php  echo $userinfo['accountid'];?></span>
             <button type="button" class="btn navbar-btn" onclick="parent.left.location.href='/pages/subpages/menu.php?flag=1'">Refresh</button>
             <button type="button" class="btn btn-warning navbar-btn" onclick="$.session.remove('<?php echo $lasturlsession;?>');window.parent.window.location.href='/pages/subpages/logout.php'">Logout</button>
       </div>
