@@ -184,12 +184,12 @@ class Database extends PDO
                 {
                     echo " Run time:".(microtime(true)-$time)/1000;
                 }
-                if (!$stmt) {
+                if (!$stmt&&$stmt!==0) {
                     $result =false;
-                    $this->errormsg =$stmt->errorCode() . ": " . $stmt->errorInfo() . "\n";
+                    $this->errormsg =  "Exec ".$query." error. \n";
                     if($this->debug)
                     {
-                        echo  $stmt->errorCode() . ": " . $stmt->errorInfo()."\n";
+                        echo  "Exec ".$query." error. \n";
                     }
                     break;
                 }

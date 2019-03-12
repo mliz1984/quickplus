@@ -7,6 +7,7 @@ use Quickplus\Lib\Tools\CommonTools;
 class RightManager extends quickForm
 {
 	protected $sql = "SELECT 
+                  a.`id`,
                   a.`login`,
                   a.`can_login`,
                   a.`is_admin`,
@@ -27,12 +28,13 @@ class RightManager extends quickForm
     }
 	public function init($src=null)
 	{
-	
+	     $this->addField("id","ID");
 		 $this->addField("login","Username");
          $this->addField("password","Password");
 		 $this->addField("can_login","Login Right");
 		 $this->addField("is_admin","Admin Right");
 		 $this->addField("right","Access Right");
+          $this->setRaeFieldType("id",true);
   		 $this->setRaeFieldType("login",true,"editUrlReportMode");
 		 $this->setRaeFieldType("can_login",true,"translateByStatus");
          $this->setRaeFieldType("is_admin",true,"translateByStatus");
@@ -45,20 +47,14 @@ class RightManager extends quickForm
 
 	public function initEdit($src=null)
 	{
-		    $this->setMainIdCol("login");
+		    $this->setMainIdCol("id");
 			$this->setIsAdd(true);
             $this->setIsEdit(true);
 			$this->setIsChoose(true);
-			$this->setTable("login","qp_rightcontrol","a");
-			$this->setDeleteTable("login","qp_rightcontrol","a");
-            if(!$this->isAddMode())
-            {
-                $this->setEditFieldType("login","readOnlySearchShowMode");
-            }
-            else
-            {
-			     $this->setEditFieldType("login","defaultSearchShowMode");
-            }
+            //$this->setDebug(true);
+			$this->setTable("id","qp_rightcontrol","a");
+			$this->setDeleteTable("id","qp_rightcontrol","a");
+            $this->setEditFieldType("login","defaultSearchShowMode");
 			$this->setEditFieldType("password","defaultSearchShowMode");
 			$this->setEditDefaultValue("is_admin","0");
 		    $this->setEditDefaultValue("can_login","0");
@@ -129,7 +125,7 @@ class RightManager extends quickForm
 
 	    }
         $data = new Data($this->getDb(),"qp_rightcontrol","id");
-        
+        $data->set("id",$dataArray["id"]);
         $data->set("login",$dataArray["login"]);
         
         if(isset($dataArray['password'])&&$dataArray["password"]!=null&&$dataArray["login"]!="")

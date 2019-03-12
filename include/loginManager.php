@@ -1,10 +1,11 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 use Quickplus\Lib\DbModule\Database;
 use Quickplus\Lib\DataMsg\Data;
 use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\Tools\ArrayTools;
 use Quickplus\Lib\QuickMenu;
-
+use Quickplus\Lib\QuickFormConfig;
     if(!isset($_SESSION)){	
 		session_start();
 	}
@@ -42,7 +43,7 @@ use Quickplus\Lib\QuickMenu;
 					 {
 					 	 $userinfo = Array();
 					     $userinfo["accountid"] = strtolower($username);
-					     $userinfo["id"] = strtolower($username);
+					     $userinfo["id"] = $udata->getInt("id");
 					 	 $userinfo["can_login"] = $udata->getInt("can_login");
 					 	 $userinfo["is_admin"] = $udata->getInt("is_admin");
 					 	 $userinfo["access_right"] = $udata->getString("right");
@@ -144,11 +145,17 @@ use Quickplus\Lib\QuickMenu;
         public function goToErrorPage()
 		{	
 			$str =  StringTools::conv('Please login at first!',QuickFormConfig::$encode);
-			$str = "<script>alert('".$str ."');top.location.href='/';</script>";
+			$http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+			$url = $http_type.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+			if(!empty($_SERVER['QUERY_STRING']))
+			{
+				$url .='?'.$_SERVER['QUERY_STRING'];
+			}
+			$url = urlencode($url);
+			$str = "<script>alert('".$str ."');top.location.href='/index.php?src=".$url."';</script>";
 			echo $str;
 			
 		}
-
 	   public function checkRight($url,$method=null,$src=null)
 		{
 			$result = false;
