@@ -2,6 +2,7 @@
 set_time_limit(0);
 require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
 use Quickplus\Lib\DataMsg\Data;
+use Quickplus\Lib\DataMsg\DataMsg;
 use Quickplus\Lib\quickForm;
 use Quickplus\Lib\Tools\CommonTools;
 class RightManager extends quickForm
@@ -55,6 +56,7 @@ class RightManager extends quickForm
 			$this->setTable("id","qp_rightcontrol","a");
 			$this->setDeleteTable("id","qp_rightcontrol","a");
             $this->setEditFieldType("login","defaultSearchShowMode");
+            $this->addValidateRule("login","quickAjax","checkLogin","Already have this user.");
 			$this->setEditFieldType("password","defaultSearchShowMode");
 			$this->setEditDefaultValue("is_admin","0");
 		    $this->setEditDefaultValue("can_login","0");
@@ -64,6 +66,23 @@ class RightManager extends quickForm
 
 	}
 
+      public function checkLogin($db,$dbname,$mainid,$src)
+         {
+            $login = $src[$this->getEditPrefix()."login"];
+            $sql = "SELECT a.id  FROM qp_rightcontrol a WHERE a.login = '".$login."'";
+            $dataMsg = new DataMsg();
+            $dataMsg->findBySql($db,$sql);
+            $result = true;
+            
+            if($dataMsg!=null&& $dataMsg->getSize()>0)
+            {
+                
+                $result = false;
+            }
+        
+            return $result;
+          
+         }  
      
     public function getAccessRight($rows,$dbname,$export)
     {
@@ -137,7 +156,7 @@ class RightManager extends quickForm
         $data->set("is_admin",$dataArray["is_admin"]);
         $data->set("right",$access_right);
        $result = $data->createUpdate();
-       $array = array("result"=>$result,"src"=>$src);
+       $array = array("result"=>(bool)$result,"src"=>$src);
        return $array;
        
     }

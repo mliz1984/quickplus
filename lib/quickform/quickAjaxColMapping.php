@@ -3,8 +3,9 @@
  require_once(dirname(__FILE__)."/include.php");
    require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
     use Quickplus\Lib\QuickFormConfig;
-    use Quickplus\Lib\QuickFormDrawer;
+    use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\Tools\ArrayTools;
+     use Quickplus\Lib\Tools\CommonTools;
      $db =  new QuickFormConfig::$SqlType();
     $src = CommonTools::getDataArray($_REQUEST,"ed_");
     $formMark = ArrayTools::getValueFromArray($src,'formmark');

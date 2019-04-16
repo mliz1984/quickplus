@@ -21,7 +21,7 @@ use Quickplus\Lib\QuickFormConfig;
     $blank = ArrayTools::getValueFromArray($_REQUEST,"blank");
     $id = ArrayTools::getValueFromArray($_REQUEST,"id");
     $pageRows= ArrayTools::getValueFromArray($_REQUEST,"pageRows");
-    $page =  ArrayTools::getValueFromArray($_REQUEST,"page");
+    $page =  ArrayTools::getValueFromArray($_REQUEST,"curPage");
     $method =  ArrayTools::getValueFromArray($_REQUEST,"method");
     $searchSign =   ArrayTools::getValueFromArray($_REQUEST,"searchSign");
     $exportmode =  ArrayTools::getValueFromArray($_REQUEST,"exportmode");
@@ -511,7 +511,7 @@ for($i=0;$i<count($htmlArray);$i++)
     </div>
 </body>
 <script language="javascript">
-     $('#quickTableDiv').perfectScrollbar();
+     //$('#quickTableDiv').perfectScrollbar();
       <?php if($obj->isFullScreenMode()) {?>
             $('#quickTableDiv').css('width',function(){return screen.width*0.95;});   
         <?php }?>

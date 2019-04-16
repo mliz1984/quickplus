@@ -2199,12 +2199,9 @@ use Picqer\Barcode\BarcodeGenerator;
             {
                 $dataArray = Array();
             }
-           
-            //echo "<br>";
-            //print_r($dataArray);
+            $ret = Array();
             foreach($_FILES as $dbname => $uploadinfo)
             {
-                
                 if(StringTools::isStartWith($dbname,$this->getUploadPrefix())&&$uploadinfo["name"]!=null&&trim($uploadinfo["name"])!="")
                 {
                   
@@ -2258,13 +2255,13 @@ use Picqer\Barcode\BarcodeGenerator;
                     else if($save)
                     { 
 
-                       $dataArray[$tmp] = $savepath.$uploader->getReturnString();
+                       $ret[$tmp] = $savepath.$uploader->getReturnString();
                     }
                     
                 }
 
             }
-            return $dataArray;
+            return $ret;
         }
 
        
@@ -2309,8 +2306,9 @@ use Picqer\Barcode\BarcodeGenerator;
                 return false;
             }   
             $dataArray = CommonTools::getDataArray($src, $editPrefix); 
-
-            $dataArray = array_merge( $dataArray,$fileArray);
+            
+            $dataArray = array_merge($dataArray,$fileArray);
+            
             $dataArray = $this->modifySaveDataArray($src,$dataArray,$forceAdd,$editPrefix);
             if($this->colRelation!=null&&is_array($this->colRelation))
             {
@@ -2378,14 +2376,14 @@ use Picqer\Barcode\BarcodeGenerator;
             }
            
             $fullData = $data;
-            $result = true;
+            $result = true;   
             if($mainData!=null)
             {
 
                 $isUpdate = $mainData->hasPrimaryKeyValue();
 
                 $data->setDb($db);
-               
+                
                 $result = $mainData->createUpdate(false,false,true);
                  if($this->getDebug())
                  {
