@@ -1456,6 +1456,11 @@ use Quickplus\Lib\DataMsg\DataMsg;
            {
                $data = $dataMsg->getData($i);
                $r =  $data->getDataArray();
+               foreach($r as $key=>$value)
+               {
+                 $value = StringTools::conv($value,QuickFormConfig::$encode);
+                 $r[$key] = $value;
+               }
                $this->result[] =$this->modifyData($r);
            }
          

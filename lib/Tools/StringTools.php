@@ -69,7 +69,7 @@ class StringTools
             $src = QuickFormConfig::$encode;
         }
 
-        $string =  iconv($src,$dst,$string);
+        $string =  mb_convert_encoding($string,$dst,$src);
         return  $string;
     }
     public static function getRandStr($len=6,$format='ALL')

@@ -3,6 +3,7 @@
      set_time_limit(0);
      use Quickplus\Lib\DataMsg\DataMsg;
      use Quickplus\Lib\Tools\ArrayTools;
+     use Quickplus\Lib\Tools\StringTools;
 class report extends QuickChart{
      protected $title;
      protected $titleInfo;
@@ -1029,7 +1030,13 @@ class report extends QuickChart{
            for($i=0;$i<$dataMsg->getSize();$i++)
            {
                $data = $dataMsg->getData($i);
-               $this->result[] = $data->getDataArray(); 
+                $tmp = $data->getDataArray(); 
+               foreach($tmp as $key=>$value)
+               {
+                 $value = StringTools::conv($value,QuickFormConfig::$encode);
+                 $tmp[$key] = $value;
+               }
+               $this->result[] = $tmp; 
            }
        }
      
