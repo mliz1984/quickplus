@@ -19,6 +19,20 @@ namespace Quickplus\Lib;
 	    protected $cateMethod = Array();
 	    protected $summaryColSetting = Array();
 	    protected $subTotalSetting = Array();
+	    protected $subTitleSetting = Array();
+	    public function setSubTitle($setname,$col,$setting)
+	    {
+	    	$this->subTitleSetting[$setname][$col] = $setting; 
+	    }
+	    public function getSubTitle($setname,$col)
+	    {
+	    	$result = true;
+	    	if(isset($this->subTitleSetting[$setname][$col])&&is_bool($this->subTitleSetting[$setname][$col]))
+	    	{
+	    		$result = $this->subTitleSetting[$setname][$col];
+	    	}
+	    	return $result;
+	    }
 	    public function setSubTotal($setname,$col,$setting)
 	    {
 	    	$this->subTotalSetting[$setname][$col] = $setting; 
@@ -559,7 +573,7 @@ namespace Quickplus\Lib;
 	    			if(!$titleMark)
 	    			{
 		    			$colspan = "";
-		    			if(trim($subtable)!="")
+		    			if(trim($subtable)!=""&&$this->getSubTotal($setname,$col))
 		    			{
 		    				$colspan =" colspan='2' ";
 		    			} 
@@ -611,7 +625,11 @@ namespace Quickplus\Lib;
 
 		    		if(trim($key)!="statistics_result"&&trim($key)!="statistics_result_col"&&trim($key)!="statistics_param")
 		    		{
-		    			$html.="<tr><td align='center' style='vertical-align:middle'>".$key."</td>";
+		    			    $html.="<tr>";
+		    			    if($this->getSubTitle($setname,$col))
+		    			    {
+		    			    	$html.="<td align='center' style='vertical-align:middle'>".$key."</td>";
+		    				}
 		    			
 		    				$html.=$this->getStatisticsSubTable($setname,$value,$col);
 		    				$html.="<td align='center' style='vertical-align:middle'>".$this->getStatisticValue($setname,$col,$value["statistics_result"][$col],$value["statistics_result"])."</td>";   				
