@@ -1,5 +1,5 @@
-<?php
-namespace Quickplus\Lib;
+<?php 
+    namespace Quickplus\Lib;
 	class QuickStatistics
 	{
 	    protected $statisticsResult = Array();
@@ -20,6 +20,25 @@ namespace Quickplus\Lib;
 	    protected $summaryColSetting = Array();
 	    protected $subTotalSetting = Array();
 	    protected $subTitleSetting = Array();
+	    protected $statisticResultProcessMethod = Array();
+	    protected $showSN = Array();
+	    public function setShowSN($setName,$showSN)
+	    {
+	    	$this->showSN[$setName] =  $showSN;
+	    }
+	    public function getShowSN($setName)
+	    {
+	    	$ret = false;
+	    	if(is_bool($this->showSN[$setName]))
+	    	{
+	    		$ret = $this->showSN[$setName];
+	    	}
+	    	return $ret;
+	    }
+	    public function setStatisticResultProcessMethod($setName,$method)
+	    {	
+	    	$this->statisticResultProcessMethod[$setName] = $method;
+	    }
 	    public function setSubTitle($setname,$col,$setting)
 	    {
 	    	$this->subTitleSetting[$setname][$col] = $setting; 
@@ -369,6 +388,12 @@ namespace Quickplus\Lib;
 			    		    $newvalue = $this->$method($o,$totalCount["statistics_result"][$col],$col);
 			    		    $totalCount["statistics_result"][$col] = $newvalue;
 			    	}
+			    	foreach($categoryCols as $categoryCol)
+				    {
+						 	$newvalue = $o[$categoryCol];
+	    				 	$totalCount["statistics_category"][$categoryCol] = $newvalue;
+				    }
+
 	    		    $array = $this->statisticsResult[$setname];	
 	    			for($j=0;$j<count($categoryCols);$j++)
 	    			{
@@ -376,7 +401,7 @@ namespace Quickplus\Lib;
 	    				 $tmp = $array;
 	    				 for($k=0;$k<=$j;$k++)
 	    				 { 
-						
+						     
 	    				 	$tmp = $tmp[$this->getCateVal($setname,$o,$categoryCols[$k])];
 	    				 }
 	    				 $new = Array();
@@ -384,12 +409,21 @@ namespace Quickplus\Lib;
 	    				 {
 	    				 	$newparam = $this->$method($o,$tmp["statistics_param"][$param]);
 	    				 	$new[$this->getCateVal($setname,$o,$categoryCols[$j])]["statistics_param"][$param] = $newparam;
+
 	    				 }
+	    			
+	    				foreach($categoryCols as $categoryCol)
+					    {
+							 	$newvalue = $o[$categoryCol];
+							 	$new[$this->getCateVal($setname,$o,$categoryCols[$j])]["statistics_category"][$categoryCol] = $this->getCateVal($setname,$o,$categoryCol);
+		    				 	$new[$this->getCateVal($setname,$o,$categoryCols[$j])]["statistics_category"][$categoryCol."_data"] = $newvalue;
+					    }
 	    				 foreach($commonParamSet as $param=>$method)
 	    				 {
 	    				 	$newparam = $this->$method($o,$tmp["statistics_param"][$param]);
 	    				 	$new[$this->getCateVal($setname,$o,$categoryCols[$j])]["statistics_param"][$param] = $newparam;
 	    				 }
+	    				
 	    				 foreach($colSet as $col=>$method)
 	    				 {
 	    				 	$newvalue = $this->$method($o,$tmp["statistics_result"][$col],$col);
@@ -409,8 +443,7 @@ namespace Quickplus\Lib;
 	    	
 	    			}
 	    		$this->statisticsTotalResult[$setname] = $totalCount;
-	    		$this->statisticsResult[$setname] = $array;
-				
+	    		$this->statisticsResult[$setname] = $array;	
 	    	}
 
 			    
@@ -492,10 +525,9 @@ namespace Quickplus\Lib;
 	    	$paramSet = $this->statisticParamSet[$setname];
 			$commonParamSet = $this->statisticCommonParamSet;
 	    	foreach($data as $k=>$d)
-	    	{
+	    	{ 
 	    		$colMark =  $d["statistics_result_col"];
 	    		$translateData = $this->getStatisticTranslateData($setname,$colMark);
-	    		$nk = $translateData[$k];
 	    		if($nk!=null&&$nk!="")
 	    		{
 	    			$k = $nk;
@@ -515,13 +547,24 @@ namespace Quickplus\Lib;
 	    		    $value =  $d["statistics_result"][$col];
 	    			$result[$k]["statistics_result"][$col] = $value;
 	    		}
-	    		
+	    		$result[$k]["statistics_category"] = $d["statistics_category"];
+	    		foreach($d["statistics_category"] as $col=>$value) 
+	    		{
+	    			$trd = $value;
+	    			$td = $this->getStatisticTranslateData($setname,$col);
+	    			
+	    			if(is_array($td)&&!empty($td[$value]))
+	    			{
+	    				$trd = $td[$value];
+	    			}
 
+	    			$result[$k]["statistics_category"][$col."_display"] = $trd;
+	    		}
 	    		$result[$k]["statistics_result_col"] = $colMark;
 	    		$setsData = Array();
 	    		foreach($d as $dk =>$dd)
 	    		{
-	    			if(trim($dk)!="statistics_result"&&trim($dk)!="statistics_result_col"&&trim($dk)!="statistics_param")
+	    			if(trim($dk)!="statistics_result"&&trim($dk)!="statistics_result_col"&&trim($dk)!="statistics_param"&&trim($dk)!="statistics_category")
 	    			{
 	    				$t = Array($dk=>$dd);
 		    			$tmp = $this->getTranslateResult($setname,$t);
@@ -532,6 +575,8 @@ namespace Quickplus\Lib;
 
 	    	return $result;
 	    }
+
+
 	    
 	    public function getStatisticsTable($setname,$array)
 	    {
@@ -541,7 +586,7 @@ namespace Quickplus\Lib;
 	    	$title = "";
 	        $total = "";
 	    	$titleArray = $this->statisticColTitle[$setname];
-	    		
+	 	    
 	    	$showTitle = false;
 	    	if(is_array($titleArray)&&count($titleArray)>0)
 	    	{
@@ -549,11 +594,32 @@ namespace Quickplus\Lib;
 	    	}
 	    	$titleMark =false;
 	    	$totalData = $this->statisticsTotalResult[$setname]["statistics_result"];
-	    	$title.="<tr><td align='center' style='vertical-align:middle'></td>";
-	    	$total.="<tr><td align='center' style='vertical-align:middle'>".$this->getStatisticTotalRowName($setname)."</td>";
-	    	foreach($array as $key => $value)
+	    	$tmp = "";
+	    	if($this->getShowSN($setname))
 	    	{
-	    		$html.="<tr><td align='center' style='vertical-align:middle'>".$key."</td>";
+	    		$tmp = "colspan='2'";	
+	    	}
+	    	$title.="<tr><td align='center' style='vertical-align:middle' ".$tmp." ></td>";
+	    	$total.="<tr><td align='center' style='vertical-align:middle'>".$this->getStatisticTotalRowName($setname)."</td>";  
+	    	if(!empty($this->statisticResultProcessMethod[$setname]))
+	    	{
+	    		$method = $this->statisticResultProcessMethod[$setname];
+	    		$array = $this->$method($array);
+
+	    	}
+	    	$i = 0;
+	    	foreach($array as $key => $value)
+	    	{ 
+	    		$categoryCol = $value["statistics_result_col"];
+	    		$categoryValue = $value["statistics_category"][$categoryCol."_display"];
+	    		$tmp = "";
+	    		$html.="<tr>";
+	    		if($this->getShowSN($setname))
+	    		{
+	    			$i = $i+1;
+	    			$html.="<td align='center' style='vertical-align:middle'>".$i."</td>";
+	    		}
+	    		$html.="<td align='center' style='vertical-align:middle'>".$categoryValue."</td>";
 	    		foreach($colSet as $col=>$method)
 	    		{
 
@@ -573,7 +639,7 @@ namespace Quickplus\Lib;
 	    			if(!$titleMark)
 	    			{
 		    			$colspan = "";
-		    			if(trim($subtable)!=""&&$this->getSubTotal($setname,$col))
+		    			if(trim($subtable)!=""&&$this->getSubTotal($setname,$col)&&!$this->getSummaryCol($setname,$col))
 		    			{
 		    				$colspan =" colspan='2' ";
 		    			} 
@@ -601,7 +667,6 @@ namespace Quickplus\Lib;
 	    	if($showTitle)
 	    	{
 	    		$result.=$title;
-
 	    	}
 	    	$result.=$html;
 	    	if($this->getStatisticTotal($setname))
@@ -615,23 +680,42 @@ namespace Quickplus\Lib;
 	    protected function getStatisticsSubTable($setname,$array,$col)
 	    {
 	    	$html = "";
-            ksort($array);
+                 
 	    	if(is_array($array))
 	    	{
-	    		
-
-		    	foreach($array as $key=>$value)
+	    		$newArray = Array();
+	    		foreach($array as $key=>$value)
+	    		{
+	    			if(trim($key)!="statistics_result"&&trim($key)!="statistics_result_col"&&trim($key)!="statistics_param"&&trim($key)!="statistics_category")
+	    			{
+	    				$value["_key"] = $key;
+	    				$newArray[] = $value;
+	    			}
+	    		}
+	    		if(!empty($this->statisticResultProcessMethod[$setname]))
 		    	{
+		    	
+		    		$method = $this->statisticResultProcessMethod[$setname];
+		    		$newArray = $this->$method($newArray);
 
-		    		if(trim($key)!="statistics_result"&&trim($key)!="statistics_result_col"&&trim($key)!="statistics_param")
+		    	}
+		    	foreach($newArray as $newValue)
+		    	{
+		    		$key= $newValue["_key"];
+		    		$value = $array[$key];
+
+		    		if(trim($key)!="statistics_result"&&trim($key)!="statistics_result_col"&&trim($key)!="statistics_param"&&trim($key)!="statistics_category")
 		    		{
+
 		    			    $html.="<tr>";
 		    			    if($this->getSubTitle($setname,$col))
-		    			    {
-		    			    	$html.="<td align='center' style='vertical-align:middle'>".$key."</td>";
+		    			    { 
+		    			    	$categoryMark = $value["statistics_result_col"];
+		    			    	$show = $value["statistics_category"][$categoryMark."_display"];	
+		    			    	$html.="<td align='center' style='vertical-align:middle'>".$show."</td>";
 		    				}
-		    			
 		    				$html.=$this->getStatisticsSubTable($setname,$value,$col);
+
 		    				$html.="<td align='center' style='vertical-align:middle'>".$this->getStatisticValue($setname,$col,$value["statistics_result"][$col],$value["statistics_result"])."</td>";   				
 		    			
 		    			$html.="</tr>";

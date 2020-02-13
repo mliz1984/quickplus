@@ -5811,6 +5811,7 @@ error.insertAfter( element );
 
                         $html = new HtmlElement($sign,$sign); 
                         $html->setParam("autocomplete","off");
+                        $html->setParam("size","30");
                         $ret = $html->getInput($defaultValue);
                         $format = 'YYYY-MM-DD';
                         $options .="";

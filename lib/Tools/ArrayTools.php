@@ -25,6 +25,28 @@ class ArrayTools{
 
     }
 
+     public static function array_multi_col_sort(...$args)
+        {
+            $arr = array_shift($args); 
+            foreach($args as $arg){
+                $sort = $arr;
+                if(is_string($arg)){
+                    $arg = explode('.', $arg); 
+                    foreach($arg as $key){
+                        $sort = array_column($sort, $key); 
+                    }
+                    $sort_arg[] = $sort;
+                }else{
+                    $sort_arg[] = $arg; 
+                }
+            }
+            $sort_arg[] = &$arr; 
+            
+            call_user_func_array('array_multisort', $sort_arg); // 
+            
+            return($arr);
+        }
+
     public static function getValueFromArray($array,$key,$defaultValue=null)
     {
         $ret = $defaultValue;
