@@ -1,15 +1,15 @@
-<?php
+<?php 
     namespace Quickplus\Lib;
     use Quickplus\Lib\Tools;
-	class QuickChart extends QuickStatistics
-	{ 
-		protected $chartDefaultSetting = Array();
-		protected $chartSetting =Array();
-		protected $chartLegend = Array();
-		protected $chartInfo = Array();
-	    protected $chartSetName = Array();
-	    protected $chartData = Array();
-	    protected $chartSeries = Array();
+    class QuickChart extends QuickStatistics
+    { 
+        protected $chartDefaultSetting = Array();
+        protected $chartSetting =Array();
+        protected $chartLegend = Array();
+        protected $chartInfo = Array();
+        protected $chartSetName = Array();
+        protected $chartData = Array();
+        protected $chartSeries = Array();
         protected $chartRenderer = Array();
         protected $chartCustomSetting = Array();
         protected $chartDataProcessMethod = Array();
@@ -86,78 +86,80 @@
         {
             return $this->chartRenderer[$chartid];
         }
-	    protected function getChartSetName($cols)
-	    {
-	    	$added = false;
-	    	$result = $cols;
+        protected function getChartSetName($cols)
+        {
+            $added = false;
+            $result = $cols;
 
-	    	foreach($this->chartSetName as $setName => $setCols)
-	    	{
+            foreach($this->chartSetName as $setName => $setCols)
+            {
                  
-	    		if(StringTools::isStartWith($setCols,$cols))
-	    		{
-	    			$added = true;
-	    			$result = $setName;
-	    			break;
-	    		}
-	    		else if(StringTools::isStartWith($cols,$setCols))
-	    		{
-	    			unset($this->chartSetName[$setName]);
-	    			$this->chartSetName[$result] = $cols;
-	    			$added = true;
-	    			break;
-	    		}
+                if(StringTools::isStartWith($setCols,$cols))
+                {
+                    $added = true;
+                    $result = $setName;
+                    break;
+                }
+                else if(StringTools::isStartWith($cols,$setCols))
+                {
+                    unset($this->chartSetName[$setName]);
+                    $this->chartSetName[$result] = $cols;
+                    $added = true;
+                    break;
+                }
 
-	    	}	
-	    	if(!$added)
-	    	{
-	    		$this->chartSetName[$result] = $cols;
-	    	}
+            }   
+            if(!$added)
+            {
+                $this->chartSetName[$result] = $cols;
+            }
 
-	    	return $result;
+            return $result;
 
-	    }
-	    
+        }
+        
         public function getChartData($chartid,$oriArray)
         {
-        	$xcol = $this->chartInfo[$chartid]["xcol"];
+            $xcol = $this->chartInfo[$chartid]["xcol"];
                          
-        	$chartSeries = $this->chartSeries[$chartid];
-        	
+            $chartSeries = $this->chartSeries[$chartid];
+            
             $sets = Array();
            
-        	foreach($chartSeries as $serieName => $serieData)
-        	{
-        		$cols = $xcol;
+            foreach($chartSeries as $serieName => $serieData)
+            {
+                $cols = $xcol;
     
-        		$spiltBy = $serieData["spiltBy"];
+                $spiltBy = $serieData["spiltBy"];
                 $ycol = $serieData["ycol"];
-        		$method = $serieData["method"];
-        		if($ycol!=null&&$ycol!="")
-        		{
-        			$cols.=$spiltBy.$ycol;
-        		}
-        		$setName = $this->getChartSetName($cols);
-        		$this->chartSeries[$chartid][$serieName]["setName"] = $setName;
-        		$sets[$setName][$method] = $method;
+                $method = $serieData["method"];
+                if($ycol!=null&&$ycol!="")
+                {
+                    $cols.=$spiltBy.$ycol;
+                }
+                $setName = $this->getChartSetName($cols);
+                $this->chartSeries[$chartid][$serieName]["setName"] = $setName;
+                $sets[$setName][$method] = $method;
              
-        	}
+            }
            
-        	$dataArray = Array();
+            $dataArray = Array();
 
-        	foreach($sets as $setName => $methods)
-        	{	
+            foreach($sets as $setName => $methods)
+            {   
                 unset($this->statisticColSet[$setName]);
-        		foreach($methods as $method)
-        		{
-        			$this->setStatisticCol($setName,$method,$method);
-        		}
-        		$tmpArray = $this->getStatisticsBySet($setName,$oriArray,$setName);
+                    
+                foreach($methods as $method)
+                {
+                    $this->setStatisticCol($setName,$method,$method);
+                }
+                $tmpArray = $this->getStatisticsBySet($setName,$oriArray,$setName,",",$chartid);
+             
+                $tmpArray = $this->getTranslateResult($setName,$tmpArray);
 
-        		$tmpArray = $this->getTranslateResult($setName,$tmpArray);
-
-        		$dataArray[$setName] = $this->getStatisticDataList($setName,$tmpArray);
-        	}
+                $dataArray[$setName] = $this->getStatisticDataList($setName,$tmpArray);
+            }
+        
             return $dataArray;
         }
 
@@ -165,9 +167,9 @@
          
         protected function getXAxis($chartid)
         {
-        	$array = Array();
-        	
-        	return $array;
+            $array = Array();
+            
+            return $array;
         }
 
         
@@ -175,28 +177,28 @@
 
         protected function getYAxis($chartid)
         {
-        	$array = Array();
+            $array = Array();
             $array["type"] = "value";
-        	if($this->chartSetting[$chartid]["sign"]["value"]!=null&&trim($this->chartSetting[$chartid]["sign"]["value"])!="")
-        	{
-        		$value =  $this->chartSetting[$chartid]["sign"]["value"];
-        		$isAfter = true;
-        		if(is_bool($this->chartSetting[$chartid]["sign"][$isAfter]))
-        		{
-        			$isAfter = $this->chartSetting[$chartid]["sign"][$isAfter];
-        		}
-        		if($isAfter)
-        		{
-        			$value = "{value}".$value;
-        		}
-        		else 
-        		{
-        			$value = $value."{value}";
-        		}
-        		$array["axisLabel"]["formatter"] = $value;
-        	}
+            if($this->chartSetting[$chartid]["sign"]["value"]!=null&&trim($this->chartSetting[$chartid]["sign"]["value"])!="")
+            {
+                $value =  $this->chartSetting[$chartid]["sign"]["value"];
+                $isAfter = true;
+                if(is_bool($this->chartSetting[$chartid]["sign"][$isAfter]))
+                {
+                    $isAfter = $this->chartSetting[$chartid]["sign"][$isAfter];
+                }
+                if($isAfter)
+                {
+                    $value = "{value}".$value;
+                }
+                else 
+                {
+                    $value = $value."{value}";
+                }
+                $array["axisLabel"]["formatter"] = $value;
+            }
 
-        	return $array;	
+            return $array;  
         }
 
         public function getChartHtml($chartid,$oriArray,$src=null)
@@ -222,59 +224,59 @@
             return $html;
         }   
   
-  		public function getChartHtmlArray($chartid,$oriArray)
-  		{
+        public function getChartHtmlArray($chartid,$oriArray)
+        {
 
-  			$charttype =$this->chartInfo[$chartid]["charttype"];
-  			$isPieChart = false;
-  			if($charttype=="pie")
-  			{
-  					$isPieChart = true;
-  			}
-  			$result = Array();
-  			$dataListArray = $this->getChartData($chartid,$oriArray);
+            $charttype =$this->chartInfo[$chartid]["charttype"];
+            $isPieChart = false;
+            if($charttype=="pie")
+            {
+                    $isPieChart = true;
+            }
+            $result = Array();
+            $dataListArray = $this->getChartData($chartid,$oriArray);
  
-  			$result["tooltip"] = $this->getChartTooltipArray($chartid,$isPieChart);
-		    $result["toolbox"] = $this->getChartToolBoxArray($chartid,$isPieChart);
-		   
-		    $xcol  =$this->chartInfo[$chartid]["xcol"];
+            $result["tooltip"] = $this->getChartTooltipArray($chartid,$isPieChart);
+            $result["toolbox"] = $this->getChartToolBoxArray($chartid,$isPieChart);
+           
+            $xcol  =$this->chartInfo[$chartid]["xcol"];
 
-        	$chartSeries = $this->chartSeries[$chartid];
-        	$legend = Array();
-        	$xAxisDataStr = "";
-        	$xAxisDataMark = false;
-        	$serieData = Array();
-        	$serieDataValue = Array();
+            $chartSeries = $this->chartSeries[$chartid];
+            $legend = Array();
+            $xAxisDataStr = "";
+            $xAxisDataMark = false;
+            $serieData = Array();
+            $serieDataValue = Array();
             $serieSetting = Array();
-        	foreach($chartSeries as $serieName => $sData)
-        	{
+            foreach($chartSeries as $serieName => $sData)
+            {
 
-        		$group = $sData["group"];
-        		$ycol = $sData["ycol"];
-        		$setname = $sData["setName"];
-        		$spiltBy = $sData["spiltBy"];
-        		$addLegend =  $sData["addLegend"];
+                $group = $sData["group"];
+                $ycol = $sData["ycol"];
+                $setname = $sData["setName"];
+                $spiltBy = $sData["spiltBy"];
+                $addLegend =  $sData["addLegend"];
                 $method =   $sData["method"];
                 $serieName = $sData["serieName"];
-        		$serietype = $charttype;
+                $serietype = $charttype;
                 $snm = base64_encode($serieName.$method);
-        		if($sData["type"]!=""&&trim($sData["type"])!="")
-        		{
-        			$serietype = $sData["type"];
-        		}
-        		$pointCol = $xcol;
+                if($sData["type"]!=""&&trim($sData["type"])!="")
+                {
+                    $serietype = $sData["type"];
+                }
+                $pointCol = $xcol;
                 
                 $multiMode = false;
-        		if($ycol!=null&&trim($ycol)!="")
-        		{
-        			$tmp = explode($spiltBy,$ycol);
-        			$pointCol = $tmp[count($tmp)-1];
+                if($ycol!=null&&trim($ycol)!="")
+                {
+                    $tmp = explode($spiltBy,$ycol);
+                    $pointCol = $tmp[count($tmp)-1];
                     $multiMode = true;
-        		}
+                }
                 $serieSetting[$serieName]["multiMode"] = $multiMode;
                 $serieSetting[$serieName]["col"] = $pointCol;
-         	   	$array = $dataListArray[$setname][$pointCol];
-        	           
+                $array = $dataListArray[$setname][$pointCol];
+                       
 
                 $orderArray = null;
                  
@@ -288,9 +290,9 @@
                    $serieData[$snm]["type"] = $serietype;   
                    $serieData[$snm]["name"] = $serieName;  
                     foreach($array as $a)
-        			{  
-        				$value = $a[$pointCol];
- 						$keyvalue = $a[$xcol];
+                    {  
+                        $value = $a[$pointCol];
+                        $keyvalue = $a[$xcol];
                         if($isPieChart&&$value!=null&&trim($value)!="")
                         {
                             if($addLegend && !in_array("'".$value."'",$legend))
@@ -299,7 +301,7 @@
                             }
                         }
 
-        			   $v = $a["statistics_result"][$method];
+                       $v = $a["statistics_result"][$method];
                        if($isPieChart)
                        {
                                $serieDataValue[$snm][$value]["value"] = $v;
@@ -311,7 +313,7 @@
 
                        }   
 
-        		   }
+                   }
                   
                 }
                 else
@@ -387,9 +389,9 @@
                    
                 }
      
-        		if(!$xAxisDataMark)
-        		{
-        			if($multiMode)
+                if(!$xAxisDataMark)
+                {
+                    if($multiMode)
                     {
                         
                         foreach($orderArray as $o)
@@ -403,28 +405,28 @@
                     else
                     {
                         foreach($array as $a)
-            			{ 
+                        { 
                            
-            				$value = $a[$xcol];
+                            $value = $a[$xcol];
                             
-            				if($value!=null&&trim($value)!="")
-            				{
-            					$xAxisDataStr.=",'".$value."'";
-            				}
-            			}
+                            if($value!=null&&trim($value)!="")
+                            {
+                                $xAxisDataStr.=",'".$value."'";
+                            }
+                        }
                     }
-        			$xAxisDataMark = true;
-        		}
-        		
-        	}
+                    $xAxisDataMark = true;
+                }
+                
+            }
             $xAxisDataStr = ltrim( $xAxisDataStr,",");
-        	if(COUNT($legend)>0)
-        	{
+            if(COUNT($legend)>0)
+            {
                 $result["legend"]["type"] = "scroll";
-        		$result["legend"]["data"] = "[".implode(",",$legend)."]";
+                $result["legend"]["data"] = "[".implode(",",$legend)."]";
                 $result["legend"]["top"] = "30";
                
-        	}
+            }
             $tmpStr = "";
             $total = 90;
             $point = 0;
@@ -525,7 +527,7 @@
                                  }
                                  $dataArray["stack"] = $groupValue;  
                            }
-                	       $dataArray["data"] = "[".implode(",",$serieDataValue[$key])."]";   
+                           $dataArray["data"] = "[".implode(",",$serieDataValue[$key])."]";   
                         
                     }
 
@@ -540,42 +542,42 @@
                 
             }
             $result["series"] = "[".$tmpStr."]";
-        	if(!$isPieChart)
-		    {
+            if(!$isPieChart)
+            {
 
-		    	$result["yAxis"] = $this->getYAxis($chartid);
-		    	$xAxis = $this->getXAxis($chartid);
-		    	if($xAxisDataMark!=null&&trim($xAxisDataMark)!="")
-	        	{
-	        		$xAxis["data"] = "[".$xAxisDataStr."]";
-	        	}
-	        	$result["xAxis"] = $xAxis;
-		    }
+                $result["yAxis"] = $this->getYAxis($chartid);
+                $xAxis = $this->getXAxis($chartid);
+                if($xAxisDataMark!=null&&trim($xAxisDataMark)!="")
+                {
+                    $xAxis["data"] = "[".$xAxisDataStr."]";
+                }
+                $result["xAxis"] = $xAxis;
+            }
             return $result;
-  		}
+        }
 
         
         protected  function getChartToolBoxArray($chartid,$isPieChart=false)
         {
-        	$array = Array();
-        	$array["show"] = true;
-        	if($this->chartRenderer[$chartid]!="svg")
+            $array = Array();
+            $array["show"] = true;
+            if($this->chartRenderer[$chartid]!="svg")
             {    
                 $array["feature"]["saveAsImage"]["title"] = "Save as image";
                 $array["feature"]["saveAsImage"]["type"] = "jpeg";
             }
             $array["feature"]["dataView"]["show"] = "Data View";
             //$array["feature"]["saveAsImage"]["title"] = "Save as image";
-        	if(!$isPieChart)
-			{
-			
-            	//$array["feature"]["dataZoom"]["title"]["zoom"] = "Area Zoom";
-				//$array["feature"]["dataZoom"]["title"]["back"] = "Undo Area Zoom";  
-        		$array["feature"]["magicType"]["type"] = "['line', 'bar','stack','tiled']";
-        		$array["feature"]["magicType"]["title"]["line"] = "Line view";
-        		$array["feature"]["magicType"]["title"]["bar"] = "Bar view";
-        		$array["feature"]["magicType"]["title"]["stack"] = "Stack view";
-        		$array["feature"]["magicType"]["title"]["tiled"] = "Tiled view";
+            if(!$isPieChart)
+            {
+            
+                //$array["feature"]["dataZoom"]["title"]["zoom"] = "Area Zoom";
+                //$array["feature"]["dataZoom"]["title"]["back"] = "Undo Area Zoom";  
+                $array["feature"]["magicType"]["type"] = "['line', 'bar','stack','tiled']";
+                $array["feature"]["magicType"]["title"]["line"] = "Line view";
+                $array["feature"]["magicType"]["title"]["bar"] = "Bar view";
+                $array["feature"]["magicType"]["title"]["stack"] = "Stack view";
+                $array["feature"]["magicType"]["title"]["tiled"] = "Tiled view";
                 $array["feature"]["restore"]["title"] = "Restore";
             }
            
@@ -583,15 +585,15 @@
         }
         protected  function getChartTitleArray($chartid)
         {
-        	return $this->chartSetting[$chartid]["title"];
+            return $this->chartSetting[$chartid]["title"];
         }
         protected function getChartTooltipArray($chartid,$isPieChart=false)
         {
-        	$value = "axis";
-        	if($isPieChart)
-        	{
-        		$value = "item";
-        	}
+            $value = "axis";
+            if($isPieChart)
+            {
+                $value = "item";
+            }
             if(isset($this->chartCustomSetting[$chartid]["quickchart_option"]["tooltip"])&&is_array($this->chartCustomSetting[$chartid]["quickchart_option"]["tooltip"]))
             {
                 foreach($this->chartCustomSetting[$chartid]["quickchart_option"]["tooltip"] as $k => $v)
@@ -599,42 +601,42 @@
                     $array[$k] = $v;
                 }
             }
-        	$array["trigger"] = $value;
-        	return $array; 
+            $array["trigger"] = $value;
+            return $array; 
         }
         public function setChartSign($sign,$isAfter=true)
         {
-        	$this->chartSetting[$chartid]["sign"]["value"] = $sign;
-        	$this->chartSetting[$chartid]["sign"]["isAfter"] = $isAfter;
+            $this->chartSetting[$chartid]["sign"]["value"] = $sign;
+            $this->chartSetting[$chartid]["sign"]["isAfter"] = $isAfter;
         }
-		public function setChartInfo($charttype,$chartid,$xcol)
-		{
-			$this->chartInfo[$chartid] = Array("xcol"=>$xcol,"charttype"=>$charttype);
-		}
+        public function setChartInfo($charttype,$chartid,$xcol)
+        {
+            $this->chartInfo[$chartid] = Array("xcol"=>$xcol,"charttype"=>$charttype);
+        }
 
-		public function setChartSerie($chartid,$serieName,$method,$ycol=null,$group=false,$addLegend=true,$type=null,$spiltBy=",")
-		{
-			$this->chartSeries[$chartid][$serieName] = Array("serieName"=>$serieName,"ycol"=>$ycol,"method"=>$method,"group"=>$group,"addLegend"=>$addLegend,"spiltBy"=>$spiltBy,"type"=>$type);
-		}
+        public function setChartSerie($chartid,$serieName,$method,$ycol=null,$group=false,$addLegend=true,$type=null,$spiltBy=",")
+        {
+            $this->chartSeries[$chartid][$serieName] = Array("serieName"=>$serieName,"ycol"=>$ycol,"method"=>$method,"group"=>$group,"addLegend"=>$addLegend,"spiltBy"=>$spiltBy,"type"=>$type);
+        }
 
-		public function setChartSetting($chartid,$param,$value)
-		{
-			$this->chartSetting[$chartid][$param] = $value; 
-		}
-		public function setChartDefaultSetting($param,$value)
-		{
-			$this->chartDefaultSetting[$param] = $value; 
-		}
+        public function setChartSetting($chartid,$param,$value)
+        {
+            $this->chartSetting[$chartid][$param] = $value; 
+        }
+        public function setChartDefaultSetting($param,$value)
+        {
+            $this->chartDefaultSetting[$param] = $value; 
+        }
 
-		public function setChartTitle($chartid,$title)
-		{
-			$this->chartSetting[$chartid]["title"]["text"] = $title;
-		}
+        public function setChartTitle($chartid,$title)
+        {
+            $this->chartSetting[$chartid]["title"]["text"] = $title;
+        }
 
-		public function setChartSubTitle($chartid,$title)
-		{
-			$this->chartSetting[$chartid]["title"]["subtext"] = $title;
-		}
+        public function setChartSubTitle($chartid,$title)
+        {
+            $this->chartSetting[$chartid]["title"]["subtext"] = $title;
+        }
 
         public function getChartWidth($chartid)
         {
@@ -656,28 +658,28 @@
              return $result;
         }
 
-		public function setChartWidth($chartid,$width)
-		{
-			$this->chartSetting[$chartid]["width"] = $width;
-		}
+        public function setChartWidth($chartid,$width)
+        {
+            $this->chartSetting[$chartid]["width"] = $width;
+        }
 
-		public function setChartHeight($chartid,$height)
-		{
-			$this->chartSetting[$chartid]["height"] = $height;
-		}
+        public function setChartHeight($chartid,$height)
+        {
+            $this->chartSetting[$chartid]["height"] = $height;
+        }
 
-		protected function getChartSettingValue($chartid,$param)
-		{
-			$result = null;
-		    if(isset($this->chartSetting[$chartid][$param]))
-		    {
-		    	$result = $this->chartSetting[$chartid][$param];
-		    }
-		    elseif(isset($this->chartDefaultSetting[$param]))
-		    {
-		    	$result = $this->chartDefaultSetting[$param];
-		    }
-		    return $result;
-		}
-	}
+        protected function getChartSettingValue($chartid,$param)
+        {
+            $result = null;
+            if(isset($this->chartSetting[$chartid][$param]))
+            {
+                $result = $this->chartSetting[$chartid][$param];
+            }
+            elseif(isset($this->chartDefaultSetting[$param]))
+            {
+                $result = $this->chartDefaultSetting[$param];
+            }
+            return $result;
+        }
+    }
 ?>
