@@ -21,7 +21,7 @@ Version History:
  2 devide quickpay as a indenpent library.
  3 add quickplus-lavavel adapter,let's quickplus work as a lavavel package
  4 add quickplus-CodeIgniter adapter, let's quickplus could be work with CodeIgniter.
- 
+ 5 we are wroking for quickdashboard,will add a new tools for quick build a dashboard.
  
  QuickPlus is a php develop tools library for report and other crud functon ,we want to make a library which is  quick develop and quick learn.
  
