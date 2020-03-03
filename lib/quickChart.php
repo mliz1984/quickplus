@@ -443,7 +443,7 @@
             foreach($chartSeries as $serieName => $sData)
             {  
 
-                $k = $sData["method"];
+                $method = $sData["method"];
                 $group = $sData["group"];
                 $multiMode = $serieSetting[$serieName]["multiMode"];
                 $snm = base64_encode($serieName.$method);
