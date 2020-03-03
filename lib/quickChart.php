@@ -651,7 +651,7 @@
          public function getChartHeight($chartid)
         {
             $result = QuickFormConfig::$defaultChartHeight;
-            if($this->chartSetting[$chartid]["height"]!=null&&trim($this->chartSetting[$chartid]["width"])!="")
+            if($this->chartSetting[$chartid]["height"]!=null&&trim($this->chartSetting[$chartid]["height"])!="")
             {
                  $result = $this->chartSetting[$chartid]["height"];
             }

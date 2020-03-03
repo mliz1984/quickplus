@@ -102,7 +102,7 @@ set_time_limit(0);
     </div>
   </div>
       <?php }?>
-     <div id="content"> 
+      <div style="width:100%">
         
     
        <table> 

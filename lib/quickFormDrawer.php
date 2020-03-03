@@ -13,6 +13,10 @@ class quickFormDrawer
         {
             $this->quickForm = $this->quickForm->initChartFilter($chartId);
         }
+         public function setDashboardFilter($dashboardId)
+        {
+            $this->quickForm = $this->quickForm->initDashboardFilter($dashboardId);
+        }
           public function setStatisticFilter($chartId)
         {
             $this->quickForm = $this->quickForm->initStatisticFilter($chartId);
@@ -75,7 +79,7 @@ class quickFormDrawer
             }
             if($quickForm->getDb()==null)
             {
-        	   $quickForm->setDb($db);
+               $quickForm->setDb($db);
             }
             else
             {
@@ -196,14 +200,14 @@ class quickFormDrawer
             $quickForm->addJsFile(QuickFormConfig::$imagePickerPath."image-picker.min.js");
             $quickForm->addJsFile(QuickFormConfig::$chosenPath."chosen.jquery.min.js");
             //$quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."JsBarcode.all.min.js");
-            //$quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."perfect-scrollbar/js/perfect-scrollbar.jquery.min.js");
+            $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."perfect-scrollbar/js/perfect-scrollbar.jquery.min.js");
             $quickForm->addJsFile(QuickFormConfig::$ueditPath."ueditor.config.js",QuickFormConfig::$encode);
             $quickForm->addJsFile(QuickFormConfig::$ueditPath."ueditor.all.js",QuickFormConfig::$encode);
             $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."sweetalert2/sweetalert2.min.js");
             $quickForm->addJsFile(QuickFormConfig::$quickFormResourcePath."jquery-ui.multidatespicker.js");
              $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."jquery-ui.multidatespicker.css");
             $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."sweetalert2/sweetalert2.min.css");
-           // $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."perfect-scrollbar/css/perfect-scrollbar.min.css");
+            $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."perfect-scrollbar/css/perfect-scrollbar.min.css");
             $quickForm->addCssFile(QuickFormConfig::$chosenPath."chosen.css");
             $quickForm->addCssFile(QuickFormConfig::$imagePickerPath."image-picker.css");
             $quickForm->addCssFile(QuickFormConfig::$quickFormResourcePath."quickform.css");
@@ -503,6 +507,7 @@ class quickFormDrawer
                     {
 
                         $fullSql = $this->getSql($src); 
+                     
                         if($this->quickForm->getDebug())
                         {
                             print_r($src);

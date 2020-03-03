@@ -50,6 +50,7 @@ use Picqer\Barcode\BarcodeGenerator;
         protected $colVisGroup = Array();
         protected $statisticsGroup = Array();
         protected $chartGroup = Array();
+        protected $dashboardGroup = Array();
         protected $layoutColInfo = Array();
         protected $uploadMaxSize = Array();
         protected $showTitle = true;
@@ -71,6 +72,7 @@ use Picqer\Barcode\BarcodeGenerator;
         protected $searchExtendHtml = null;
         protected $seqTitle = "Seq.";
         protected $chartFilterSetting = Array();
+        protected $dashboardFilterSetting = Array();
         protected $statisticFilterSetting = Array();
         protected $statisticDataProcessMethod = Array();
         protected $chartDataProcessMethod = Array();
@@ -201,6 +203,10 @@ use Picqer\Barcode\BarcodeGenerator;
                 }
                 return $result;
         }
+         public function setDashboardFilter($dashboardid,$dbname,$search=null,$defaultsearch=null,$oridbname=null,$isSql=true,$having=false,$groupid=null,$relation="AND",$text="")
+        {
+            $this->dashboardFilterSetting[$dashboardid]["filter"][$dbname] = Array("dbname"=>$dbname,"search"=>$search,"defaultsearch"=>$defaultsearch,"oridbname"=>$oridbname,"isSql"=>$isSql,"having"=>$having,"groupid"=>$groupid,"relation"=>$relation,"text"=>$text) ;
+        }
         public function setChartFilter($chartId,$dbname,$search=null,$defaultsearch=null,$oridbname=null,$isSql=true,$having=false,$groupid=null,$relation="AND",$text="")
         {
             $this->chartFilterSetting[$chartId]["filter"][$dbname] = Array("dbname"=>$dbname,"search"=>$search,"defaultsearch"=>$defaultsearch,"oridbname"=>$oridbname,"isSql"=>$isSql,"having"=>$having,"groupid"=>$groupid,"relation"=>$relation,"text"=>$text) ;
@@ -209,7 +215,8 @@ use Picqer\Barcode\BarcodeGenerator;
         {
             $this->statisticFilterSetting[$setname]["filter"][$dbname] = Array("dbname"=>$dbname,"search"=>$search,"defaultsearch"=>$defaultsearch,"oridbname"=>$oridbname,"isSql"=>$isSql,"having"=>$having,"groupid"=>$groupid,"relation"=>$relation,"text"=>$text) ;
         }
-
+     
+ 
         public function initChartFilter($chartId)
         {  
             if(is_array($this->chartFilterSetting[$chartId]))
@@ -233,6 +240,51 @@ use Picqer\Barcode\BarcodeGenerator;
 
             return $this;
         }
+
+        public function initDashboardFilter($dashboardId)
+        {  
+            if(is_array($this->dashboardFilterSetting[$dashboardId]))
+            {
+               
+                $array = $this->dashboardFilterSetting[$dashboardId];
+                if(isset($array["filter"])&&is_array($array["filter"])&&count($array["filter"])>0)
+                {
+                    foreach($array["filter"] as $dbname => $f)
+                    {
+                        $this->setSearchFieldType($f["dbname"],$f["search"],$f["defaultsearch"],$f["oridbname"],$f["isSql"],$f["having"],$f["groupid"],$f["relation"],$f["text"]);
+                    }
+                }
+            }
+            $dashboardGroup = $this->getDashboardGroup();
+            if(is_array($dashboardGroup)&&count($dashboardGroup)>1)
+            {
+                $this->addField("quick_Dashboard_Selecter","Dashboard Type");
+                $this->setSearchFieldType("quick_Dashboard_Selecter","dashboardSelecter",$dashboardId);
+            }
+
+            return $this;
+        }
+
+        public function dashboardSelecter($dbname,$colname,$src,$sql=false,$defaultValue="")
+        {
+            if($sql)
+            {
+                return "";
+            }
+            else
+            {
+                $dashboardGroup = $this->getDashboardGroup();
+                $array = Array();
+                foreach($chartGroup as $chartid => $chartArray)
+                {
+                    $array[$chartid] = $chartArray["name"];
+                }
+                $sign = $this->getSearchPrefix().$dbname;  
+                $html = new HtmlElement($sign,$sign);
+                $html->setFunction("onChange","$('#_statistics_setname').val($(this).val());");
+                return $html->getSelect($array,$defaultValue,true);
+            }
+        }   
         
         public function chartSelecter($dbname,$colname,$src,$sql=false,$defaultValue="")
         {
@@ -406,11 +458,11 @@ use Picqer\Barcode\BarcodeGenerator;
         }
         public function setAfterQuickUpdateMethod($dbname,$method)
         {
-        	$this->afterQuickUpdateMethod[$dbname] = $method;
+            $this->afterQuickUpdateMethod[$dbname] = $method;
         }
         public function getAfterQuickUpdateMethod($dbname)
         {
-        	return $this->afterQuickUpdateMethod[$dbname];
+            return $this->afterQuickUpdateMethod[$dbname];
         }
         public function setCustomColText($customColText)
         {
@@ -468,6 +520,7 @@ use Picqer\Barcode\BarcodeGenerator;
                     }
                 }
                 $defaultValue = ltrim($defaultValue,",");
+            
             }
             if($this->getCustomCol())
             { 
@@ -638,7 +691,56 @@ use Picqer\Barcode\BarcodeGenerator;
          //   $this->setChartSerie($chartid,$serieName,$methodname,$ycol);
           
         }
+        public function setDashboard($dashboardid,$name)
+        {
+             $this->dashboardGroup[$dashboardid] = Array("name"=>$name);
+        }
+        public function addChartToDashboard($dashboardid,$chartid,$rowid,$colid,$groupid=null,$width=null)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"chart","id"=>$chartid,"groupid"=>$groupid,"width"=>$width);
+        }
+        public function addStatisticToDashboard($dashboardid,$statisticid,$rowid,$colid,$groupid=null,$width=null)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"statistic","id"=>$statisticid,"groupid"=>$groupid,"width"=>$width);
+        }
 
+        public function getDashboardHtml($dashboardid,$src)
+        {
+            $ret = "";
+            if(is_array($this->dashboardGroup[$dashboardid]["content"]))
+            {
+                $array = $this->dashboardGroup[$dashboardid]["content"];
+                $j  = count($array);
+                foreach($array as $rowid=>$arr)
+                {
+                    $i = count($arr);
+                    foreach($arr as $colid=>$data)
+                    {
+                        $type =$data["type"];
+                        $id = $data["id"];
+                        $groupid = $data["groupid"];
+                        $width = $data["width"];
+                        if($type=="chart")
+                        {
+                            $weight = intval($this->getChartWeight($id)/$i);
+
+                            $this->setChartWeight($id,$weight."px");
+                            $height = intval($this->getChartHeight($id)/$j);
+
+                            $this->setChartHeight($id,$height."px");
+                            $html = $this->getChartHtml($id,$this->getResult(),$src);
+                        }
+                        else
+                        {
+                            $html = $this->getStatisticsHtml($id,$this->getResult(),$src);
+                        }
+                        $this->setColByHtml($rowid,$colid,$html, $groupid,$width);
+                    }
+                }
+                $ret = $this->getHtml();
+            }
+            return $ret;
+        }
         public function setChart($charttype,$chartid,$name,$xcol)
         {
              $this->chartGroup[$chartid] = Array("chartid"=>$chartid,"name"=>$name);
@@ -648,6 +750,11 @@ use Picqer\Barcode\BarcodeGenerator;
         public function getChartGroup()
         {
             return $this->chartGroup;
+        }
+
+        public function getDashboardGroup()
+        {
+            return $this->dashboardGroup;
         }
 
         public function getStatisticsGroup()
@@ -916,8 +1023,8 @@ use Picqer\Barcode\BarcodeGenerator;
 
         public function getSqlByTableName($db,$tablename)
         {
-        	$data = new Data($db,$tablename);
-        	$this->sql = $data->getSearchSql();
+            $data = new Data($db,$tablename);
+            $this->sql = $data->getSearchSql();
         }
         public function getHtmlArrayForColMapping($type,$data,$keyValue=null,$mainid=null)
         {
@@ -1490,14 +1597,14 @@ use Picqer\Barcode\BarcodeGenerator;
             return $this->isDetail;
         } 
 
-		public function setDetailName($detailName)
-		{
-			$this->detailName = $detailName;
-		}        
+        public function setDetailName($detailName)
+        {
+            $this->detailName = $detailName;
+        }        
 
         public function getDetailName()
         {
-        	return $this->detailName;
+            return $this->detailName;
         }
 
         public function setIsChoose($choose)
@@ -1531,12 +1638,12 @@ use Picqer\Barcode\BarcodeGenerator;
 
          public function getExport()
          {
-             return ($this->export&&count($this->getExportField())>0&&$this->getResultSize()>0);
+             return ($this->export&&count($this->getExportField())>0);
          }
 
           public function getPageExport()
          {
-             return ($this->pageexport&&count($this->getExportField())>0&&$this->getResultSize()>0);
+             return ($this->pageexport&&count($this->getExportField())>0);
          }
 
         public function addColRelation($dst,$src)
@@ -1753,7 +1860,7 @@ use Picqer\Barcode\BarcodeGenerator;
             $beforeResult = $this->beforeDelete($db,$mainIds,$src);
             if(is_bool($beforeResult)&&!$beforeResult)
             {
-            	return $beforeResult;
+                return $beforeResult;
             }
   
             if($mainIds!=null&&trim($mainIds)!="")
@@ -1761,6 +1868,7 @@ use Picqer\Barcode\BarcodeGenerator;
 
                 $mainIds ='('.$mainIds.')';
                 $sql = $this->getSqlByMainId($mainIds,"IN");
+                $sql.=$this->getGroupSql().$this->getHavingSql();
                 $datamsg = new DataMsg(); 
                 $datamsg->findBySql($db,$sql);
                 $sqlArray = array();
@@ -1879,8 +1987,8 @@ use Picqer\Barcode\BarcodeGenerator;
        
         public function insertLinkData($src)
         {
-        	
-			
+            
+            
         }
        
         public function insertFormData($db,$src,$editPrefix=null)
@@ -1998,11 +2106,11 @@ use Picqer\Barcode\BarcodeGenerator;
             }
             if($dataMsg->batchUpdate())
             {
-            	$method = $this->getAfterQuickUpdateMethod($dbname);
-            	if($method!=null&&trim($method)!="")
-            	{
-            		$this->$method($this->getDb(),$dbname,$data->getDataArray());   
-            	}
+                $method = $this->getAfterQuickUpdateMethod($dbname);
+                if($method!=null&&trim($method)!="")
+                {
+                    $this->$method($this->getDb(),$dbname,$data->getDataArray());   
+                }
             }
 
         }
@@ -2199,9 +2307,13 @@ use Picqer\Barcode\BarcodeGenerator;
             {
                 $dataArray = Array();
             }
+           
+            //echo "<br>";
+            //print_r($dataArray);
             $ret = Array();
             foreach($_FILES as $dbname => $uploadinfo)
             {
+                
                 if(StringTools::isStartWith($dbname,$this->getUploadPrefix())&&$uploadinfo["name"]!=null&&trim($uploadinfo["name"])!="")
                 {
                   
@@ -2292,7 +2404,7 @@ use Picqer\Barcode\BarcodeGenerator;
         protected function saveFormData($db,$src,$forceAdd=false,$editPrefix=null)
         { 
             //print_r($src);
-           
+
             if($editPrefix==null)
             {
                $editPrefix = $this->getEditPrefix(); 
@@ -2306,9 +2418,7 @@ use Picqer\Barcode\BarcodeGenerator;
                 return false;
             }   
             $dataArray = CommonTools::getDataArray($src, $editPrefix); 
-            
-            $dataArray = array_merge($dataArray,$fileArray);
-            
+            $dataArray = array_merge( $dataArray,$fileArray);
             $dataArray = $this->modifySaveDataArray($src,$dataArray,$forceAdd,$editPrefix);
             if($this->colRelation!=null&&is_array($this->colRelation))
             {
@@ -2376,15 +2486,16 @@ use Picqer\Barcode\BarcodeGenerator;
             }
            
             $fullData = $data;
-            $result = true;   
+            $result = true;
             if($mainData!=null)
             {
 
                 $isUpdate = $mainData->hasPrimaryKeyValue();
 
                 $data->setDb($db);
-                
+               
                 $result = $mainData->createUpdate(false,false,true);
+
                  if($this->getDebug())
                  {
                             echo $mainData->createUpdate(true,false,true);
@@ -2400,7 +2511,7 @@ use Picqer\Barcode\BarcodeGenerator;
                 }
                
                 $tmpArray = $this->saveExtendTable($tmpSrc,null,$editPrefix);
-               
+             
                 if(is_array($tmpArray)&&count($tmpArray)>0)
                 {
                     if($this->getDebug())
@@ -2409,6 +2520,7 @@ use Picqer\Barcode\BarcodeGenerator;
                     }
                     $result = $db->execTransaction($tmpArray);
                 }
+
                 if(!$isUpdate||$forceAdd)
                 {   
                     $src[$editPrefix.$maindbname] = $result;
@@ -2431,7 +2543,7 @@ use Picqer\Barcode\BarcodeGenerator;
 
             if($result&&$execMsg->getSize()>0)
             {
-              
+
                 for($i=0;$i<$execMsg->getSize();$i++)
                 {
                     $execData = $execMsg->getData($i);
@@ -2448,6 +2560,7 @@ use Picqer\Barcode\BarcodeGenerator;
                     }
                 }
             }
+
             if($result)
             {
                 $result = true;
@@ -2457,7 +2570,7 @@ use Picqer\Barcode\BarcodeGenerator;
                 $result = false;
             }
             $array = array("result"=>$result,"src"=>$src);
-            
+           
             return $array;
         }
 
@@ -2539,19 +2652,19 @@ use Picqer\Barcode\BarcodeGenerator;
             return $result;
 
         }
-  	    public function getExportField()
-  	    {
-  	    	return $this->getFieldArray($this->exportField);
-  	    }
-  	    public function getReportField($all=false)
-  	    {
+        public function getExportField()
+        {
+            return $this->getFieldArray($this->exportField);
+        }
+        public function getReportField($all=false)
+        {
             $reportField = $this->reportField;
             if(!$all)
             {
                 $this->getFieldArray($reportField);
             }
             return $reportField;
-  	    }
+        }
         public  function getReportHead()
         {
             return $this->reportHead;
@@ -2573,10 +2686,10 @@ use Picqer\Barcode\BarcodeGenerator;
         {
           return $this->detailField;
         }
-  	    public function getSearchField()
-  	    {
+        public function getSearchField()
+        {
             return $this->searchField;
-  	    }
+        }
         public function getGroupField()
         {
           return $this->groupField;
@@ -2585,32 +2698,32 @@ use Picqer\Barcode\BarcodeGenerator;
         {
            $this->orderField = $orderField;
         }
-  	    public function getOrderField()
-  	    {
-  	    	return $this->orderField;
-  	    }
+        public function getOrderField()
+        {
+            return $this->orderField;
+        }
         public function getEditField()
         {
           return $this->editField;
         }
-  		  public function getQuickEditField()
+          public function getQuickEditField()
         {
           return $this->quickEditField;
         }
-  		public function setJsOrderType($dbname,$jsOrderType)
-  		{
-  			$this->jsOrderType[$dbname] = $jsOrderType;
-  		}
+        public function setJsOrderType($dbname,$jsOrderType)
+        {
+            $this->jsOrderType[$dbname] = $jsOrderType;
+        }
 
-  		public function getJsOrderType($dbname)
-  		{
-  			$type = ArrayTools::getValueFromArray($this->jsOrderType,$dbname);
-  			if($type==null||trim($type)=="")
-  			{
-  				$type = "CaseInsensitiveString";
-  			}
-  			return $type;
-  		}
+        public function getJsOrderType($dbname)
+        {
+            $type = ArrayTools::getValueFromArray($this->jsOrderType,$dbname);
+            if($type==null||trim($type)=="")
+            {
+                $type = "CaseInsensitiveString";
+            }
+            return $type;
+        }
       public function initResource($src=null)
       {
 
@@ -2640,7 +2753,7 @@ use Picqer\Barcode\BarcodeGenerator;
 
 
 
-  		public function addFormField($dbname,$displayName="",$oriDbName=null,$defaultsearch=null,$isChecked=true)
+        public function addFormField($dbname,$displayName="",$oriDbName=null,$defaultsearch=null,$isChecked=true)
         {
              $this->fieldsOrder[] = $dbname;
              $isFromDB = true;
@@ -2970,7 +3083,7 @@ use Picqer\Barcode\BarcodeGenerator;
 
         public function setEditMutilFieldType($dbname,$edit=null,$spiltBy=",",$muiltRow=false,$save=true,$upload=false)
         {
-        	$this->setEditFieldType($dbname,$edit,$save,$upload,true,$splitBy,$muiltRow);
+            $this->setEditFieldType($dbname,$edit,$save,$upload,true,$splitBy,$muiltRow);
         }
          
         public function setEditFieldType($dbname,$edit=null,$save=true,$upload=false,$isMutil=false,$splitBy=",",$muiltRow=false)
@@ -3037,8 +3150,8 @@ use Picqer\Barcode\BarcodeGenerator;
         {
           $this->setReportFieldType($dbname,$reportExtend,$report);
           $this->setExportFieldType($dbname,$exportExtend,$export);
-        	$this->setSearchFieldType($dbname,$search,$defaultSeatch);
-        	$this->setOrderFieldType($dbname,$order);
+            $this->setSearchFieldType($dbname,$search,$defaultSeatch);
+            $this->setOrderFieldType($dbname,$order);
           $this->setEditFieldType($dbname,$edit,$save);
         } 
 
@@ -3703,7 +3816,7 @@ use Picqer\Barcode\BarcodeGenerator;
                 $w ++;
                 $colMark = $quickExcel->getColMark($w);
                 $mapping[$colMark] = $dbname;
-                $titleData[$dbname] =  $fieldinfo["displayname"];
+                $titleData[$dbname] = $fieldinfo["displayname"];
         }
         $exportData = Array();
         if($withTitle)
@@ -3716,7 +3829,7 @@ use Picqer\Barcode\BarcodeGenerator;
             $d = Array();
             foreach($mapping as $colMark=>$dbname)
             {
-                $d[$dbname] =   $this->getValueByDbName($i,$dbname,true,true);   
+                $d[$dbname] =  $this->getValueByDbName($i,$dbname,true,true);   
             }
             $data[] = $d;
             $exportData[] = $d;
@@ -3729,7 +3842,7 @@ use Picqer\Barcode\BarcodeGenerator;
         }
         if($this->isExportMainData)
         {
-           $quickExcel->setCellDataFromArray($exportData,$mapping,1,null,$this->exportImageSetting);
+            $quickExcel->setCellDataFromArray($exportData,$mapping,1,null,$this->exportImageSetting);
         }
         $quickExcel = $this->customExport($quickExcel,$mapping,$data,$withTitle,$titleData);
     
