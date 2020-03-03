@@ -10,7 +10,6 @@ use Quickplus\Lib\Tools\ArrayTools;
 use Quickplus\Lib\Tools\CommonTools;
 use Picqer\Barcode\BarcodeGeneratorSVG;
 use Picqer\Barcode\BarcodeGenerator;
-
   class quickForm extends quickLayout
   {
         protected $debug = false;
@@ -727,9 +726,7 @@ use Picqer\Barcode\BarcodeGenerator;
                         $width = $data["width"];
                         if($type=="chart")
                         {
-                            $weight = intval($this->getChartWeight($id)/$i);
-
-                            $this->setChartWeight($id,"100%");
+                            $this->setChartWidth($id,"95%");
                             $height = intval($this->getChartHeight($id)/$j);
 
                             $this->setChartHeight($id,$height."px");

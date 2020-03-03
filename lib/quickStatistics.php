@@ -263,8 +263,15 @@
 		    			$template = Array();
 		    		}
 	           		$colmark = $value["statistics_result_col"];
-
 	           		$template[$colmark] = $key;
+	             	$display =$key;
+	           		if(isset($value["statistics_category"][$colmark."_display"])&&!empty($value["statistics_category"][$colmark."_display"])) 
+	           		{
+	           			$display = $value["statistics_category"][$colmark."_display"];
+
+	           			
+	           		}
+	           		$template[$colmark."_display"] = $display;
 	           		$tmp = $template;
 	           		$tmp["statistics_result_col"]= $colmark ;
 	      
@@ -341,13 +348,14 @@
 	        {
 	        	$result = Array();    
 	        	$list = Array();
+	        		
 	           	foreach($array as $key=>$value)
-	           	{  
-	           		$tmpTotalResult = $this->getStatisticResult($setname,$key,$value);
+	           	{                
+	           		$tmpTotalResult = $this->getStatisticResult($setname,$key,$value);	
 			           		foreach($tmpTotalResult as $tkey => $tmpResult)
 			           	    {
 			           	    
-			           	    	    foreach($tmpResult as $fkey =>$fvalue)
+			           	   	    foreach($tmpResult as $fkey =>$fvalue)
 					           		{ 	
 					           				$val = $fvalue[$setname];
 					           				if(!in_array($val, $list))
@@ -524,17 +532,22 @@
 		    }
 
 			
-		    public function getTranslateResult($setname,$data)
+		    public function getTranslateResult($setname,$data,$chartid=null)
 		    {
 		    	$result = Array(); 
 		    //	$result["method"] = $data["method"];
 		    	$colSet = $this->statisticColSet[$setname];
 		    	$paramSet = $this->statisticParamSet[$setname];
 				$commonParamSet = $this->statisticCommonParamSet;
+				$tkey = $setname;
+				if(!empty($chartid))
+				{
+					$tkey = $chartid;
+				}
 		    	foreach($data as $k=>$d)
 		    	{ 
 		    		$colMark =  $d["statistics_result_col"];
-		    		$translateData = $this->getStatisticTranslateData($setname,$colMark);
+		    		$translateData = $this->getStatisticTranslateData($tkey,$colMark);
 		    		if($nk!=null&&$nk!="")
 		    		{
 		    			$k = $nk;
@@ -558,7 +571,7 @@
 		    		foreach($d["statistics_category"] as $col=>$value) 
 		    		{
 		    			$trd = $value;
-		    			$td = $this->getStatisticTranslateData($setname,$col);
+		    			$td = $this->getStatisticTranslateData($tkey,$col);
 		    			
 		    			if(is_array($td)&&!empty($td[$value]))
 		    			{
@@ -574,7 +587,7 @@
 		    			if(trim($dk)!="statistics_result"&&trim($dk)!="statistics_result_col"&&trim($dk)!="statistics_param"&&trim($dk)!="statistics_category")
 		    			{
 		    				$t = Array($dk=>$dd);
-			    			$tmp = $this->getTranslateResult($setname,$t);
+			    			$tmp = $this->getTranslateResult($tkey,$t);
 			    			$result[$k] = $this->resultMerge($result[$k],$tmp)	;
 			    		}
 		    		}

@@ -155,11 +155,11 @@
                 }
                 $tmpArray = $this->getStatisticsBySet($setName,$oriArray,$setName,",",$chartid);
              
-                $tmpArray = $this->getTranslateResult($setName,$tmpArray);
+                $tmpArray = $this->getTranslateResult($setName,$tmpArray,$chartid);
 
                 $dataArray[$setName] = $this->getStatisticDataList($setName,$tmpArray);
             }
-        
+           
             return $dataArray;
         }
 
@@ -276,8 +276,14 @@
                 $serieSetting[$serieName]["multiMode"] = $multiMode;
                 $serieSetting[$serieName]["col"] = $pointCol;
                 $array = $dataListArray[$setname][$pointCol];
-                       
-
+                $newArray  = Array();
+                foreach($array as $a)
+                {
+                   $col  = $a["statistics_result_col"];
+                   $a[$col] = $a[$col."_display"];
+                   $newArray[]=$a;
+                }       
+                $array = $newArray;
                 $orderArray = null;
                  
                 if(!$multiMode)
