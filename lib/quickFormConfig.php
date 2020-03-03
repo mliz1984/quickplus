@@ -9,7 +9,8 @@ namespace Quickplus\Lib;
 
    class QuickFormConfig
    {
-		public  static $defaultChartRenderer = "canvas";
+		public  static $defaultChartRenderer = "svg";
+		public  static $max_row_in_dashboard = "3";
 		public  static $quickFormBasePath = "/lib/";
 		public  static $quickFormClassPath = "/class/";
 		public  static $quickFormPagePath = "/pages/";

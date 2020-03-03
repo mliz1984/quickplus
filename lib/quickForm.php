@@ -711,6 +711,11 @@ use Picqer\Barcode\BarcodeGenerator;
             {
                 $array = $this->dashboardGroup[$dashboardid]["content"];
                 $j  = count($array);
+                $max_row_in_dashboard = intval(QuickFormConfig::$max_row_in_dashboard);
+                if($max_row_in_dashboard>0&&$j>$max_row_in_dashboard)
+                {
+                    $j = $max_row_in_dashboard;
+                }
                 foreach($array as $rowid=>$arr)
                 {
                     $i = count($arr);
@@ -724,7 +729,7 @@ use Picqer\Barcode\BarcodeGenerator;
                         {
                             $weight = intval($this->getChartWeight($id)/$i);
 
-                            $this->setChartWeight($id,$weight."px");
+                            $this->setChartWeight($id,"100%");
                             $height = intval($this->getChartHeight($id)/$j);
 
                             $this->setChartHeight($id,$height."px");
