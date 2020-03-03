@@ -83,6 +83,20 @@ use Picqer\Barcode\BarcodeGenerator;
         protected $barCodeMapping = Array();
         protected $joinArray = Array();
         protected $reportHead = null;
+        protected $max_row_in_dashboard = null;
+        public function setMaxRowInDashboard($max_row_in_dashboard)
+        {
+                $this->max_row_in_dashboard = $max_row_in_dashboard;
+        }
+        public function getMaxRowInDashboard()
+        {
+             $maxRowInDashboard = $this->max_row_in_dashboard;
+             if(!empty($maxRowInDashboard))
+             {
+                $maxRowInDashboard = intval(QuickFormConfig::$max_row_in_dashboard);
+             }
+             return $maxRowInDashboard;
+        } 
         public function setBarCodeMapping($dbname,$colname)
         {
             $this->barCodeMapping[$dbname] = $colname;
@@ -694,13 +708,13 @@ use Picqer\Barcode\BarcodeGenerator;
         {
              $this->dashboardGroup[$dashboardid] = Array("name"=>$name);
         }
-        public function addChartToDashboard($dashboardid,$chartid,$rowid,$colid,$groupid=null,$width=null)
+        public function addChartToDashboard($dashboardid,$chartid,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
-            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"chart","id"=>$chartid,"groupid"=>$groupid,"width"=>$width);
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"chart","id"=>$chartid,"groupid"=>$groupid,"width"=>$width,"height"=>$height);
         }
-        public function addStatisticToDashboard($dashboardid,$statisticid,$rowid,$colid,$groupid=null,$width=null)
+        public function addStatisticToDashboard($dashboardid,$statisticid,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
-            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"statistic","id"=>$statisticid,"groupid"=>$groupid,"width"=>$width);
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"statistic","id"=>$statisticid,"groupid"=>$groupid,"width"=>$width,"height"=>$height);
         }
 
         public function getDashboardHtml($dashboardid,$src)
@@ -710,7 +724,7 @@ use Picqer\Barcode\BarcodeGenerator;
             {
                 $array = $this->dashboardGroup[$dashboardid]["content"];
                 $j  = count($array);
-                $max_row_in_dashboard = intval(QuickFormConfig::$max_row_in_dashboard);
+                $max_row_in_dashboard = $this->getMaxRowInDashboard();
                 if($max_row_in_dashboard>0&&$j>$max_row_in_dashboard)
                 {
                     $j = $max_row_in_dashboard;
@@ -724,11 +738,14 @@ use Picqer\Barcode\BarcodeGenerator;
                         $id = $data["id"];
                         $groupid = $data["groupid"];
                         $width = $data["width"];
+                        $height = $data["height"];
                         if($type=="chart")
                         {
                             $this->setChartWidth($id,"95%");
-                            $height = intval($this->getChartHeight($id)/$j);
-
+                            if(!empty($height))
+                            {
+                                    $height = intval($this->getChartHeight($id)/$j);
+                            }
                             $this->setChartHeight($id,$height."px");
                             $html = $this->getChartHtml($id,$this->getResult(),$src);
                         }
