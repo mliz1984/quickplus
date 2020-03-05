@@ -153,11 +153,12 @@
                 {
                     $this->setStatisticCol($setName,$method,$method);
                 }
+
                 $tmpArray = $this->getStatisticsBySet($setName,$oriArray,$setName,",",$chartid);
-             
+     
                 $tmpArray = $this->getTranslateResult($setName,$tmpArray,$chartid);
 
-                $dataArray[$setName] = $this->getStatisticDataList($setName,$tmpArray);
+                $dataArray[$setName] = $this->getStatisticDataList($setName,$tmpArray,$chartid,$serieData["spiltBy"]);
             }
            
             return $dataArray;
@@ -235,7 +236,6 @@
             }
             $result = Array();
             $dataListArray = $this->getChartData($chartid,$oriArray);
- 
             $result["tooltip"] = $this->getChartTooltipArray($chartid,$isPieChart);
             $result["toolbox"] = $this->getChartToolBoxArray($chartid,$isPieChart);
            
@@ -250,7 +250,7 @@
             $serieSetting = Array();
             foreach($chartSeries as $serieName => $sData)
             {
-
+        
                 $group = $sData["group"];
                 $ycol = $sData["ycol"];
                 $setname = $sData["setName"];
@@ -264,6 +264,7 @@
                 {
                     $serietype = $sData["type"];
                 }
+
                 $pointCol = $xcol;
                 
                 $multiMode = false;
@@ -285,10 +286,10 @@
                 }       
                 $array = $newArray;
                 $orderArray = null;
-                 
+                
+
                 if(!$multiMode)
                 {
-              
                     if(!$isPieChart&&$addLegend && !in_array( "'".$serieName."'", $legend))
                     {
                         $legend[] = "'".$serieName."'";
@@ -320,16 +321,17 @@
                        }   
 
                    }
-                  
+                   
                 }
                 else
                 {   
-                   
 
-                    $array = $this->getStatisticCategoryDataList($setname,$xcol,$ycol,$dataListArray);
+          
+                    $array = $this->getStatisticCategoryDataList($setname,$xcol,$ycol,$dataListArray[$setname]);
                     $orderArray = $array["order"];
                     $valuesArray = $array["values"];
                     $dataArray = $array["data"];
+                    $displayArray = $array["display"];
                     $serieSetting[$serieName]["valuesArray"] = $valuesArray;
                     foreach($valuesArray as $va)
                     { 
@@ -400,7 +402,7 @@
                     if($multiMode)
                     {
                         
-                        foreach($orderArray as $o)
+                        foreach($displayArray as $o)
                         {
                             if($o!=null&&trim($o)!="")
                             {
@@ -468,6 +470,7 @@
                 {
                     $keyArray[] = Array("key"=>$snm,"name"=>$serieName);
                 }
+
                 foreach($keyArray as $keyData)
                 {    
                     $key = $keyData["key"];
@@ -486,7 +489,7 @@
 
                            $dataStr ="";
                            $tmpCols = Array();
-                      
+
                            foreach($serieDataValue[$key] as $col=>$dArray)
                            {
 

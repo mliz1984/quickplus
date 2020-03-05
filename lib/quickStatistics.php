@@ -262,6 +262,7 @@
 		    	    {
 		    			$template = Array();
 		    		}
+
 	           		$colmark = $value["statistics_result_col"];
 	           		$template[$colmark] = $key;
 	             	$display =$key;
@@ -323,52 +324,85 @@
 	        	$order = Array();
 	        	$values  = Array();
 	        	$data = Array();
+	        	$display = Array();
 	        	
-	        	$dataloop = $datalist[$setname][$col];
-	        
+	        	$dataloop = $datalist[$setname];
+	     
 	        	foreach($dataloop as $d)
 	        	{		
 	        		$xval = $d[$xcol];
 	        		$val = $d[$col];
+	        		$xDisplay = $d[$xcol."_display"]; 
 	        		if(!in_array($xval,$order))
 	        		{
 	        			$order[] = $xval;
+	        			$display[] = $xDisplay;
 	        		}
 	        		if(!in_array($val,$values))
 	        		{
 	        			$values[] = $val;
 	        		}
+
 	        		$data[$xval][$val] = $d;
 	        	}
-	        	$result = Array("order"=>$order,"values"=>$values,"data"=>$data);
+	        	$result = Array("order"=>$order,"values"=>$values,"data"=>$data,"display"=>$display);
 	        	return $result;
 	        }
 	 
-	        public function getStatisticDataList($setname,$array)
+	        public function getStatisticDataList($setname,$array,$chartid=null,$spiltBy=null)
 	        {
 	        	$result = Array();    
-	        	$list = Array();
-	        		
+	        	
+	           $mutilChartMode = false;
+	          
+	           	    if($chartid!=null&&!empty($spiltBy))
+	           	    {
+	           	    	 $tmp = explode($spiltBy, $setname);
+	           	    	 if(count($tmp)>1)
+	           	    	 {
+	           	    	 	$mutilChartMode = true;
+	           	    	 }
+	           	    }
+	         
 	           	foreach($array as $key=>$value)
 	           	{                
-	           		$tmpTotalResult = $this->getStatisticResult($setname,$key,$value);	
-			           		foreach($tmpTotalResult as $tkey => $tmpResult)
-			           	    {
-			           	    
-			           	   	    foreach($tmpResult as $fkey =>$fvalue)
-					           		{ 	
-					           				$val = $fvalue[$setname];
-					           				if(!in_array($val, $list))
-					           				{
-					           					$result[$fkey][] = $fvalue;
-					           					$list[] = $val;
-					           				}
-					           		}
-					              
-					        }
+	           		 $tmpTotalResult = $this->getStatisticResult($setname,$key,$value);	
+	           				$list = Array();
+	           			   if($mutilChartMode)
+				           {
+				           	   
+				           	   foreach($array[$key] as $k =>$v)
+				           	   {
+				           	   		if(!empty($k)&&!in_array($k,Array("statistics_param","statistics_result","statistics_category","statistics_result_col")))
+				           	   		{
+				           	   			$r = $v["statistics_category"];
+				           	   			$r["statistics_result"] = $v["statistics_result"];
+				           	   			$result[$setname][]= $r;
+				           	   		}
+				           	   }
+				           	  
+				           	}    		
+	           				else
+	           				{
+				           		foreach($tmpTotalResult as $tkey => $tmpResult)
+				           	    {
+				           	   	        foreach($tmpResult as $fkey =>$fvalue)
+						           		{ 	
+						           			
+						           				$val = $fvalue[$setname];
+						           				if(!in_array($val, $list))
+						           				{
+						           					$result[$fkey][] = $fvalue;
+						           					$list[] = $val;
+						           				}
+						           		}
+						              
+						        }
+						    }
 	           			
 	           	}
-	     		
+              
+	           	
 	           	return $result;
 	        }
 		    public function getStatisticsBySet($setname,$oriArray,$categoryCols,$spiltBy=",",$chartid=null)
@@ -412,14 +446,16 @@
 					    {
 							 $tk = $chartid;
 						}
+
 		    			for($j=0;$j<count($categoryCols);$j++)
 		    			{
-		    				 
+		    				   
 		    				 $tmp = $array;
 		    				 for($k=0;$k<=$j;$k++)
 		    				 { 
 
 		    				 	$tmp = $tmp[$this->getCateVal($tk,$o,$categoryCols[$k])];
+		    				 	
 		    				 }
 		    				 $new = Array();
 		    				 foreach($paramSet as $param=>$method)
@@ -582,12 +618,13 @@
 		    		}
 		    		$result[$k]["statistics_result_col"] = $colMark;
 		    		$setsData = Array();
+
 		    		foreach($d as $dk =>$dd)
 		    		{
 		    			if(trim($dk)!="statistics_result"&&trim($dk)!="statistics_result_col"&&trim($dk)!="statistics_param"&&trim($dk)!="statistics_category")
 		    			{
 		    				$t = Array($dk=>$dd);
-			    			$tmp = $this->getTranslateResult($tkey,$t);
+			    			$tmp = $this->getTranslateResult($setname,$t,$chartid);		
 			    			$result[$k] = $this->resultMerge($result[$k],$tmp)	;
 			    		}
 		    		}
