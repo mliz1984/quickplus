@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace  Quickplus\Lib;
 
 use Quickplus\Lib\DataMsg\DataMsg;
@@ -91,7 +91,7 @@ use Picqer\Barcode\BarcodeGenerator;
         public function getMaxRowInDashboard()
         {
              $maxRowInDashboard = $this->max_row_in_dashboard;
-             if(!empty($maxRowInDashboard))
+             if(empty($maxRowInDashboard))
              {
                 $maxRowInDashboard = intval(QuickFormConfig::$max_row_in_dashboard);
              }
@@ -311,7 +311,8 @@ use Picqer\Barcode\BarcodeGenerator;
                 $array = Array();
                 foreach($chartGroup as $chartid => $chartArray)
                 {
-                    $array[$chartid] = $chartArray["name"];
+                   $array[$chartid] = $chartArray["name"];
+                
                 }
                 $sign = $this->getSearchPrefix().$dbname;  
                 $html = new HtmlElement($sign,$sign);
@@ -331,8 +332,8 @@ use Picqer\Barcode\BarcodeGenerator;
                 $statisticsGroup = $this->getStatisticsGroup();
                 $array = Array();
                 foreach($statisticsGroup as $setname => $statisticsGroupArray)
-                {
-                    $array[$setname] = $statisticsGroupArray["name"];
+                { 
+                   $array[$setname] = $statisticsGroupArray["name"];
                 }
                 $sign = $this->getSearchPrefix().$dbname;  
                 $html = new HtmlElement($sign,$sign);
@@ -673,17 +674,25 @@ use Picqer\Barcode\BarcodeGenerator;
         {
              return   $this->statisticsGroup[$setname]["name"];
         }
-        public function  setSimpleStatistic($setname,$name,$methodname,$cols,$spiltBy=",")
+        public function  setSimpleStatistic($setname,$name,$methodname,$cols,$spiltBy=",",$visible=true)
         {
-            $this->statisticsGroup[$setname] = Array("setname"=>$setname,"name"=>$name,"methodname"=>$methodname,"cols"=>$cols,"spiltBy"=>$spiltBy,"multiStatistic"=>false);
+            $this->statisticsGroup[$setname] = Array("setname"=>$setname,"name"=>$name,"methodname"=>$methodname,"cols"=>$cols,"spiltBy"=>$spiltBy,"multiStatistic"=>false,"visible"=>$visible);
         }
 
-        public function setStatistic($setname,$name,$cols,$spiltBy=",")
+        public function setStatistic($setname,$name,$cols,$spiltBy=",",$visible=true)
         {
-             $this->statisticsGroup[$setname] = Array("setname"=>$setname,"name"=>$name,"cols"=>$cols,"spiltBy"=>$spiltBy,"multiStatistic"=>true);
+             $this->statisticsGroup[$setname] = Array("setname"=>$setname,"name"=>$name,"cols"=>$cols,"spiltBy"=>$spiltBy,"multiStatistic"=>true,"visible"=>$visible);
+        }
+        public function setSimpleStatisticVisible($setname,$visible)
+        {
+             $this->setStatisticVisible($setname,$visible);
+        }
+        public function setStatisticVisible($setname,$visible)
+        {
+             $this->statisticsGroup[$setname]["visible"] = $visible;
         }
 
-        public function setSimpleChart($charttype,$chartid,$name,$serieName,$methodname,$cols,$spiltBy=",")
+        public function setSimpleChart($charttype,$chartid,$name,$serieName,$methodname,$cols,$spiltBy=",",$visible=true)
         {
             $chartid = $chartid;
             $colsArray = explode($spiltBy,$cols);
@@ -698,7 +707,7 @@ use Picqer\Barcode\BarcodeGenerator;
                      $ycol = implode($spiltBy,$ycolsArray);
                 }
             }
-            $this->chartGroup[$chartid] = Array("chartid"=>$chartid,"name"=>$name);
+            $this->chartGroup[$chartid] = Array("chartid"=>$chartid,"name"=>$name,"visible"=>$visible);
           //  echo $xcol."--".$ycol;
             $this->setChartInfo($charttype,$chartid,$xcol);
          //   $this->setChartSerie($chartid,$serieName,$methodname,$ycol);
@@ -741,12 +750,13 @@ use Picqer\Barcode\BarcodeGenerator;
                         $height = $data["height"];
                         if($type=="chart")
                         {
-                            $this->setChartWidth($id,"95%");
-                            if(!empty($height))
+                            $this->setChartWidth($id,"95%");    
+                            if(empty($height))
                             {
                                     $height = intval($this->getChartHeight($id)/$j);
+                                     
                             }
-                            $this->setChartHeight($id,$height."px");
+                           $this->setChartHeight($id,$height."px");
                             $html = $this->getChartHtml($id,$this->getResult(),$src);
                         }
                         else
@@ -760,15 +770,38 @@ use Picqer\Barcode\BarcodeGenerator;
             }
             return $ret;
         }
-        public function setChart($charttype,$chartid,$name,$xcol)
+        public function setChart($charttype,$chartid,$name,$xcol,$visible=true)
         {
-             $this->chartGroup[$chartid] = Array("chartid"=>$chartid,"name"=>$name);
+             $this->chartGroup[$chartid] = Array("chartid"=>$chartid,"name"=>$name,"visible"=>$visible);
              $this->setChartInfo($charttype,$chartid,$xcol);
         }
-
-        public function getChartGroup()
+        public function setSimpleChartVisible($chartid,$visible)
         {
-            return $this->chartGroup;
+            $this->setChartVisible($chartid,$visible);
+        }
+
+        public function setChartVisible($chartid,$visible)
+        {
+            $this->chartGroup[$chartid]["visible"] = $visible;
+        }
+
+        public function getChartGroup($all=true)
+        {
+            $ret = $this->chartGroup;
+            if(!$all)
+            {
+                $ret = Array();
+                foreach($this->chartGroup as $chartid=>$data)
+                {
+                    $visible = $data["visible"];
+                    if($visible)
+                    {
+                        $ret[$chartid] = $data;
+                    }
+                } 
+            }
+            return $ret;
+           
         }
 
         public function getDashboardGroup()
@@ -776,9 +809,23 @@ use Picqer\Barcode\BarcodeGenerator;
             return $this->dashboardGroup;
         }
 
-        public function getStatisticsGroup()
+        public function getStatisticsGroup($all=true)
         {
-            return $this->statisticsGroup;
+            $ret = $this->statisticsGroup;
+            if(!$all)
+            {
+                $ret = Array();
+                foreach($this->statisticsGroup as $setname=>$data)
+                {
+
+                    $visible = $data["visible"];
+                    if($visible)
+                    {
+                        $ret[$setname] = $data;
+                    }
+                } 
+            }
+            return $ret;
         }
 
         protected function getChartsScriptByChartid($chartid)

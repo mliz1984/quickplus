@@ -210,17 +210,19 @@
             {
                 $oriArray = array_reverse($oriArray);
             }
+            $rondom = StringTools::getRandStr();
             $chartHtmlArray = $this->getChartHtmlArray($chartid,$oriArray);
-            $html ='<div id="div_chart_'.$chartid.'" style="width:'.$this->getChartWidth($chartid).';height:'.$this->getChartHeight($chartid).';"></div>';
+            $id = $rondom.'_'.$chartid;
+            $html ='<div id="div_chart_'.$id.'" style="width:'.$this->getChartWidth($chartid).';height:'.$this->getChartHeight($chartid).';"></div>';
             $renderer = $this->chartRenderer[$chartid];
             if($renderer==null||trim($renderer)==""||(trim($renderer)!="svg"&&trim($renderer)!="canvas"))
             {
                 $renderer = QuickFormConfig::$defaultChartRenderer;
             }
             $html.= '<script type="text/javascript">';
-            $html.= 'var chart_'.$chartid.' = echarts.init(document.getElementById("div_chart_'.$chartid.'"), null, {renderer: \''.$renderer.'\'});';
-            $html.= 'var option_'.$chartid.' = {'.jqueryTools::arrayToString($chartHtmlArray).'};';
-            $html.= 'chart_'.$chartid.'.setOption(option_'.$chartid.');';
+            $html.= 'var chart_'.$id.' = echarts.init(document.getElementById("div_chart_'.$id.'"), null, {renderer: \''.$renderer.'\'});';
+            $html.= 'var option_'.$id.' = {'.jqueryTools::arrayToString($chartHtmlArray).'};';
+            $html.= 'chart_'.$id.'.setOption(option_'.$id.');';
             $html.= '</script>';
             return $html;
         }   
@@ -335,15 +337,18 @@
                     $serieSetting[$serieName]["valuesArray"] = $valuesArray;
                     foreach($valuesArray as $va)
                     { 
-
-                        foreach($orderArray as $o)
+                        
+                        for($i=0;$i<count($orderArray);$i++)
                         {
-                            if($isPieChart&&$o!=null&&trim($o)!="")
+                            $o = $orderArray[$i];
+                            $d = $displayArray[$i];
+
+                            if($isPieChart&&$d!=null&&trim($d)!="")
                             {
-                                if($addLegend && !in_array("'".$o."'", $legend))
+                                if($addLegend && !in_array("'".$d."'", $legend))
                                 {
 
-                                    $legend[] = "'".$o."'";
+                                    $legend[] = "'".$d."'";
                                 }
                             }
                             $v = 0;
@@ -356,13 +361,13 @@
                             {
                                 if($group)
                                 {
-                                     $serieDataValue[$snm][$o.$va]["value"] = $v;
-                                     $serieDataValue[$snm][$o.$va]["name"] = $o." (".$va.")";
+                                     $serieDataValue[$snm][$d.$va]["value"] = $v;
+                                     $serieDataValue[$snm][$d.$va]["name"] = $d." (".$va.")";
                                 }
                                 else
                                 {
-                                   $serieDataValue[$snm.$va][$o]["value"] = $v;
-                                   $serieDataValue[$snm.$va][$o]["name"] = $o;
+                                   $serieDataValue[$snm.$va][$d]["value"] = $v;
+                                   $serieDataValue[$snm.$va][$d]["name"] = $d;
                                 }
 
                             }
