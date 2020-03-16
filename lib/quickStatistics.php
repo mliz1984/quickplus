@@ -237,11 +237,11 @@
 		    public function getStatisticTranslateData($setname,$col)
 		    {
 		    	$result = Array();
-		    	if(is_array($this->statisticTranslateData[$setname][$col])&&count($this->statisticTranslateData[$setname][$col]))
+		    	if(is_array($this->statisticTranslateData[$setname][$col]))
 		    	{
 		    		$result = $this->statisticTranslateData[$setname][$col];
 		    	}
-		    	else if(is_array($this->statisticCommonTranslateData[$col])&&count($this->statisticCommonTranslateData[$col]))
+		    	else if(is_array($this->statisticCommonTranslateData[$col]))
 		    	{
 		    		$result = $this->statisticCommonTranslateData[$col];
 		    	}
@@ -546,8 +546,9 @@
 	        	return $oldvalue + $array[$params];
 	        }
 	        public function statisticsShow($array,$oldvalue,$params,$isCount=false)
-	        {
-	        	return $array[$params];
+	        {		
+  					$ret = $array[$params];
+  					return $ret;
 	        }
 	        public function statisticsDollarShow($value,$dataArray)
 	        {
@@ -584,6 +585,7 @@
 		    	{ 
 		    		$colMark =  $d["statistics_result_col"];
 		    		$translateData = $this->getStatisticTranslateData($tkey,$colMark);
+		    		$nk = $translateData[$k];
 		    		if($nk!=null&&$nk!="")
 		    		{
 		    			$k = $nk;
@@ -600,7 +602,14 @@
 		    		}
 		    	    foreach($colSet as $col=>$method)
 		    		{ 
+		    			
+		    			$tdata = $this->getStatisticTranslateData($tkey,$col);
 		    		    $value =  $d["statistics_result"][$col];
+		    		    if(count($tdata)>0)
+		    		    {
+		    		    	$t = $tdata[$value];
+		    		    	$value = $t;
+		    		    }
 		    			$result[$k]["statistics_result"][$col] = $value;
 		    		}
 		    		$result[$k]["statistics_category"] = $d["statistics_category"];
@@ -629,6 +638,7 @@
 			    		}
 		    		}
 		    	}
+		    	
 		    	return $result;
 		    }
 
