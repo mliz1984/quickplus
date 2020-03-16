@@ -1,4 +1,4 @@
-	<?php 
+<?php 
 		namespace Quickplus\Lib;
 		class QuickStatistics
 		{
@@ -224,14 +224,16 @@
 		    	return $this->categoryCols;
 		    }
 
-		    public function setStatisticTranslateData($setname,$col,$data)
+		    public function setStatisticTranslateData($setname,$col,$data,$isAttach=false)
 		    {
-		    	 $this->statisticTranslateData[$setname][$col]= $data;
+		    	 $this->statisticTranslateData[$setname][$col]["isAttach"]=$isAttach;
+		    	 $this->statisticTranslateData[$setname][$col]["data"]= $data;
 		    }
 
-		    public function setStatisticCommonTranslateData($col,$data)
+		    public function setStatisticCommonTranslateData($col,$data,$isAttach=false)
 		    {
-		    	 $this->statisticCommonTranslateData[$setname][$col]= $data;
+		    	 $this->statisticCommonTranslateData[$setname][$col]["isAttach"]=$isAttach;
+		    	  $this->statisticCommonTranslateData[$setname][$col]["data"]=$data;
 		    }
 
 		    public function getStatisticTranslateData($setname,$col)
@@ -239,11 +241,38 @@
 		    	$result = Array();
 		    	if(is_array($this->statisticTranslateData[$setname][$col]))
 		    	{
-		    		$result = $this->statisticTranslateData[$setname][$col];
+		      		$data = $this->statisticTranslateData[$setname][$col]["data"];
+		      		$isAttach = $this->statisticTranslateData[$setname][$col]["isAttach"];
+		     
+		      		if($isAttach)
+		      		{
+		      			  $array =  $this->getAttachData($data);
+			              $data = Array();
+			              foreach($array as $a)
+			              {
+			                $k = $a["attachdata_id"];
+			                $v = $a["attachdata_name"];
+			                $data[strval($k)] = strval($v);
+			              }
+		      		}
+		    		$result = $data;
 		    	}
 		    	else if(is_array($this->statisticCommonTranslateData[$col]))
 		    	{
-		    		$result = $this->statisticCommonTranslateData[$col];
+		    		$data = $this->statisticCommonTranslateData[$col]["data"];
+		    		$isAttach = $this->statisticCommonTranslateData[$col]["isAttach"];
+		    		if($isAttach)
+		      		{
+		      			  $array =  $this->getAttachData($data);
+			              $data = Array();
+			              foreach($array as $a)
+			              {
+			                $k = $a["attachdata_id"];
+			                $v = $a["attachdata_name"];
+			                $data[strval($k)] = strval($v);
+			              }
+		      		}
+		    		$result = $data;
 		    	}
 		    	return $result;
 		    }

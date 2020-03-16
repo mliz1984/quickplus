@@ -1,15 +1,15 @@
 <?php 
-namespace  Quickplus\Lib;
+  namespace  Quickplus\Lib;
 
-use Quickplus\Lib\DataMsg\DataMsg;
-use Quickplus\Lib\DataMsg\Data;
-use Quickplus\Lib\Tools\DbTools;
-use Quickplus\Lib\Tools\StringTools;
-use Quickplus\Lib\Tools\HtmlElement;
-use Quickplus\Lib\Tools\ArrayTools;
-use Quickplus\Lib\Tools\CommonTools;
-use Picqer\Barcode\BarcodeGeneratorSVG;
-use Picqer\Barcode\BarcodeGenerator;
+  use Quickplus\Lib\DataMsg\DataMsg;
+  use Quickplus\Lib\DataMsg\Data;
+  use Quickplus\Lib\Tools\DbTools;
+  use Quickplus\Lib\Tools\StringTools;
+  use Quickplus\Lib\Tools\HtmlElement;
+  use Quickplus\Lib\Tools\ArrayTools;
+  use Quickplus\Lib\Tools\CommonTools;
+  use Picqer\Barcode\BarcodeGeneratorSVG;
+  use Picqer\Barcode\BarcodeGenerator;
   class quickForm extends quickLayout
   {
         protected $debug = false;
@@ -639,35 +639,20 @@ use Picqer\Barcode\BarcodeGenerator;
         }
         public function setStatisticCommonTranslateDataByAttachData($col,$key)
         {
-             $array =  $this->getAttachData($key);
-             $data = Array();
-             foreach($array as $a)
-             {
-                $k = $a["attachdata_id"];
-                $v = $a["attachdata_name"];
-                $data[$k] = $v;
-             }
-             $this->setStatisticCommonTranslateData($col,$data);
+             
+             $this->setStatisticCommonTranslateData($col,$key,true);
         }
         public function setChartCommonTranslateDataByAttachData($col,$key)
         {
-            $this->setStatisticCommonTranslateDataByAttachData($col,$key);
+            $this->setStatisticCommonTranslateDataByAttachData($col,$key,false);
         }
         public function setChartTranslateDataByAttachData($setname,$col,$key)
         {
-            $this->setStatisticTranslateDataByAttachData($setname,$col,$key);
+            $this->setStatisticTranslateDataByAttachData($setname,$col,$key,false);
         }
         public function setStatisticTranslateDataByAttachData($setname,$col,$key)
         {
-             $array =  $this->getAttachData($key);
-             $data = Array();
-             foreach($array as $a)
-             {
-                $k = $a["attachdata_id"];
-                $v = $a["attachdata_name"];
-                $data[strval($k)] = strval($v);
-             }
-             $this->setStatisticTranslateData($setname,$col,$data);
+             $this->setStatisticTranslateData($setname,$col,$key,true);
         }
         public function getChartName($chartid)
         {
