@@ -506,14 +506,14 @@
         }
         public function getCustomColMark()
         {
-            return $this->customColMark;
+            return $this->customColMark."_".get_class($this);
         }
         public function initCustomCol($src)
         {
             $colSetting = null;
-            if(isset($src[$this->getSearchPrefix().$this->customColMark]))
+            if(isset($src[$this->getSearchPrefix().$this->getCustomColMark()]))
             {
-                $colSetting = $src[$this->getSearchPrefix().$this->customColMark];
+                $colSetting = $src[$this->getSearchPrefix().$this->getCustomColMark()];
             }
             $fields = $this->getReportField(true);
             $defaultValue = "";

@@ -66,7 +66,7 @@ $processMethod = null;
  
 
     $warning ='<script language="javascript" >Lobibox.alert("error", {msg:"Operation failed, please check your data."});window.close();</script>';
-    $js = '<script language="javascript" >window.opener.opener._refreshPage("_anchor_'.$id.'");window.opener.close();';
+    $js = '<script language="javascript" >window.opener._refreshPage("_anchor_'.$id.'");';
     if(!$form->getDebug())
     {
          $js .= 'window.close();';
@@ -277,7 +277,7 @@ $processMethod = null;
         }?>
         if(check)
         {
-           document.editData.target="_blank";
+          // document.editData.target="_blank";
           document.editData.submit();
         }
         
