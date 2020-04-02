@@ -786,6 +786,19 @@
                             $array = CommonTools::getDataArray($src,$this->getSearchPrefix());
                             foreach($array as $k =>$v)
                             {
+                                if(is_array($v))
+                                {
+                                    $temp = "";
+                                    foreach($v as $vk => $vv)
+                                    {
+                                        if(!empty($vv))
+                                        {
+                                            $temp.=','.$vv;
+                                        }
+                                    }
+                                    $temp = ltrim($temp,",");
+                                    $v = $temp;
+                                }
                                 $quickHtmlDrawer->setParameter($this->getSearchPrefix().$k,$v);
                             }
 
