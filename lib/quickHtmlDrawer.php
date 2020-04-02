@@ -1,14 +1,14 @@
 <?php
 namespace Quickplus\Lib;;
 use Quickplus\Lib\Tools\HtmlElement;
- 	class quickHtmlDrawer extends quickFormDrawer 
+ class quickHtmlDrawer extends quickFormDrawer 
  	{
  		protected $withTitle = true;
  	    protected $withPanel = true;
  		protected $search = false;
  		protected $parameter = Array();
  		protected $formId = null;
- 		protected $ajaxTimeout = 30000;
+ 		protected $ajaxTimeout = 0;
  		protected $panelName = null;
  		public function setAjaxTimeout($ajaxTimeout)
  		{
@@ -149,7 +149,7 @@ use Quickplus\Lib\Tools\HtmlElement;
  			$result.= ";margin: 0 auto;}</style>";
  			return $result;
  		}
- 		public function getDataTableJs($obj)
+ 		public function getDataTableJs($obj,$loadQuickFormJs=false)
 		{
 			$isreport = "0";
           	if($obj->isReport())
@@ -158,7 +158,10 @@ use Quickplus\Lib\Tools\HtmlElement;
           	}
           	$curPage = $obj->getCurPage();
             $startRecord = ($curPage-1)*$pageRows+1;
-          	$result =  $obj->getScriptStr();
+            if($loadQuickFormJs===true)
+            {
+          		$result =  $obj->getScriptStr();
+          	}
           	$searchStr ="false";
           	if($this->search)
           	{
@@ -187,33 +190,38 @@ use Quickplus\Lib\Tools\HtmlElement;
  								}
  								$result .=	"'data':{
  									   		'json':1,
+ 									   'formMark':'".$obj->getFormMark()."',
+ 									   		'searchSign':1,
  									   		'formid':'".$this->formId."',
  									   		'isreport':'".$isreport."',";
  						    foreach($this->parameter as $key=>$value)
 				 			{
 				 				$result .="'".$key."':'".$value."',";
 				 			}
- 							$result .= "'formMark':'".$obj->getFormMark()."'
- 									   }
+ 							$result .= "}
 					        		}
 					    } );
 					} );</script>";
 			return $result;
 		}
 
-		public function getStatisticHtml($obj,$statisticName,$loadQuickFormJs=true)
+		public function getStatisticHtml($obj,$statisticName,$data=null,$loadQuickFormJs=false)
 		{
 			$result = "";
- 			 if($loadQuickFormJs)
+ 			 if($loadQuickFormJs===true)
  			 {
  			 		$result.=$obj->getScriptStr();
+ 			 }
+ 			 if($data==null)
+ 			 {
+ 			 	$data = $obj->getResult();
  			 }
              $result.= $obj->getStatisticsHtml($statisticName,$obj->getResult());
              if($this->withPanel)
              {
               	 $panel = new HtmlElement();
               	 $panelName = $this->panelName;
-              	 if($panelName==null||trim($panelName)=="")
+              	 if($panelName===null)
               	 {
               	 	if($obj->getStatisticName($statisticName)!=null&&trim($obj->getStatisticName($statisticName))!="")
               	 	{
@@ -225,19 +233,23 @@ use Quickplus\Lib\Tools\HtmlElement;
              return $result;
 		}
 
-		public function getChartHtml($obj,$chartName,$loadQuickFormJs=true)
+		public function getChartHtml($obj,$chartName,$data=null,$loadQuickFormJs=false)
 		{
 			 $result = "";
- 			 if($loadQuickFormJs)
+ 			 if($loadQuickFormJs===true)
  			 {
  			 		$result.=$obj->getScriptStr();
  			 }
-             $result.= $obj->getChartHtml($chartName,$obj->getResult());
+ 			 if($data==null)
+ 			 {
+ 			 	$data = $obj->getResult();
+ 			 }
+             $result.= $obj->getChartHtml($chartName,$data);
              if($this->withPanel)
              {
               	 $panel = new HtmlElement();
               	 $panelName = $this->panelName;
-              	 if($panelName==null||trim($panelName)=="")
+              	 if($panelName===null)
               	 {
               	 	if($obj->getChartName($chartName)!=null&&trim($obj->getChartName($chartName))!="")
               	 	{
@@ -249,12 +261,12 @@ use Quickplus\Lib\Tools\HtmlElement;
              return $result;
 
 		}
-
- 		public function getDataTableHtml($obj,$withTitle=true,$withIngrid=false,$loadJs=true,$loadQuickFormJs=true)
+        
+ 		public function getDataTableHtml($obj,$withTitle=true,$withIngrid=false,$loadJs=true,$loadQuickFormJs=false)
  		{
  			 
  			 $result = "";
- 			 if($loadQuickFormJs)
+ 			 if($loadQuickFormJs===true)
  			 {
  			 		$result.=$obj->getScriptStr();
  			 }
@@ -269,8 +281,9 @@ use Quickplus\Lib\Tools\HtmlElement;
  			 		}
  			 		else
  			 		{
+
  			 			$result .= $this->getDataTableCss($obj);
- 			 			$result .= $this->getDataTableJs($obj);
+ 			 			$result .= $this->getDataTableJs($obj,$loadQuickFormJs);
  			 		}
  			 		
  			 	}
@@ -307,7 +320,7 @@ use Quickplus\Lib\Tools\HtmlElement;
 		           
            		 
 			   }
-			 $resultSize = $obj->getResultSize();  
+			/* $resultSize = $obj->getResultSize();  
   			 for($j=0;$j<$resultSize;$j++)
 		     {
 		     	 $result .= "<tr id='". $obj->getMainId($j,"",$export)."'>";
@@ -321,8 +334,8 @@ use Quickplus\Lib\Tools\HtmlElement;
 	                   $result .=" </td>";	
 		          }	
 		     	 $result .= "</tr>";
-		     }
- 			 $result .="</tbody></table></div>";
+		     }*/
+ 			 $result .="</tbody></table></div>"; 
 
  			 if($withTitle&&!$withIngrid)
  			 {
@@ -336,7 +349,7 @@ use Quickplus\Lib\Tools\HtmlElement;
               {
               	 $panel = new HtmlElement();
               	  $panelName = $this->panelName;
-              	 if($panelName==null||trim($panelName)=="")
+              	 if($panelName===null)
               	 {
               	 	if($obj->getFormName()!=null&&trim($obj->getFormName())!="")
               	 	{

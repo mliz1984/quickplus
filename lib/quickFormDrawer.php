@@ -159,7 +159,7 @@ class quickFormDrawer
                 $quickForm->setMethod("update","updateFormData",true);
             }
             $quickForm->initCustomMethod($src);
-
+     
             $quickForm->addJsFile(QuickFormConfig::$jquery);
             $quickForm->addCssFile(QuickFormConfig::$jqueryUiPath."themes/base/jquery.ui.all.css");
             $quickForm->addJsFile(QuickFormConfig::$jqueryUiPath."ui/jquery-ui.js");
@@ -397,30 +397,38 @@ class quickFormDrawer
             $searchSign = intval(ArrayTools::getValueFromArray($src,'searchSign'));
             $this->quickForm->setIsExport($isExport);
             $this->quickForm->deleteFormDataByMainId($db,$src);
+
             if($isExport)
             {
                 $src["searchSign"] = 1;
             } 
+           
             if(!$blank)
             {
+               
                 $blank = $this->quickForm->isBlank();
             } 
 
             if(is_bool($this->blank))
             {
+                
                 $blank = $this->blank;
             }
 
-
+            
            if($blank)
             {   
                     $where = $this->getWhereClause($src);
+                    
+
                     if(trim($where) == "WHERE 1=1" &&  $searchSign!=1)
                     {
+                       
                         $blank = true;
                     }
                     else if($searchSign==1)
                     {
+                        
                         $blank = false;
                     }
              }
@@ -492,10 +500,10 @@ class quickFormDrawer
                     $this->quickForm->setWhereClause($whereClause);
                 }
             
-        
+           
             if(!$blank||!$this->quickForm->getSearchBar()||$isExport)
             {  
-               
+                   
                     $customDataMethod = $this->quickForm->getCustomDataMethod();
 
                     if($customDataMethod!=null&&trim($customDataMethod)!="")
@@ -505,14 +513,14 @@ class quickFormDrawer
                     }
                     else
                     {
-
+                        
                         $fullSql = $this->getSql($src); 
-                     
                         if($this->quickForm->getDebug())
                         {
                             print_r($src);
                             echo "<br>".$fullSql.$this->getOrderClause()."<br>";
                         }
+                       
                     $dataMsg = new DataMsg();
             
                     $this->quickForm->getData($db,$fullSql,$this->getOrderClause(),$this->quickForm->getPageRows(),$curpage);

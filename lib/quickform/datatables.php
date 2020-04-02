@@ -1,6 +1,6 @@
 <?php
   require_once(dirname(__FILE__)."/include.php");
-      require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
+  require_once($_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php");
     use Quickplus\Lib\QuickFormConfig;
     use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\Tools\ArrayTools;
@@ -14,7 +14,6 @@
     $json = ArrayTools::getValueFromArray($_REQUEST,'json');
     $draw = ArrayTools::getValueFromArray($_REQUEST,'draw');
     $form = null;
-
     if(intval($isreport)==1)
     {
         $reportDesigner = new reportDesigner();
@@ -30,6 +29,7 @@
             $db =$form->initDb();
     }
     $quickHtmlDrawer = new quickHtmlDrawer($formid);
+    $form->setBlank(false);
     $obj = $quickHtmlDrawer->setQuickForm($db,$form);
 
 
@@ -38,14 +38,13 @@
        $db =  $obj->getDb();   
     }
     $obj = $quickHtmlDrawer->getForm($db,$_REQUEST,$page,$pagerows,false,false,"dataTablesOrderMethod","dataTablesSearchMethod");
- 
+    
     if(intval(trim($json))==1)
     {
-
         echo $quickHtmlDrawer->getDataTablesJson($draw,$obj);
     }
     else
     {
-            echo $quickHtmlDrawer->getDataTableHtml($obj,true,false,true);
+        echo $quickHtmlDrawer->getDataTableHtml($obj,true,false,true);
     }
  ?> 

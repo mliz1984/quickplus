@@ -10,7 +10,7 @@
   use Quickplus\Lib\Tools\CommonTools;
   use Picqer\Barcode\BarcodeGeneratorSVG;
   use Picqer\Barcode\BarcodeGenerator;
-  class quickForm extends quickLayout
+    class quickForm extends quickLayout
   {
         protected $debug = false;
         protected $jsOrderType = Array();
@@ -84,6 +84,7 @@
         protected $reportHead = null;
         protected $max_row_in_dashboard = null;
         protected $dashboardDataProcessMethod = Array();
+
         public function setDashboardDataProcessMethod($dashboardid,$method)
         {
             $this->dashboardDataProcessMethod[$dashboardid] = $method;
@@ -706,6 +707,14 @@
         {
              $this->dashboardGroup[$dashboardid] = Array("name"=>$name);
         }
+        public function setPageRowsForDashboard($dashboardid,$rowid,$colid,$pageRows)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid]["pageRows"] = $pageRows;
+        }
+        public function addDataTableToDashboard($dashboardid,$rowid,$colid,$groupid=null,$width=null,$height=null)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"datatable","groupid"=>$groupid,"width"=>$width,"height"=>$height,"dataKey"=>null,"pageRows"=>20);
+        }
         public function addChartToDashboard($dashboardid,$chartid,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
             $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"chart","id"=>$chartid,"groupid"=>$groupid,"width"=>$width,"height"=>$height,"dataKey"=>null);
@@ -757,7 +766,8 @@
                             $rowData = $resultParts[$dataKey];
 
                         }
-                       
+                        $quickHtmlDrawer = new QuickHtmlDrawer($id);
+                         $quickHtmlDrawer->setPanelName("");
                         if($type=="chart")
                         {
                             $this->setChartWidth($id,"95%");    
@@ -766,12 +776,28 @@
                                     $height = intval($this->getChartHeight($id)/$j);
                                      
                             }
-                           $this->setChartHeight($id,$height."px");
-                            $html = $this->getChartHtml($id,$rowData,$src);
+                            $this->setChartHeight($id,$height."px");
+                            $html = $quickHtmlDrawer->getChartHtml($this,$id,$rowData,$src);
+                        }
+                        else if($type=="datatable")
+                        {
+                            $pageRows = intval($data["pageRows"]);
+                            $id = StringTools::getRandStr();
+                            $array = CommonTools::getDataArray($src,$this->getSearchPrefix());
+                            foreach($array as $k =>$v)
+                            {
+                                $quickHtmlDrawer->setParameter($this->getSearchPrefix().$k,$v);
+                            }
+
+                            $obj = $this;
+                            $obj->setPageRows($pageRows);
+
+                            $html = $quickHtmlDrawer->getDataTableHtml($obj);
+
                         }
                         else
                         {
-                            $html = $this->getStatisticsHtml($id,$src,$rowData);
+                            $html = $quickHtmlDrawer->getStatisticHtml($this,$id,$rowData,$src);
                         }
                         $this->setColByHtml($rowid,$colid,$html, $groupid,$width);
                     }
@@ -3416,7 +3442,7 @@
              }
              
             $searchSign = intval(ArrayTools::getValueFromArray($src,"searchSign"));   
-            $searchMapping = $this->getSearchMapping($dbname);                    
+            $searchMapping = $this->getSearchMapping($dbname);  
             if(($defaultsearch==null||trim($defaultsearch)=="")&&$searchMapping!=null&&trim($searchMapping)!=""&&trim($src[$searchMapping])!=null&&trim($src[$searchMapping])!="")
             {
                  $defaultsearch = $src[$searchMapping];
