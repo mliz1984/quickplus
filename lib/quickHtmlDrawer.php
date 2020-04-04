@@ -1,7 +1,7 @@
 <?php
 namespace Quickplus\Lib;;
 use Quickplus\Lib\Tools\HtmlElement;
- class quickHtmlDrawer extends quickFormDrawer 
+class quickHtmlDrawer extends quickFormDrawer 
  	{
  		protected $withTitle = true;
  	    protected $withPanel = true;
@@ -70,15 +70,26 @@ use Quickplus\Lib\Tools\HtmlElement;
  			return $result;
  		}
 
- 		public function getDataTablesJson($draw,$obj)
+ 		public function getDataTableJson($draw,$obj,$colArray=null,$dataPart=false)
  		{	
  			$tableData = Array();
  			$titleinfo = $obj->getTitleInfo();
  			$resultSize = $obj->getResultSize(); 
+ 			$totalCount = $obj->getTotalCount();
+			
+ 			 $cols = $titleinfo;
+ 			 if(is_array($colArray)&&count($colArray)>0)
+ 			 {
+ 			 	$cols =$colArray;
+ 			 }
+ 			if($dataPart===true)
+ 			{
+ 				$totalCount = $resultSize;
+ 			}
   			for($j=0;$j<$resultSize;$j++)
 		    {
 		    	$tmp = Array();
-		    	 foreach($titleinfo as $dbname =>$title)
+		    	 foreach($cols as $dbname =>$title)
 		         {
 		         		$tmp[] =  $obj->getValueByDbName($j,$dbname);
 
@@ -87,8 +98,8 @@ use Quickplus\Lib\Tools\HtmlElement;
 		    }
 		    return json_encode(array(
 				    "draw" => intval($draw),
-				    "recordsTotal" => $obj->getTotalCount(),
-				    "recordsFiltered" => $obj->getTotalCount(),
+				    "recordsTotal" => $totalCount,
+				    "recordsFiltered" => $totalCount,
 				    "data" => $tableData
 				));
  		}
@@ -262,7 +273,7 @@ use Quickplus\Lib\Tools\HtmlElement;
 
 		}
         
- 		public function getDataTableHtml($obj,$withTitle=true,$withIngrid=false,$loadJs=true,$loadQuickFormJs=false)
+ 		public function getDataTableHtml($obj,$colArray=null,$withTitle=true,$withIngrid=false,$loadJs=true,$loadQuickFormJs=false)
  		{
  			 
  			 $result = "";
@@ -296,20 +307,23 @@ use Quickplus\Lib\Tools\HtmlElement;
  			 $result .= '><table width="100%"  id="'.$tableid.'" class="table table-condensed">';
  			
  			 $titleinfo = $obj->getTitleInfo();
- 			
+ 			 $cols = $titleinfo;
+ 			 if(is_array($colArray)&&count($colArray)>0)
+ 			 {
+ 			 	$cols =$colArray;
+ 			 }
  			 if($withTitle)
  			 {
 	 			  $result .= " <thead><tr>";		
 	 			        
-		          foreach($titleinfo as $dbname =>$title)
+		          foreach($cols as $dbname =>$title)
 		          {
-		                     
+		             $title = $titleinfo[$dbname];        
 		             $titleName = $title["name"];    
 		       
 		             if($title['ischecked'])
 		             {
-		             	
-
+		             
 		                $result .= '<th  align="center" width="'.$title['width'].'" style="cursor:hand;'.$title['style'].'">';
 		                $result .=htmlspecialchars_decode($titleName);
 		                $result .="</th>";

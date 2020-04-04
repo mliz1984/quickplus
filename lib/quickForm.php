@@ -84,10 +84,123 @@
         protected $reportHead = null;
         protected $max_row_in_dashboard = null;
         protected $dashboardDataProcessMethod = Array();
+        protected $dataTableSetting = Array();
+        protected $defaultDataTablePageRows = 10;
+        public function setDefaultDataTablePageRows($pageRows)
+        {
+            $this->defaultDataTablePageRows= $pageRows;
+        }
+        public function setDataTableColMode($dashboardid,$id,$overwrite=true)
+        {
+            $this->dataTableSetting[$dashboardid][$id]["colMode"] = $overwrite;
+        }
+        public function getDataTableColMode($dashboardid,$id)
+        {
+            $ret = true;
+            if(isset($this->dataTableSetting[$dashboardid][$id]["colMode"]))
+            {
+                $ret = $this->dataTableSetting[$dashboardid][$id]["colMode"];
+            }
+            return $ret;
+        }
+        public function setDataTableCol($dashboardid,$id,$dbname,$displayname=null,$extend=null,$method="defaultShowMode")
+        {
+            $this->dataTableSetting[$dashboardid][$id]["colSetting"][$dbname] = Array("displayname"=>$displayname,"extend"=>$extend,"method"=>$method);
+        }
+        public function loadDataTableColSetting($dashboardid,$id)
+        {
+                $ret = Array();
+                $mode = $this->getDataTableColMode($dashboardid,$id);
+                if(is_array($this->dataTableSetting[$dashboardid][$id]["colSetting"])&&count( $this->dataTableSetting[$dashboardid][$id]["colSetting"])>0)
+                {
+                    $setting =  $this->dataTableSetting[$dashboardid][$id]["colSetting"];
+                    $titleinfo = $this->getTitleInfo();
+                    foreach($titleinfo as $dbname=>$title)
+                    {
+                        $fieldData = $fields[$dbname];
+                        $name = $title["name"];
+                        if(is_array($setting[$dbname]))
+                        {
+                            
+                            $s = $setting[$dbname];
+                            if(!empty($s["displayname"]))
+                            {
+                                $name = $s["displayname"];
+                            }
+                            $extend = $s["extend"];
+                            $method = $s["method"];
+                            $this->titleInfo[$dbname]["name"] = $name;
+                            
+                            if($extend!==null)
+                            {
+                                if($extend===false)
+                                {
+                                    $method = "defaultShowMode";
+                                }
+                                if($extend===false||!empty($method))
+                                {
+                                        $this->structure[$dbname]["methodname"] = $method;
+                                        
+                                }
+                                $ret[$dbname] = $dbname;
 
+                                if($method===null||$method===false)
+                                {
+                                    
+                                     $this->setRaeFieldType($dbname,false,false);
+                                }
+                            }
+                            else
+                            {
+                                
+                                $ret[$dbname] = $dbname;
+                            }
+                        }
+                        else if($mode===true&&$dbname!=="_quickform_seq_for_datatables")
+                        {
+                           
+                            $this->setRaeFieldType($dbname,false,false);
+                        }
+                        else
+                        {
+                            
+                            $ret[$dbname] = $dbname;
+                        }
+                    }   
+                    
+                }
+                if(count($ret)==0)
+                {
+                    $ret = null;
+                }
+                return $ret;
+
+        }
+        public function getDataTablePageRows($dashboardid,$id)
+        {
+            $ret = $this->defaultDataTablePageRows;
+            if(isset($this->dataTableSetting[$dashboardid][$id]["pageRows"])&&is_int($this->dataTableSetting[$id]["pageRows"]))
+            {
+                $ret = intval($this->dataTableSetting[$dashboardid][$id]["pageRows"]);
+                if($ret<0)
+                {
+                    $ret =0;
+                }
+            }
+            return $ret;
+        }
         public function setDashboardDataProcessMethod($dashboardid,$method)
         {
             $this->dashboardDataProcessMethod[$dashboardid] = $method;
+        }
+        public function getDashboardDataProcessMethod($dashboardid)
+        {
+            $ret = null;
+            if(!empty($this->dashboardDataProcessMethod[$dashboardid]))
+            {
+                $ret = $this->dashboardDataProcessMethod[$dashboardid];
+            }
+            return $ret;
         }
         public function setMaxRowInDashboard($max_row_in_dashboard)
         {
@@ -707,13 +820,14 @@
         {
              $this->dashboardGroup[$dashboardid] = Array("name"=>$name);
         }
-        public function setPageRowsForDashboard($dashboardid,$rowid,$colid,$pageRows)
+        public function setDataTablePageRows($id,$pageRows)
         {
-            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid]["pageRows"] = $pageRows;
+            $this->dataTableSetting[$id]["pageRows"] = $pageRows;
         }
-        public function addDataTableToDashboard($dashboardid,$rowid,$colid,$groupid=null,$width=null,$height=null)
+
+        public function addDataTableToDashboard($dashboardid,$id,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
-            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"datatable","groupid"=>$groupid,"width"=>$width,"height"=>$height,"dataKey"=>null,"pageRows"=>20);
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"datatable","id"=>$id,"groupid"=>$groupid,"width"=>$width,"height"=>$height,"dataKey"=>null);
         }
         public function addChartToDashboard($dashboardid,$chartid,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
@@ -760,11 +874,11 @@
                         $height = $data["height"];
                         $dataKey = $data["dataKey"];
                         $rowData = $result;
-                    
+                        $key ="";
                         if(!empty($dataKey)&&is_array($resultParts[$dataKey]))
                         {
                             $rowData = $resultParts[$dataKey];
-
+                            $key = $dataKey;
                         }
                         $quickHtmlDrawer = new QuickHtmlDrawer($id);
                          $quickHtmlDrawer->setPanelName("");
@@ -781,9 +895,14 @@
                         }
                         else if($type=="datatable")
                         {
-                            $pageRows = intval($data["pageRows"]);
+                            $pageRows = $this->getDataTablePageRows($dashboardid,$id);
+                            $quickHtmlDrawer->setParameter("dashboardid",$dashboardid);
+                            $datatableid = $id;
+                            $quickHtmlDrawer->setParameter("datatableid",$datatableid);
+                            $quickHtmlDrawer->setParameter("dataKey",$key); 
                             $id = StringTools::getRandStr();
                             $array = CommonTools::getDataArray($src,$this->getSearchPrefix());
+                            
                             foreach($array as $k =>$v)
                             {
                                 if(is_array($v))
@@ -800,12 +919,14 @@
                                     $v = $temp;
                                 }
                                 $quickHtmlDrawer->setParameter($this->getSearchPrefix().$k,$v);
+                                
                             }
 
                             $obj = $this;
                             $obj->setPageRows($pageRows);
-
-                            $html = $quickHtmlDrawer->getDataTableHtml($obj);
+                            $ret = $obj->loadDataTableColSetting($dashboardid,$datatableid);
+                            
+                            $html = $quickHtmlDrawer->getDataTableHtml($obj,$ret);
 
                         }
                         else

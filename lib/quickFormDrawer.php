@@ -9,6 +9,7 @@ class quickFormDrawer
         protected $reportName;
         protected $blank = null;
         protected $where = null;
+   
         public function setChartFilter($chartId)
         {
             $this->quickForm = $this->quickForm->initChartFilter($chartId);
