@@ -399,7 +399,7 @@ if($toolbar!=null&&!$blank){
               }
 
      </style>
-     <div id="quickTableDiv"  <?php if(!$obj->isAllowWrap()){?>style="position:relative; margin:0px auto; padding:0px;overflow: auto;"<?php }?>>
+     <div id="quickTableDiv"  <?php if(!$obj->isAllowWrap()){?>style="position:relative; margin:0px auto; padding:0px;overflow: false;"<?php }?>>
     <table id="quickTable"  class="table table-striped  table-hover table-responsive" >
        <thead>   
        <?php
@@ -510,12 +510,7 @@ for($i=0;$i<count($htmlArray);$i++)
        
     </div>
 </body>
-<script language="javascript">
-     //$('#quickTableDiv').perfectScrollbar();
-      <?php if($obj->isFullScreenMode()) {?>
-            $('#quickTableDiv').css('width',function(){return screen.width*0.95;});   
-        <?php }?>
-     </script>
+
 <?php
 if($qp_anchor!=null&&trim($qp_anchor)!="")
     {

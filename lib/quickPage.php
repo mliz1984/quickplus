@@ -16,9 +16,10 @@ use Quickplus\Lib\Tools\UrlTools;
                         bInfo:false,
                         bFilter:false, 
                         colReorder: true,  
+                        scrollX: false,
                         fixedHeader: true,
                         responsive: true,
-                        bAutoWidth : true, 
+                        bAutoWidth : false, 
                         rowReorder: true,
                         order:[]";
             if($form->isShowTableButton())
