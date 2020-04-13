@@ -244,6 +244,19 @@ class quickHtmlDrawer extends quickFormDrawer
              return $result;
 		}
 
+		public function getQuickCardHtml($id,$title,$content)
+        {
+            $div = new HtmlElement($id,$id);
+            $div->setParam("class","quickcard");
+            $ret = $div->getDiv($content);
+             if($this->withPanel)
+             {
+              	 $panel = new HtmlElement();
+              	 $ret = $panel->getPanel($ret,$title);
+             }
+             return $ret;
+        }
+
 		public function getChartHtml($obj,$chartName,$data=null,$loadQuickFormJs=false)
 		{
 			 $result = "";

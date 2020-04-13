@@ -10,7 +10,7 @@
   use Quickplus\Lib\Tools\CommonTools;
   use Picqer\Barcode\BarcodeGeneratorSVG;
   use Picqer\Barcode\BarcodeGenerator;
-    class quickForm extends quickLayout
+  class quickForm extends quickLayout
   {
         protected $debug = false;
         protected $jsOrderType = Array();
@@ -824,6 +824,11 @@
         {
             $this->dataTableSetting[$id]["pageRows"] = $pageRows;
         }
+        public function addQuickCardToDashboard($dashboardid,$id,$rowid,$colid,$title,$content,$groupid=null,$width=null,$height=null)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"quickcard","id"=>$id,"groupid"=>$groupid,"title"=>$title,"content"=>$content,"width"=>$width,"height"=>$height);
+
+        }
 
         public function addDataTableToDashboard($dashboardid,$id,$rowid,$colid,$groupid=null,$width=null,$height=null)
         {
@@ -842,7 +847,6 @@
         {
             $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"statistic","id"=>$statisticid,"groupid"=>$groupid,"width"=>$width,"height"=>$height,"dataKey"=>null);
         }
-
         public function getDashboardHtml($dashboardid,$src)
         {
             $ret = "";
@@ -865,6 +869,7 @@
                 foreach($array as $rowid=>$arr)
                 {
                     $i = count($arr);
+
                     foreach($arr as $colid=>$data)
                     {
                         $type =$data["type"];
@@ -928,6 +933,14 @@
                             
                             $html = $quickHtmlDrawer->getDataTableHtml($obj,$ret);
 
+                        }
+                        else if($type=="quickcard")
+                        {
+                        
+                            $title = $data["title"];
+                            $content = $data["content"];
+                            $html = $quickHtmlDrawer->getQuickCardHtml($id,$title,$content);
+                        
                         }
                         else
                         {
