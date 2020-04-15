@@ -10,7 +10,7 @@ use Quickplus\Lib\Tools\jqueryTools;
 use Quickplus\Lib\DataMsg\DataMsg;
 
 
-    class reportDesignerBase extends categoryReport
+     class reportDesignerBase extends categoryReport
     {
 
          protected $loginCheck =true;
@@ -1426,7 +1426,7 @@ use Quickplus\Lib\DataMsg\DataMsg;
             return $this->mainIdCol;
         }
 
-        public function getData($db,$sql,$orderBy,$pagerows=0,$curpage=1,$sqlBuilder=null)
+        public function getData($db,$sql,$orderBy,$pagerows=0,$curpage=1,$sqlBuilder=null,$loadTotalInfo=true)
         { 
 
            $this->setDb($db);
@@ -1434,6 +1434,7 @@ use Quickplus\Lib\DataMsg\DataMsg;
            $this->setExecSql($fullSql);
            $this->getSqlBuilder($sqlBuilder);
            $dataMsg = new DataMsg($db);
+           $dataMsg->setLoadTotalInfo($loadTotalInfo);
            $srvSqlMainCol  = null;
            if($db->isMssql())
            {
@@ -1458,12 +1459,12 @@ use Quickplus\Lib\DataMsg\DataMsg;
                $r =  $data->getDataArray();
                foreach($r as $key=>$value)
                {
+                
                  $value = StringTools::conv($value,QuickFormConfig::$encode);
                  $r[$key] = $value;
                }
                $this->result[] =$this->modifyData($r);
            }
-         
        }
         
         public function modifyData($data)
@@ -3443,7 +3444,7 @@ error.insertAfter( element );
         }
         public function getCommonAjaxSelectBy($name,$arguments)
         {
-        	 return $this->getCommonSelectBy($name,$arguments,"getAjaxSelectBy",false,false,true);
+          return $this->getCommonSelectBy($name,$arguments,"getAjaxSelectBy",false,false,true);
         }
         public function getCommonAutoCompleteBy($name,$arguments)
         {
@@ -5634,6 +5635,29 @@ error.insertAfter( element );
                      if($a!=null&&trim($a)!="")
                     {
                       $sql.=" OR ".$colname." LIKE '%".trim($a)."%'";
+                    }
+                }
+                $sql = trim($sql);
+                $sql = ltrim($sql,"OR");
+                return $sql;
+             }
+             return $this->multiLineSearchShowMode($dbname,$colname,$src,$sql,$defaultValue,false,10);
+          }
+
+           public function multiLineStartWithSearchShowMode($dbname,$colname,$src,$sql=false,$defaultValue="")
+          {
+
+             $sign = $this->getSearchPrefix().$dbname;    
+             if($sql)
+             {
+                $value = $src[$sign];
+                $array = explode("\n",$value);
+                $sql = "";
+                foreach($array as $a)
+                {
+                     if($a!=null&&trim($a)!="")
+                    {
+                      $sql.=" OR ".$colname." LIKE '".trim($a)."%'";
                     }
                 }
                 $sql = trim($sql);

@@ -9,6 +9,9 @@ use Quickplus\Lib\QuickPage;
 use Quickplus\Lib\QuickLoginManager;
 use Quickplus\Lib\QuickFormConfig;
 ?>
+<style>
+.footer{position: fixed;bottom: 0;left: 0;width: 100%;}
+</style>
 <?php
     $menuid = intval(ArrayTools::getValueFromArray($_REQUEST,QuickFormConfig::$menuIdMark));
     $subForm = ArrayTools::getValueFromArray($_REQUEST,QuickFormConfig::$subFormMark);
@@ -124,6 +127,7 @@ use Quickplus\Lib\QuickFormConfig;
 <meta http-equiv="Content-Type" content="text/html;charset=<?php echo QuickFormConfig::$encode?>" >
 
 <?php echo $obj->getScriptStr();?>
+
 <?php echo QuickPage::getPageJs($_REQUEST,$obj,$searchSign,"quickTable");?>
 </head>
 <body >
@@ -160,7 +164,7 @@ use Quickplus\Lib\QuickFormConfig;
 
 <?php echo $obj->getHiddenStr()?> 
 <table width="100%" >
-<?php if(($obj->getPageExport()&&$pageRows!=0&&$endRecord>0)||($obj->getExport()&&$totalCount!=0)||($obj->getClear()&&$obj->getSearchBar())||($obj->getSearchBar())){ ?>
+<?php if(($obj->getPageExport())||($obj->getExport())||($obj->getClear()&&$obj->getSearchBar())||($obj->getSearchBar())){ ?>
  <tr><td>
  <?php 
     $isCollapse = null;
@@ -281,6 +285,18 @@ use Quickplus\Lib\QuickFormConfig;
                           </ul>
                     </div>
                   <?}?> 
+                  <?php $dashboardGroup = $obj->getDashboardGroup();
+                  if(is_array($dashboardGroup)&&count($dashboardGroup)>0)
+                  {?>
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboards</button>
+                         <ul class="dropdown-menu">
+                          <?php foreach($dashboardGroup as $dashboardid=>$array){?>
+                            <li><a href="javascript:_showDashboard('<?php echo $dashboardid;?>')"><?php echo $array["name"]?></a></li>
+                            <?php }?>
+                          </ul>
+                    </div>
+                  <?}?> 
                     
              <?php   if($obj->getClear()&&$obj->getSearchBar()) { ?>
                      <input type="button" onclick="_clear()" value="Clear"/>
@@ -349,7 +365,7 @@ if($toolbar!=null&&!$blank){
 
 <tr>
     <td>
-    <table>
+    <table id="sticker">
     <tr><td>
     <?php if($obj->isAdd()){?>
             <input type="button" Value="Add" onClick="_add()" />
@@ -374,13 +390,7 @@ if($toolbar!=null&&!$blank){
             <input type="button" Value="Delete" onClick="_delete()" />
     <?php }?>
     </td>
-    <td align="right">
-      <?php if($obj->isChoose()){?>
-           <input type="button" Value="Keep Selected Rows" onClick="_keepRows()">
-            <input type="button" Value="Exclude Selected Rows" onClick="_excludeRows()">
-
-      <?php }?>
-    </td>
+ 
     </table>
     </td>
 </tr>
@@ -510,13 +520,46 @@ for($i=0;$i<count($htmlArray);$i++)
        
     </div>
 </body>
-
 <?php
 if($qp_anchor!=null&&trim($qp_anchor)!="")
     {
         echo '<script language="javascript" >location.hash="'.$qp_anchor.'";</script>';
     } 
 ?>
+<div class="footer">
+ <table>
+    <tr><td>
+    <?php if($obj->isAdd()){?>
+            <input type="button" Value="Add" onClick="_add()" />
+    <?php }?>
+     <?php if($obj->isEdit()){?>
+            <input type="button" Value="Edit" onClick="_edit()" /> 
+     <?php }?>        
+    
+     <?php 
+        $customProcessMethod = $obj->getCustomProcessMethod();
+        foreach($customProcessMethod as $processName =>$methodInfo)
+        {   
+            echo $obj->getProcessButtonHtml($processName)." ";
+        }
+         $customOperationButtons = $obj->getCustomOperationButtons();
+        foreach($customOperationButtons as $buttonid =>$html)
+        {   
+            echo $html." ";
+        }
+    ?>
+    <?php if($obj->isDelete()){?>
+            <input type="button" Value="Delete" onClick="_delete()" />
+    <?php }?>
+    </td>
+    <td align="right">
+      <?php if($obj->isChoose()){?>
+           <input type="button" Value="Keep Selected Rows" onClick="_keepRows()">
+            <input type="button" Value="Exclude Selected Rows" onClick="_excludeRows()">
 
+      <?php }?>
+    </td>
+    </table>
+</div>
     
 <?php echo  $obj->getCustomJs();?></html>

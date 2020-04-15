@@ -384,7 +384,7 @@ class quickFormDrawer
     
         public function getForm($db,$src,$curpage=1,$pagerows=null,$isExport=false,$blank=false,$orderMethod=null,$searchMethod=null)
         {
-
+            $loadTotalInfo = true;
             if($this->quickForm->getDb()!=null)
             {
                 $db = $this->quickForm->getDb();
@@ -402,6 +402,7 @@ class quickFormDrawer
             if($isExport)
             {
                 $src["searchSign"] = 1;
+                $loadTotalInfo = false;
             } 
            
             if(!$blank)
@@ -442,6 +443,7 @@ class quickFormDrawer
             if(StringTools::isStartWith($exportmode,"all"))
             {
                $this->quickForm->setPageRows(0);
+                
             }
             if($this->getReportName()==null||trim($this->getReportName())=="")
             {
@@ -524,7 +526,7 @@ class quickFormDrawer
                        
                     $dataMsg = new DataMsg();
             
-                    $this->quickForm->getData($db,$fullSql,$this->getOrderClause(),$this->quickForm->getPageRows(),$curpage);
+                    $this->quickForm->getData($db,$fullSql,$this->getOrderClause(),$this->quickForm->getPageRows(),$curpage,null,$loadTotalInfo);
                         $this->quickForm->getAllLinkData();
                         $this->quickForm->proessingColMapping($db);
                     }
