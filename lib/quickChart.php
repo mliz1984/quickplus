@@ -59,15 +59,21 @@
         }
         public function setAreaStyle($chartid,$serieName,$style=Array())
         {
-            $this->chartCustomSetting[$chartid][$serieName]["areaStyle"] = Array();
+            $this->chartCustomSetting[$chartid][$serieName]["areaStyle"] =$style;
         }
         public function getAreaStyle($chartid,$serieName)
         {
             $result = null;
+            $charttype =$this->chartInfo[$chartid]["charttype"];
             if(isset($this->chartCustomSetting[$chartid][$serieName]["areaStyle"])&&is_array($this->chartCustomSetting[$chartid][$serieName]["areaStyle"]))
             {
                 $result = $this->chartCustomSetting[$chartid][$serieName]["areaStyle"];
             }
+            else if($charttype=="area")
+            {
+                $result = Array();
+            }
+
             return $result;
         }
         public function setChartRenderer($chartid,$renderer)
@@ -169,7 +175,11 @@
         protected function getXAxis($chartid)
         {
             $array = Array();
-            
+            $charttype =$this->chartInfo[$chartid]["charttype"];
+            if($charttype=="area")
+            {
+                $array["boundaryGap"] = false;
+            }
             return $array;
         }
 
@@ -232,6 +242,12 @@
 
             $charttype =$this->chartInfo[$chartid]["charttype"];
             $isPieChart = false;
+            
+            if($charttype=="area")
+            {
+                $charttype = "line";
+            }
+
             if($charttype=="pie")
             {
                     $isPieChart = true;
@@ -546,15 +562,11 @@
                     }
 
                     $tmpStr .=",{".$lableStr.$radiusStr.jqueryTools::arrayToString($dataArray)."}";
-              
                 }
             }
             $tmpStr = ltrim($tmpStr,",");
             $lableStr = "";
-            if($isPieChart&&$serieNum>1)
-            {
-                
-            }
+           
             $result["series"] = "[".$tmpStr."]";
             if(!$isPieChart)
             {
