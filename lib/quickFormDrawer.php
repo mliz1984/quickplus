@@ -9,7 +9,13 @@ class quickFormDrawer
         protected $reportName;
         protected $blank = null;
         protected $where = null;
-   
+        protected $loadTotalInfo = true;
+
+        public function setLoadTotalInfo($loadTotalInfo)
+        {
+            $this->loadTotalInfo = $loadTotalInfo; 
+        }
+
         public function setChartFilter($chartId)
         {
             $this->quickForm = $this->quickForm->initChartFilter($chartId);
@@ -384,7 +390,7 @@ class quickFormDrawer
     
         public function getForm($db,$src,$curpage=1,$pagerows=null,$isExport=false,$blank=false,$orderMethod=null,$searchMethod=null)
         {
-            $loadTotalInfo = true;
+            $loadTotalInfo = $this->loadTotalInfo;
             if($this->quickForm->getDb()!=null)
             {
                 $db = $this->quickForm->getDb();

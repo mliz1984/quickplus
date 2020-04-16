@@ -31,6 +31,7 @@ set_time_limit(0);
     $quickFormDrawer = new quickFormDrawer();
     $quickFormDrawer->setQuickForm($db,$form);
     $quickFormDrawer->setChartFilter($setname);
+    $quickFormDrawer->setLoadTotalInfo(false);
     $obj = $quickFormDrawer->getForm($db,$_REQUEST,1,0,false,false);
      
     ?>

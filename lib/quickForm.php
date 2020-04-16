@@ -10,7 +10,7 @@
   use Quickplus\Lib\Tools\CommonTools;
   use Picqer\Barcode\BarcodeGeneratorSVG;
   use Picqer\Barcode\BarcodeGenerator;
-  class quickForm extends quickLayout
+   class quickForm extends quickLayout
   {
         protected $debug = false;
         protected $jsOrderType = Array();
@@ -824,9 +824,15 @@
         {
             $this->dataTableSetting[$id]["pageRows"] = $pageRows;
         }
-        public function addQuickCardToDashboard($dashboardid,$id,$rowid,$colid,$title,$content,$groupid=null,$width=null,$height=null)
+        public function addDataCardToDashboard($dashboardid,$id,$rowid,$colid,$title,$content,$method=null,$groupid=null,$width=null,$height=null)
         {
-            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"quickcard","id"=>$id,"groupid"=>$groupid,"title"=>$title,"content"=>$content,"width"=>$width,"height"=>$height);
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"datacard","id"=>$id,"groupid"=>$groupid,"title"=>$title,"content"=>$content,"method"=>$method,"width"=>$width,"height"=>$height);
+
+        }
+
+        public function addSimpleCardToDashboard($dashboardid,$id,$rowid,$colid,$title,$content,$groupid=null,$width=null,$height=null)
+        {
+            $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid] = Array("type"=>"simplecard","id"=>$id,"groupid"=>$groupid,"title"=>$title,"content"=>$content,"width"=>$width,"height"=>$height);
 
         }
 
@@ -934,11 +940,20 @@
                             $html = $quickHtmlDrawer->getDataTableHtml($obj,$ret);
 
                         }
-                        else if($type=="quickcard")
+                        else if($type=="simplecard"||$type=="datacard")
                         {
                         
                             $title = $data["title"];
                             $content = $data["content"];
+                            if($type=="datacard")
+                            {
+                                $content = $resultParts[$content];
+                                $method = $data["method"];
+                                if(!empty($method))
+                                {
+                                    $content = $this->$method($dashboardid,$id,$content);
+                                }
+                            }
                             $html = $quickHtmlDrawer->getQuickCardHtml($id,$title,$content);
                         
                         }
