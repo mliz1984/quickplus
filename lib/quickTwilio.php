@@ -1,10 +1,10 @@
 <?php
     namespace Quickplus\Lib;
  	class QuickTwilio extends QuickTwilioConfig
- 	{
- 		protected $client;
+    {
+        protected $client;
         protected $from; 
- 		public function __construct($from=null)
+        public function __construct($from=null)
         {
               $this->client = new Services_Twilio($this->account_sid, $this->auth_token); 
               $this->from = $from;   
@@ -32,7 +32,7 @@
             return date("Y-m-d H:i:s",strtotime($dataTime));
         }
 
- 		 public function sendSms($to,$msg,$media=null)
+         public function sendSms($to,$msg,$media=null)
         {
           $from = $this->from;
           if($msg==null||trim($msg)=="")
@@ -47,7 +47,7 @@
             if(is_array($to))
             {
                 $echo = Array();
-                foreach($to as $number)
+                foreach($to as $number => $name)
                 {
                     $tmp = $client->account->messages->sendMessage($from, $number, $msg,$media);
                 }  
@@ -137,5 +137,5 @@
           
             return $result;
         }
- 	}
+    }
  ?>
