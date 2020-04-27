@@ -11,6 +11,11 @@ namespace Quickplus\Lib;
      protected $comLink = Array();
      protected $autoRefresh = false;
      protected $customCol = false; 
+     protected $defaultDashboardId = "dashboard";
+     public function setDefaultDashboardId($defaultDashboardId)
+     {
+        $this->defaultDashboardId = $defaultDashboardId;
+     }
      public function setComLink($dashboardid,$id,$oriid)
      {
         $this->comLink[$dashboardid][$id] = $oriid;
@@ -88,6 +93,7 @@ namespace Quickplus\Lib;
             $quickFormSrc = $this->getSearchArray($dashboardid,$sourceid,$src);
             
             $quickFormDrawer = new quickFormDrawer();
+            $quickFormDrawer->setLoadRes(false);
             $quickForm = $quickFormDrawer->setQuickForm($this->getDb(),$quickForm);
             $quickFormDrawer->setLoadTotalInfo(false);
             $obj = $quickFormDrawer->getForm($this->getDb(),$quickFormSrc,1,0,false,false);
@@ -124,9 +130,12 @@ namespace Quickplus\Lib;
           }
         return $ret;
      }
-     public function getDashboardHtml($dashboardid,$src)
+     public function getDashboardHtml($src,$dashboardid=null)
         {
-
+            if(empty($dashboardid))
+            {
+                $dashboardid = $this->defaultDashboardId;
+            }
             $ret = "";
             if(is_array($this->dashboardGroup[$dashboardid]["content"]))
             {
@@ -168,6 +177,7 @@ namespace Quickplus\Lib;
                         {
                           $oriid = $this->comLink[$dashboardid][$id];
                           $quickFormDrawer = new quickFormDrawer();
+                          $quickFormDrawer->setLoadRes(false);
                           $form = $quickFormDrawer->setQuickForm($this->getDb(),$quickForm);
                           $form->setResult($result);
                         }
