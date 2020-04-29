@@ -5,7 +5,7 @@ set_time_limit(0);
     use Quickplus\Lib\QuickFormConfig;
     use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\Tools\ArrayTools;
-    $db =  new QuickFormConfig::$SqlType();
+   $db =  new QuickFormConfig::$SqlType();
     $testing = 0;
     $formMark = ArrayTools::getValueFromArray($_REQUEST,'_statistics_formmark');
     $isreport =  ArrayTools::getValueFromArray($_REQUEST,'_statistics_isreport');
@@ -13,13 +13,13 @@ set_time_limit(0);
     $form = null;
     if(intval($isreport)==1)
     {
-    	$reportDesigner = new reportDesigner();
+      $reportDesigner = new reportDesigner();
 
       $form = $reportDesigner->getQuickForm($db,intval($formMark));
     }
     else
     {
-    	$form = new $formMark();
+      $form = new $formMark();
     }
     //$form->setLoginCheck(false);
      if($form->initDb()!=null)
@@ -41,12 +41,12 @@ set_time_limit(0);
     <meta http-equiv="Content-Type" content="text/html;charset=<?php echo QuickFormConfig::$encode?>" >
     <?php echo $obj->getScriptStr();?>
    </head>
-   <body>
-   <div id="master">
+   <body >
+   <div  style="height: 100%;width:100%; position: absolute;"> 
      <?php if($obj->getSearchBar()){?>
     <div>
        <button class="btn btn-info " type="button"  onclick="$('#qp_searchBar').css('display','');"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
-      <div id="qp_searchBar" style="display:none;position:absolute;left:0%;top:0%;z-index:999" class="panel panel-info"><div class="panel-heading"><h4>Search</h4></div>  <div class="panel-body"><table width="100%" >
+      <div id="qp_searchBar" style="display:none;position:absolute;left:0%;top:0%;z-index:999" class="panel panel-info"><div class="panel-heading"><h4>Search</h4></div>  <div class="panel-body"><table width="100%"  >
          <?php $url = UrlTools::getFullUrl();?>
          <form name="quickForm" id="quickForm" action = "<?php echo $url;?>" method="post" enctype="multipart/form-data">
           <input type="hidden" id="curPage" name="curPage" value="1"/>
@@ -67,14 +67,12 @@ set_time_limit(0);
         </form>
       </div></div></div>
         <?php }?>
-      <div style="width:100%">
+     <div style="width:100%;height:100%;">
        
-      
-       <table> 
-       <tr><td align="center"><?php echo $obj->getChartName($setname);?></td></tr>
-         <tr><td align="center"> <?php echo $obj->getChartHtml($setname,$obj->getResult(),$_REQUEST);?> </td></tr>
-           <tr><td align="center"> <input type="button"  class="btn btn-info  btn-xs" value="Close"  onclick="window.close();"/>
-        </td></tr></table>
+        <div align="center"> <?php echo $obj->getChartName($setname);?></div>
+           <div align="center" style="width:100%;height:90%;"><?php echo $obj->getChartHtml($setname,$obj->getResult(),$_REQUEST);?> </div>
+         <div align="center">   <input type="button"  class="btn btn-info  btn-xs" value="Close"  onclick="window.close();"/></div>
+       
        </div>
    </body>
 <?php echo  $obj->getCustomJs();?></html>

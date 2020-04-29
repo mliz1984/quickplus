@@ -223,17 +223,21 @@
             $rondom = StringTools::getRandStr();
             $chartHtmlArray = $this->getChartHtmlArray($chartid,$oriArray);
             $id = $rondom.'_'.$chartid;
-            $html ='<div id="div_chart_'.$id.'" style="width:'.$this->getChartWidth($chartid).';height:'.$this->getChartHeight($chartid).';"></div>';
+            $html ='<div id="div_chart_'.$id.'" type="quickChart" style="width:'.$this->getChartWidth($chartid).';height:'.$this->getChartHeight($chartid).';"></div>';
             $renderer = $this->chartRenderer[$chartid];
             if($renderer==null||trim($renderer)==""||(trim($renderer)!="svg"&&trim($renderer)!="canvas"))
             {
                 $renderer = QuickFormConfig::$defaultChartRenderer;
             }
             $html.= '<script type="text/javascript">';
-            $html.= 'var chart_'.$id.' = echarts.init(document.getElementById("div_chart_'.$id.'"), null, {renderer: \''.$renderer.'\'});';
-            $html.= 'var option_'.$id.' = {'.jqueryTools::arrayToString($chartHtmlArray).'};';
+            $html.= 'let chart_'.$id.' = echarts.init(document.getElementById("div_chart_'.$id.'"), null, {renderer: \''.$renderer.'\'});';
+            $html.= 'let option_'.$id.' = {'.jqueryTools::arrayToString($chartHtmlArray).'};';
             $html.= 'chart_'.$id.'.setOption(option_'.$id.');';
-            $html.= '</script>';
+            $html.='window.addEventListener("resize", () => {
+              console.log("resize");
+              chart_'.$id.'.resize();
+            })';
+                $html.= '</script>';
             return $html;
         }   
   

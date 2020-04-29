@@ -193,13 +193,13 @@ namespace Quickplus\Lib;
                         
                         if($type=="chart")
                         {
-                            $this->setChartWidth($id,"95%");    
+                            $form->setChartWidth($id,"95%");    
                             if(empty($height))
                             {
                                     $height = intval($this->getChartHeight($id)/$j);
                                      
                             }
-                            $this->setChartHeight($id,$height."px");
+                            $form->setChartHeight($id,$height."px");
                             $html = $quickHtmlDrawer->getChartHtml($form,$oriid,$rowData,$src);
                         }
                         else if($type=="datatable")
