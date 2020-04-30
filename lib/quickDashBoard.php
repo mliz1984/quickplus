@@ -75,6 +75,7 @@ namespace Quickplus\Lib;
      {
            $quickFormClass = $this->dataSource[$dashboardid][$sourceid];
            $ret = new  $quickFormClass();
+           $ret->setBlank($this->isBlank())
            return $ret;
           
      }
@@ -103,6 +104,9 @@ namespace Quickplus\Lib;
 
         return $ret;
      }
+
+      
+
      public function getDashboardResultParts($dashboardid,$sourceid,$quickform,$data,$src)
      {  
          $ret = Array();
@@ -131,12 +135,18 @@ namespace Quickplus\Lib;
         return $ret;
      }
      public function getDashboardHtml($src,$dashboardid=null)
-        {
+        { 
+
+            $haveChart = false;
             if(empty($dashboardid))
             {
                 $dashboardid = $this->defaultDashboardId;
             }
             $ret = "";
+            if(!$this->isBlank())
+            {
+                $src["searchSign"] = 1; 
+            }
             if(is_array($this->dashboardGroup[$dashboardid]["content"]))
             {
 
@@ -181,6 +191,7 @@ namespace Quickplus\Lib;
                           $form = $quickFormDrawer->setQuickForm($this->getDb(),$quickForm);
                           $form->setResult($result);
                         }
+
                         $key ="";
                         if(!empty($dataKey)&&is_array($resultParts[$dataKey]))
                         {
@@ -196,11 +207,11 @@ namespace Quickplus\Lib;
                             $form->setChartWidth($id,"95%");    
                             if(empty($height))
                             {
-                                    $height = intval($this->getChartHeight($id)/$j);
-                                     
+                                $height = intval(rtrim($this->getChartHeight($id),"%")/$j);     
                             }
-                            $form->setChartHeight($id,$height."px");
+                            $form->setChartHeight($id,$height."%");
                             $html = $quickHtmlDrawer->getChartHtml($form,$oriid,$rowData,$src);
+                             $haveChart = true;
                         }
                         else if($type=="datatable")
                         {
@@ -266,7 +277,36 @@ namespace Quickplus\Lib;
                 }
                 $ret = $this->getHtml();
             }
+            if($haveChart)
+            {
+                 $ret.=$this->getChartAutoSizeJs();
+            }
             return $ret;
         }
-    
+        protected function getChartAutoSizeJs()
+        {
+            $js  ='<script type="text/javascript">
+                    $(\'.lobipanel\').on(\'onSmallSize.lobiPanel\', function(ev, lobiPanel){
+                          var event = new Event(\'resize\');
+                           window.dispatchEvent(event);
+                        });
+                    $(\'.lobipanel\').on(\'onFullScreen.lobiPanel\', function(ev, lobiPanel){
+                       var event = new Event(\'resize\');
+                           window.dispatchEvent(event);
+                        });
+                    $(\'.lobipanel\').on(\'resizeStop.lobiPanel\', function(ev, lobiPanel){
+                        var event = new Event(\'resize\');
+                           window.dispatchEvent(event);
+                        });
+                    $(\'.lobipanel\').on(\'onPin.lobiPanel\', function(ev, lobiPanel){
+                        var event = new Event(\'resize\');
+                           window.dispatchEvent(event);
+                        });
+                  $(\'.lobipanel\').on(\'onUnpin.lobiPanel\', function(ev, lobiPanel){
+                        var event = new Event(\'resize\');
+                           window.dispatchEvent(event);
+                        });
+                   </script>';
+            return $js;
+        }
   }

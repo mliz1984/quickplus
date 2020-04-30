@@ -641,9 +641,9 @@ $obj = $quickForm;
  </tr>  
  </table>  
   </div>
+  <?php } ?>
   </form>
   <div  style="height: 100%;width:100%; position: absolute;"> 
           <?php echo $obj->getDashboardHtml($_REQUEST);?> <
      </div>
  <?php echo  $obj->getCustomJs(); }?>
-<?php } ?>
