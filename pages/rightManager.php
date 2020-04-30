@@ -12,7 +12,7 @@
     $blank = Tools\ArrayTools::getValueFromArray($_REQUEST,"blank");
     $id = Tools\ArrayTools::getValueFromArray($_REQUEST,"id");
     $pageRows= Tools\ArrayTools::getValueFromArray($_REQUEST,"pageRows");
-    $page =  Tools\ArrayTools::getValueFromArray($_REQUEST,"page");
+    $page =  Tools\ArrayTools::getValueFromArray($_REQUEST,"curPage");
     $method =  Tools\ArrayTools::getValueFromArray($_REQUEST,"method");
     $searchSign =   Tools\ArrayTools::getValueFromArray($_REQUEST,"searchSign");
     $exportmode =  Tools\ArrayTools::getValueFromArray($_REQUEST,"exportmode");

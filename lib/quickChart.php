@@ -1,6 +1,7 @@
 <?php 
     namespace Quickplus\Lib;
-    use Quickplus\Lib\Tools;
+    use Quickplus\Lib\Tools\StringTools;
+    use Quickplus\Lib\Tools\jqueryTools;
     class QuickChart extends QuickStatistics
     { 
         protected $chartDefaultSetting = Array();
@@ -212,7 +213,7 @@
             return $array;  
         }
 
-        public function getChartHtml($chartid,$oriArray,$src=null)
+        public function getChartHtml($chartid,$oriArray,$src=null,$returnID=false)
         {
             $oriArray = $this->processChartData($oriArray,$chartid,$src);   
             $isReverse = $this->getChartDataReverse($chartid);
@@ -238,6 +239,7 @@
               chart_'.$id.'.resize();
             })';
                 $html.= '</script>';
+            
             return $html;
         }   
   
@@ -246,12 +248,26 @@
 
             $charttype =$this->chartInfo[$chartid]["charttype"];
             $isPieChart = false;
-            
+            $isDoughnut = false;
             if($charttype=="area")
             {
                 $charttype = "line";
             }
+            $radiusMin = "50%";
+            $radiusMax = "65%";
+            if(StringTools::isStartWith($charttype,"doughnut"))
+            {
 
+                $tmp = explode("-", $charttype);
+                if(count($tmp)==3)
+                {
+                    $radiusMin = strval(intval($tmp[1]))."%";
+                    $radiusMax = strval(intval($tmp[2]))."%";
+                }
+                $isDoughnut = true;
+                $charttype = "pie";
+            }
+            
             if($charttype=="pie")
             {
                     $isPieChart = true;
@@ -538,6 +554,10 @@
                             
                                 $lable["label"]["normal "]["show"]= false;
                                 
+                           }
+                           else if($isDoughnut)
+                           {
+                                $radiusStr = "radius:['".$radiusMin."','".$radiusMax."'],";
                            }
                            $lableStr = jqueryTools::arrayToString($lable);
                            

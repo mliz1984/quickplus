@@ -268,7 +268,7 @@ class quickHtmlDrawer extends quickFormDrawer
  			 {
  			 	$data = $obj->getResult();
  			 }
-             $result.= $obj->getChartHtml($chartName,$data);
+             $result.= $obj->getChartHtml($chartName,$data,null);
              if($this->withPanel)
              {
               	 $panel = new HtmlElement();

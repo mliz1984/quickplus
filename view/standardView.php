@@ -67,6 +67,13 @@ use Quickplus\Lib\QuickFormConfig;
          $db = new QuickFormConfig::$SqlType();
     } 
     $quickForm = $quickFormDrawer->setQuickForm($db,$quickForm);
+    $isDashboard = false;
+    if($quickForm instanceof quickDashBoard)
+    {
+        $isDashboard = true;
+    }
+    if(!$isDashboard)
+    {
     if($pageRows==null||trim($pageRows)=="")
     {
         $pageRows = $quickForm->getPageRows();
@@ -563,3 +570,80 @@ if($qp_anchor!=null&&trim($qp_anchor)!="")
 </div>
     
 <?php echo  $obj->getCustomJs();?></html>
+<?php }else{ 
+$obj = $quickForm;
+  ?>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html;charset=<?php echo QuickFormConfig::$encode?>" >
+<?php echo $obj->getScriptStr();?>
+<?php echo QuickPage::getPageJs($_REQUEST,$obj,$searchSign,"quickTable");?>
+                       
+<form name="quickForm" id="quickForm" action = "<?php echo $url;?>" method="post" enctype="multipart/form-data">  
+<input type="hidden" id="searchSign" name="searchSign" value="1" />                  
+<?php 
+    $isCollapse = null;
+    if($_REQUEST["searchBarCollapseStatus"]!=null&&trim($_REQUEST["searchBarCollapseStatus "])!="")
+    {
+        $tmp = intval(trim($_REQUEST["searchBarCollapseStatus"]));
+        if($tmp==1)
+        {
+            $isCollapse = true;
+        }
+        else
+        {
+            $isCollapse = false;
+        }
+    }
+    if($isCollapse == null)
+    {
+        $isCollapse = $obj->getSearchBarCollapse();
+    }
+    $collapse = "";
+    if(!$isCollapse)
+    {
+         $collapse = "in";
+    }
+    if($obj->getSearchBar())
+    {
+ ?>
+
+    <?php if($obj->getSearchDivMode()){ ?> 
+ <button class="btn btn-info " type="button"  onclick="$('#qp_searchBar').css('display','');"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
+ <?php }else{?>
+ <button class="btn btn-info " type="button" data-toggle="collapse" data-target="#searchBarCollapse" aria-expanded="<?php echo strval($isCollapse);?>" aria-controls="searchBarCollapse">
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
+<?php } ?><br>
+<div class="collapse <?php echo $collapse;?>" id="searchBarCollapse">
+<input type="hidden" id="searchBarCollapseStatus" name="searchBarCollapseStatus" value="<?PHP echo strval($isCollapse); ?>"/>
+<?php if($obj->getSearchDivMode()){ ?>
+      <div id="qp_searchBar" style="display:none;position:absolute;left:0%;top:0%;z-index:999" class="panel panel-info"><div class="panel-heading"><h4>Search</h4><div class="panel-body"><?php } ?><table width="100%" >
+         <?php echo $quickFormDrawer->getSearchBarHtml($_REQUEST);?>
+       <table>  
+         <tr><td colspan="2" align="right">
+          <?php   if($obj->getSearchBar()){?>
+            <input type="button" onclick="$('#quickForm').submit();" value="Search"/>
+            <?php }?>
+             <?php   if($obj->getClear()&&$obj->getSearchBar()) { ?>
+                     <input type="button" onclick="_clear()" value="Clear"/>
+            <?php }?>
+             <?php if($obj->getSearchDivMode()){ ?>
+              <button class="btn btn-danger " type="button"  onclick="$('#qp_searchBar').css('display','none');">Close</button>
+               <?php }?>
+            
+             </td>
+         </tr>     
+     </table></div>
+     </div>
+ </td>
+ </tr>  
+ </table>  
+  </div>
+  </form>
+  <div  style="height: 100%;width:100%; position: absolute;"> 
+          <?php echo $obj->getDashboardHtml($_REQUEST);?> <
+     </div>
+ <?php echo  $obj->getCustomJs(); }?>
+<?php } ?>
