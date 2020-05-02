@@ -75,7 +75,7 @@ namespace Quickplus\Lib;
      {
            $quickFormClass = $this->dataSource[$dashboardid][$sourceid];
            $ret = new  $quickFormClass();
-           $ret->setBlank($this->isBlank())
+           $ret->setBlank($this->isBlank());
            return $ret;
           
      }
@@ -183,14 +183,18 @@ namespace Quickplus\Lib;
                         $resultParts = $this->getDashboardResultParts($dashboardid,$sourceid,$quickForm,$result,$src);
                         $rowData = $result;
                         $form = $this;
+                        $quickFormDrawer = new quickFormDrawer();
+                        $quickFormDrawer->setLoadRes(false);
                         if(isset($this->comLink[$dashboardid][$id]))
                         {
                           $oriid = $this->comLink[$dashboardid][$id];
-                          $quickFormDrawer = new quickFormDrawer();
-                          $quickFormDrawer->setLoadRes(false);
                           $form = $quickFormDrawer->setQuickForm($this->getDb(),$quickForm);
-                          $form->setResult($result);
                         }
+                        else
+                        {
+                           $form = $quickFormDrawer->setQuickForm($this->getDb(),$form); 
+                        }
+                        $form->setResult($result);
 
                         $key ="";
                         if(!empty($dataKey)&&is_array($resultParts[$dataKey]))

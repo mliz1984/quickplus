@@ -5,7 +5,6 @@ set_time_limit(0);
     use Quickplus\Lib\QuickFormConfig;
     use Quickplus\Lib\quickFormDrawer;
     use Quickplus\Lib\Tools\ArrayTools;
-    //print_r($_REQUEST);
     $db =  new QuickFormConfig::$SqlType();
   
     $testing = 0;
@@ -15,13 +14,13 @@ set_time_limit(0);
     $form = null;
     if(intval($isreport)==1)
     {
-    	$reportDesigner = new reportDesigner();
+      $reportDesigner = new reportDesigner();
 
       $form = $reportDesigner->getQuickForm($db,intval($formMark));
     }
     else
     {
-    	$form = new $formMark();
+      $form = new $formMark();
     }
     //  $form->setLoginCheck(false);
      if($form->initDb()!=null)
@@ -103,12 +102,12 @@ set_time_limit(0);
     </div>
   </div>
       <?php }?>
-      <div style="width:100%">
+     <div style="width:100%">
         
     
        <table> 
        <tr><td align="center"><?php echo $obj->getStatisticName($setname);?></td></tr>
-         <tr><td align="center"> <?php echo $obj->getStatisticsHtml($setname,$_REQUEST);?> </td></tr>
+         <tr><td align="center"> <?php echo $obj->getStatisticsHtml($setname,$obj->getResult(),$_REQUEST);?> </td></tr>
            <tr><td align="center"> <input type="button"  class="btn btn-info  btn-xs" value="Close"  onclick="window.close();"/>
            </td></tr></table>
        </div>

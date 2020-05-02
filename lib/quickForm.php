@@ -1,6 +1,5 @@
 <?php 
   namespace  Quickplus\Lib;
-
   use Quickplus\Lib\DataMsg\DataMsg;
   use Quickplus\Lib\DataMsg\Data;
   use Quickplus\Lib\Tools\DbTools;
@@ -10,7 +9,7 @@
   use Quickplus\Lib\Tools\CommonTools;
   use Picqer\Barcode\BarcodeGeneratorSVG;
   use Picqer\Barcode\BarcodeGenerator;
-   class quickForm extends quickLayout
+ class quickForm extends quickLayout
   {
         protected $debug = false;
         protected $jsOrderType = Array();
@@ -1700,12 +1699,9 @@
             }
             return $orderField;
         }
-        public function getStatisticsHtml($setname,$src=null,$oriArray=null)
+        public function getStatisticsHtml($setname,$oriArray,$src=null)
         {
-            if(!is_array($oriArray))
-            {
-                $oriArray = $this->getResult();
-            }
+
             $html = null;
             $array = $this->statisticsGroup[$setname];
             if(is_array($array))

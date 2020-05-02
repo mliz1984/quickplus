@@ -218,7 +218,11 @@ class quickHtmlDrawer extends quickFormDrawer
 
 		public function getStatisticHtml($obj,$statisticName,$data=null,$loadQuickFormJs=false)
 		{
-			$result = "";
+			 $result = "";
+			if($data==null)
+ 			 {
+ 			 	$data = $obj->getResult();
+ 			 }
  			 if($loadQuickFormJs===true)
  			 {
  			 		$result.=$obj->getScriptStr();
@@ -227,7 +231,8 @@ class quickHtmlDrawer extends quickFormDrawer
  			 {
  			 	$data = $obj->getResult();
  			 }
-             $result.= $obj->getStatisticsHtml($statisticName,$obj->getResult());
+
+             $result.= $obj->getStatisticsHtml($statisticName,$data,null);
              if($this->withPanel)
              {
               	 $panel = new HtmlElement();

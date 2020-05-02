@@ -213,7 +213,7 @@
             return $array;  
         }
 
-        public function getChartHtml($chartid,$oriArray,$src=null,$returnID=false)
+        public function getChartHtml($chartid,$oriArray,$src=null)
         {
             $oriArray = $this->processChartData($oriArray,$chartid,$src);   
             $isReverse = $this->getChartDataReverse($chartid);
