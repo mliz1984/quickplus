@@ -101,7 +101,7 @@ class RightManager extends quickForm
                 $hh = "<br>";
                 if($export)
                 {
-                    $hh="\n";
+                    $hh="\r\n";
                 }
                 if(count($rightArray)>0)
                 {

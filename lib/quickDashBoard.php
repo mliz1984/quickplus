@@ -20,7 +20,10 @@ namespace Quickplus\Lib;
      {
         $this->comLink[$dashboardid][$id] = $oriid;
      }  
-
+     public function setDashboardPanelName($dashboardid,$rowid,$colid,$dashboardPanelName)
+     {
+        $this->dashboardGroup[$dashboardid]["content"][$rowid][$colid]["dashboardPanelName"] = $dashboardPanelName;
+     }
      public function setDataSourceProcessMethod($dashboardid,$sourceid,$method,$link=false)
      {
         $this->dataSourceProcessMethod[$dashboardid][$sourceid]=Array("method"=>$method,"link"=>$link);
@@ -79,7 +82,7 @@ namespace Quickplus\Lib;
            return $ret;
           
      }
-
+    
 
      protected function getDashboardResult($dashboardid,$sourceid,$quickForm,$src)
      {
@@ -166,7 +169,6 @@ namespace Quickplus\Lib;
                         $type =$data["type"];
                         $id = $data["id"];
                         $oriid = $id;
-
                         $groupid = $data["groupid"];
                         $width = $data["width"];
                         $height = $data["height"];
@@ -203,7 +205,12 @@ namespace Quickplus\Lib;
                             $key = $dataKey;
                         }
                         $quickHtmlDrawer = new QuickHtmlDrawer($id);
-                         $quickHtmlDrawer->setPanelName("");
+                        $dashboardPanelName = "";
+                        if(isset($data["dashboardPanelName"]))
+                        {
+                             $dashboardPanelName = $data["dashboardPanelName"];
+                        }
+                        $quickHtmlDrawer->setPanelName($dashboardPanelName);
                   
                         
                         if($type=="chart")
