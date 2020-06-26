@@ -639,7 +639,7 @@ class report extends QuickChart{
            {
               $data = $this->createCsv($withTitle);
            }
-           echo trim($data);
+           echo trim(chr(0xEF).chr(0xBB).chr(0xBF).$data);
            die();
 
      }
